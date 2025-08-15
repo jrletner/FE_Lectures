@@ -1,2 +1,14 @@
-# Ignore the JS_Mini_Project folder
-JS_Mini_Project/
+# Ignore class folders individually (remove a line to unignore a specific class)
+JS_Mini_Project/class_code/class_03/
+JS_Mini_Project/class_code/class_04/
+JS_Mini_Project/class_code/class_05/
+JS_Mini_Project/class_code/class_06/
+JS_Mini_Project/class_code/class_07/
+JS_Mini_Project/class_code/class_08/
+JS_Mini_Project/class_code/class_09/
+JS_Mini_Project/class_code/class_10/
+JS_Mini_Project/class_code/class_11/
+JS_Mini_Project/class_code/class_12/
+
+# Keep docs and Project_files tracked
+# (No blanket ignore on JS_Mini_Project, so no negations needed.)
