@@ -22,5 +22,5 @@ Lectures/9_15_25_Lecture
 Lectures/9_18_25_Lecture
 Lectures/9_22_25_Lecture
 # Always ignore node_modules for the TypeScript lesson
-Lectures/9_22_25_Lecture/node_modules/
+Lectures/9_22_25_Lecture/solution
 # Keep docs and Project_files tracked
