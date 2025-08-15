@@ -12,3 +12,4 @@ JS_Mini_Project/class_code/class_12/
 
 # Keep docs and Project_files tracked
 # (No blanket ignore on JS_Mini_Project, so no negations needed.)
+.DS_Store
