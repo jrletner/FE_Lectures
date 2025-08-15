@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Campus Club Manager — Class 10</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Campus Club Manager</h1>
+    <p>Persistence with <code>localStorage</code> + Import/Export</p>
+  </header>
+
+  <main>
+    <!-- Create Club Form -->
+    <form id="club-form" class="form">
+      <div class="form-row">
+        <label for="club-name">Club Name</label>
+        <input type="text" id="club-name" placeholder="e.g., Chess Club" />
+      </div>
+      <div class="form-row">
+        <label for="club-capacity">Max Capacity</label>
+        <input type="number" id="club-capacity" placeholder="e.g., 20" min="1" />
+      </div>
+      <button type="submit" class="btn">Add Club</button>
+      <p id="error-message" class="error" role="alert" aria-live="polite"></p>
+    </form>
+
+    <!-- Toolbar -->
+    <section class="toolbar">
+      <input id="search" class="input" type="search" placeholder="Search clubs..." aria-label="Search clubs by name" />
+      <label class="checkbox">
+        <input id="only-open" type="checkbox" />
+        Has seats only
+      </label>
+      <label for="sort-by">Sort by:</label>
+      <select id="sort-by" class="select" aria-label="Sort clubs">
+        <option value="name-asc">Name (A–Z)</option>
+        <option value="name-desc">Name (Z–A)</option>
+        <option value="seats-desc">Seats left (High→Low)</option>
+        <option value="capacity-desc">Capacity (High→Low)</option>
+      </select>
+
+      <!-- NEW: persistence controls -->
+      <div class="spacer"></div>
+      <button id="export-json" class="btn" type="button">Export JSON</button>
+      <input id="import-file" type="file" accept="application/json" hidden />
+      <button id="import-json" class="btn" type="button">Import JSON</button>
+      <button id="reset-data" class="btn" type="button">Reset Data</button>
+    </section>
+
+    <!-- Clubs render here -->
+    <section id="club-info" class="cards"></section>
+  </main>
+
+  <footer>
+    <small>&copy; <span id="year"></span> Campus Club Manager</small>
+  </footer>
+
+  <!-- IMPORTANT: type=module to enable ES module imports -->
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
