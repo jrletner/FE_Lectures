@@ -10,7 +10,6 @@ This repo is organized for our course. It contains the live lecture code and the
     - `README.md` — Class summary and how to run.
     - `Current_Lesson_Walkthrough.md` — Step-by-step delta from the previous class.
   - `Project_files/` — In-class working directory that’s updated live each session.
-  - `docs/` — Supporting docs and example project files.
 - `Lectures/` — Code typed during each lecture (dated folders).
 
 ## How We’ll Use This
