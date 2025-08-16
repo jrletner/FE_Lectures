@@ -1,6 +1,6 @@
 # Solutions — 8/18/25 (Forms, Ifs, Functions)
 
-1. Validate signup form (DOM + conditions)
+1. Validate signup form (DOM + if)
 
 ```js
 const form = document.querySelector("form");
@@ -18,10 +18,11 @@ form.addEventListener("submit", (e) => {
   const name = nameInput.value.trim();
   const age = parseInt(ageInput.value, 10);
 
-  let ok = true;
+  // clear previous
   if (nameError) nameError.textContent = "";
   if (ageError) ageError.textContent = "";
 
+  let ok = true;
   if (!isNonEmpty(name)) {
     if (nameError) nameError.textContent = "Name is required";
     ok = false;
@@ -32,55 +33,58 @@ form.addEventListener("submit", (e) => {
   }
 
   if (ok) {
-    // proceed with submit/next step
-    // e.g., console.log('Valid!');
+    // proceed (e.g., show a success message)
   }
 });
 ```
 
-2. Duplicate username check (arrays + strings)
+2. Username availability (case-insensitive)
 
 ```js
-function validateUsername(usernames, candidate) {
-  if (!candidate || typeof candidate !== "string") return "Invalid username";
-  const cand = candidate.trim().toLowerCase();
-  const taken = usernames.some((u) => String(u).toLowerCase() === cand);
-  return taken ? "Username already taken" : null;
+function checkUsername(existing, candidate) {
+  if (typeof candidate !== "string") return "Invalid username";
+  const a = String(existing).trim().toLowerCase();
+  const b = candidate.trim().toLowerCase();
+  return a === b ? "Username already taken" : null;
 }
 ```
 
-3. Pure addItem (immutability)
+3. Welcome message (if / else)
 
 ```js
-function isPositiveInt(n) {
-  return Number.isInteger(n) && n >= 1;
+function isWholeNumber(n) {
+  return Number.isInteger(n);
 }
-function isEmail(str) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+function isTeen(age) {
+  return Number.isInteger(age) && age >= 13;
 }
 
-function addItem(list, item) {
-  // Example guards: title + qty
-  if (!isNonEmpty(item?.title)) {
-    return { state: list, error: "invalid-title" };
-  }
-  if (!isPositiveInt(item?.qty)) {
-    return { state: list, error: "invalid-qty" };
-  }
-  return { state: [...list, item], error: null };
+function makeWelcomeMessage(name, age) {
+  const n = String(name || "").trim();
+  const a = parseInt(age, 10);
+  if (n.length === 0) return "Name is required";
+  if (!isTeen(a)) return "Sorry, you must be 13+";
+  const cap = n[0].toUpperCase() + n.slice(1).toLowerCase();
+  return `Welcome, ${cap}!`;
 }
 ```
 
-4. Guard functions (tiny validators)
+4. Tiny helpers (reusable)
 
 ```js
 function isNonEmpty(str) {
   return typeof str === "string" && str.trim().length > 0;
 }
-function isPositiveInt(n) {
-  return Number.isInteger(n) && n >= 1;
+function isWholeNumber(n) {
+  return Number.isInteger(n);
 }
-function isEmail(str) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+function isTeen(age) {
+  return Number.isInteger(age) && age >= 13;
 }
+```
+
+}
+
+```
+
 ```
