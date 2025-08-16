@@ -13,17 +13,21 @@ JS_Mini_Project/class_code/class_10/
 JS_Mini_Project/class_code/class_11/
 JS_Mini_Project/class_code/class_12/
 
-Lectures/8_21_25_Lecture
-Lectures/8_25_25_Lecture
-Lectures/8_28_25_Lecture
-Lectures/9_4_25_Lecture
-Lectures/9_8_25_Lecture
-Lectures/9_11_25_Lecture
-Lectures/9_15_25_Lecture
-Lectures/9_18_25_Lecture
-Lectures/9_22_25_Lecture
+Lectures/Javascript/8_21_25_Lecture
+Lectures/Javascript/8_25_25_Lecture
+Lectures/Javascript/8_28_25_Lecture
+Lectures/Javascript/9_4_25_Lecture
+Lectures/Javascript/9_8_25_Lecture
+Lectures/Javascript/9_11_25_Lecture
+Lectures/Javascript/9_15_25_Lecture
+Lectures/Javascript/9_18_25_Lecture
+Lectures/Javascript/9_22_25_Lecture
 # Always ignore node_modules for the TypeScript lesson
-Lectures/9_22_25_Lecture/solution
+Lectures/9_22_25_Lecture/JavaScript/solution/
+Lectures/9_22_25_Lecture/JavaScript/solution/node_modules
+
+Lectures/Angular
+Lectures/NodeJS
 # Keep docs and Project_files tracked
 
 
