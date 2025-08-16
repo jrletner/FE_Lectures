@@ -2,6 +2,13 @@
 
 This repo is organized for our course. It contains the live lecture code and the ongoing mini project we build together.
 
+## Live coding repo: FE_Projects
+
+We live-code during class in a separate repository named FE_Projects. That repo is the in-class working app we update in real time. This FE_Lectures repo contains lesson snapshots, walkthroughs, and supporting materials so you can review, compare, and run each class at your own pace.
+
+- Live coding repo: https://github.com/jrletner/FE_Projects
+- Use FE_Lectures (this repo) for per-class instructions and runnable snapshots in `JS_Mini_Project/class_code/<class_XX>/`.
+
 ## Repository Structure
 
 - `JS_Mini_Project/`
@@ -12,7 +19,7 @@ This repo is organized for our course. It contains the live lecture code and the
 - `Resources/` — Supporting docs and tools for the course:
   - `VSCode_Extensions.md` — Recommended VS Code extensions.
 - Live project repo — In-class working directory (updated live each session):
-  - https://github.com/jrletner/FE_Project
+  - https://github.com/jrletner/FE_Projects
 
 ## How We’ll Use This
 
