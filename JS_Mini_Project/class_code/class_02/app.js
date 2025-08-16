@@ -4,7 +4,7 @@
 // 1) Seed data (arrays/objects)
 const clubs = [
   { name: "Coding Club", current: 12, capacity: 25 },
-  { name: "Art Club",    current: 8,  capacity: 15 },
+  { name: "Art Club", current: 8, capacity: 15 },
 ];
 
 // 2) Helpers (numbers & math)
@@ -34,9 +34,6 @@ function renderClubs() {
     container.appendChild(card);
   });
 }
-
-// Footer year (tiny touch)
-document.getElementById("year").textContent = new Date().getFullYear();
 
 // Initial paint
 renderClubs();
