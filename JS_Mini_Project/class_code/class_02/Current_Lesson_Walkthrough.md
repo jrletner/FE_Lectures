@@ -91,6 +91,12 @@ renderClubs();
 
 ---
 
+## How to run
+
+- Use the VS Code Live Server extension. Right-click `index.html` → "Open with Live Server".
+
+---
+
 ## 3) What you should see
 
 - In the main section, two lines rendered (one per club), e.g.:

@@ -54,6 +54,12 @@ main {
 
 ---
 
+## How to run
+
+- Use the VS Code Live Server extension. Right-click `index.html` → "Open with Live Server".
+
+---
+
 ## 3. What you should see
 
 - A page with a dark header that says "Campus Club Manager"

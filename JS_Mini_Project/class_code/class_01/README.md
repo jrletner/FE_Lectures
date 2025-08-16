@@ -9,7 +9,7 @@
 - `styles.css` — tiny, beginner-friendly styles
 - `app.js` — minimal JavaScript with a console sanity check and footer year
 
-## Run
+## Run this class
 
 - **VS Code Live Server** extension (Right-click `index.html` → “Open with Live Server”)
 

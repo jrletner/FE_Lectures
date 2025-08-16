@@ -9,7 +9,7 @@
 - `styles.css` — simple, beginner-friendly CSS
 - `app.js` — seed data, helper math functions, and DOM render
 
-## Run
+## Run this class
 
 - **VS Code Live Server** extension (Right-click `index.html` → “Open with Live Server”)
 
