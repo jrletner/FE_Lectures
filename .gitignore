@@ -1,6 +1,4 @@
 .DS_Store
-JS_Mini_Project/.DS_Store
-
 # Ignore class folders individually (remove a line to unignore a specific class)
 JS_Mini_Project/class_code/class_03/
 JS_Mini_Project/class_code/class_04/
@@ -32,6 +30,7 @@ Lectures/NodeJS
 
 
 Angular_FE_Project/
+NodeJS_Project
 # Ignore Angular FE Project class folders individually
 Angular_FE_Project/class_13/
 Angular_FE_Project/class_14/
