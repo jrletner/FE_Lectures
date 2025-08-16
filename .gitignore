@@ -1,16 +1,8 @@
 .DS_Store
-# Ignore class folders individually (remove a line to unignore a specific class)
-JS_Mini_Project/class_code/class_03/
-JS_Mini_Project/class_code/class_04/
-JS_Mini_Project/class_code/class_05/
-JS_Mini_Project/class_code/class_06/
-JS_Mini_Project/class_code/class_07/
-JS_Mini_Project/class_code/class_08/
-JS_Mini_Project/class_code/class_09/
-JS_Mini_Project/class_code/class_10/
-JS_Mini_Project/class_code/class_11/
-JS_Mini_Project/class_code/class_12/
 
+
+
+# Lectures
 Lectures/Javascript/8_21_25_Lecture
 Lectures/Javascript/8_25_25_Lecture
 Lectures/Javascript/8_28_25_Lecture
@@ -26,12 +18,21 @@ Lectures/9_22_25_Lecture/JavaScript/solution/node_modules
 
 Lectures/Angular
 Lectures/NodeJS
-# Keep docs and Project_files tracked
 
+# JS_Mini_Project
+JS_Mini_Project/class_code/class_03/
+JS_Mini_Project/class_code/class_04/
+JS_Mini_Project/class_code/class_05/
+JS_Mini_Project/class_code/class_06/
+JS_Mini_Project/class_code/class_07/
+JS_Mini_Project/class_code/class_08/
+JS_Mini_Project/class_code/class_09/
+JS_Mini_Project/class_code/class_10/
+JS_Mini_Project/class_code/class_11/
+JS_Mini_Project/class_code/class_12/
 
+# Angular Portion
 Angular_FE_Project/
-NodeJS_Project
-# Ignore Angular FE Project class folders individually
 Angular_FE_Project/class_13/
 Angular_FE_Project/class_14/
 Angular_FE_Project/class_15/
@@ -44,3 +45,18 @@ Angular_FE_Project/class_21/
 Angular_FE_Project/class_22/
 Angular_FE_Project/class_23/
 Angular_FE_Project/class_24/
+
+# NodeJS Portion
+NodeJS_Project
+NodeJS_Project/class_code/class_25/
+NodeJS_Project/class_code/class_26/
+NodeJS_Project/class_code/class_27/
+NodeJS_Project/class_code/class_28/
+NodeJS_Project/class_code/class_29/
+NodeJS_Project/class_code/class_30/
+NodeJS_Project/class_code/class_31/
+NodeJS_Project/class_code/class_32/
+NodeJS_Project/class_code/class_33/
+NodeJS_Project/class_code/class_34/
+NodeJS_Project/class_code/class_35/
+NodeJS_Project/class_code/class_36/
