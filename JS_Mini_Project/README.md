@@ -2,25 +2,17 @@
 
 This mini project evolves across folders `class_code/class_01` → `class_code/class_12`. Each folder contains the finished code for that class and a delta-style walkthrough (`Current_Lesson_Walkthrough.md`) describing what changed from the previous class.
 
-## How to run locally
+## How to run locally (VS Code Live Server)
 
-- Classes 1–11: You can open `index.html` directly or serve via a local server.
-- Class 12 uses `fetch('./data/seed.json')` and must be served over HTTP.
+- We use the VS Code Live Server extension for all classes.
+- Class 12 requires HTTP for `fetch('./data/seed.json')`; Live Server provides this.
 
-Suggested quick server (macOS, zsh), run this in the specific class folder:
+Steps:
 
-```bash
-# Example for Class 12
-cd JS_Mini_Project/class_code/class_12
-python3 -m http.server 8000
-# then open http://localhost:8000 in your browser
-```
-
-Alternatively (Node installed):
-
-```bash
-npx serve -p 8000 JS_Mini_Project/class_code/class_12
-```
+1. Install the VS Code extension: “Live Server” by Ritwick Dey.
+2. In VS Code, open the specific class folder (e.g., `JS_Mini_Project/class_code/class_12`).
+3. Open `index.html` and click “Go Live” (status bar) or right‑click → “Open with Live Server”.
+4. Your browser opens to a local URL (e.g., http://127.0.0.1:5500/…). Edits auto‑reload.
 
 ## Class-by-class overview
 
@@ -103,6 +95,6 @@ Every class folder includes `Current_Lesson_Walkthrough.md` with:
 
 ## Notes & troubleshooting
 
-- If you see errors fetching `./data/seed.json`, ensure you’re serving over HTTP (not `file://`). Use a local server (see above).
+- If you see errors fetching `./data/seed.json`, make sure Live Server is running (HTTP) and you launched it from the class folder containing `index.html`.
 - Import/Export/Reset work locally via `localStorage` (Class 10+).
 - The global status banner (Class 12) shows loading/success/error messages for async actions.
