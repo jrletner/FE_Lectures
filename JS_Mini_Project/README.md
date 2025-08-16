@@ -1,184 +1,108 @@
-# Campus Club Manager — Full Project Outline (Markdown)
+# Campus Club Manager — JS Mini Project (Class-by-Class)
 
-## Project Phases & Milestones
+This mini project evolves across folders `class_code/class_01` → `class_code/class_12`. Each folder contains the finished code for that class and a delta-style walkthrough (`Current_Lesson_Walkthrough.md`) describing what changed from the previous class.
 
-- **Phase 0 – Setup (Class 1):** Repo, basic HTML/CSS, starter JS.
-- **Phase 1 – Foundations (Classes 2–3):** Variables/strings/numbers → form, functions, validation.
-- **Phase 2 – Modeling & DOM (Classes 4–5):** OOP classes, render from state, add members.
-- **Phase 3 – Lists & UX (Classes 6–7):** Loops, search/filter/sort, debounce utilities.
-- **Phase 4 – Structure & Dates (Classes 8–9):** ES modules, dev server, Day.js/nanoid, events.
-- **Phase 5 – Rules & Persistence (Classes 10–11):** RSVP, roles, async/await, `json-server`.
-- **Phase 6 – Polish & Demo (Class 12):** QA, stretch features, deploy, presentations.
+## How to run locally
 
-**Milestones**
+- Classes 1–11: You can open `index.html` directly or serve via a local server.
+- Class 12 uses `fetch('./data/seed.json')` and must be served over HTTP.
 
-- **M1 (end Class 5):** Interactive front-end (add club/member; renders from JS state).
-- **M2 (end Class 9):** Clean module structure; events with dates & IDs.
-- **M3 (end Class 11):** Full CRUD persisted to mock backend; resilient async UX.
-- **Final (Class 12):** Polished app + demo.
+Suggested quick server (macOS, zsh), run this in the specific class folder:
 
----
+```bash
+# Example for Class 12
+cd JS_Mini_Project/class_code/class_12
+python3 -m http.server 8000
+# then open http://localhost:8000 in your browser
+```
 
-## Class 1 — Kickoff & Setup
+Alternatively (Node installed):
 
-**Date:** Mon, Aug 11, 2025  
-**Lesson:** Kickoff & Setup
+```bash
+npx serve -p 8000 JS_Mini_Project/class_code/class_12
+```
 
-- **Teach:** How the web runs JS, DevTools, VS Code, Git basics, HTML/CSS refresher
-- **Build:** `index.html`, `styles.css`, `app.js` scaffold; stub `#club-info`
-- **Deliverable:** Page loads “Campus Club Manager”; repo created
+## Class-by-class overview
 
-## Class 2 — Variables, Numbers, Strings
+- Class 1: Kickoff & setup — HTML/CSS/JS scaffold, simple page text.
+- Class 2: Variables & arrays — compute counts and render basic info.
+- Class 3: Create Club form — validation, duplicate name guard, renderClubs, addClub.
+- Class 4: OOP models — `Club`, `Member`, `EventItem` with class methods.
+- Class 5: DOM patterns — event delegation; dynamic club cards; Add Member UI.
+- Class 6: Search/Filter/Sort — toolbar with derived list pipeline.
+- Class 7: UX helpers — `debounce`, small `pipe` utility; cleaner filtering.
+- Class 8: ES Modules — moved to `src/` with `models/`, `store/`, `ui/`, `utils/`, `router`.
+- Class 9: Libraries & Events — `dayjs` (relative-time) and `nanoid`; events with friendly dates.
+- Class 10: Persistence — `localStorage` save/load; Import/Export/Reset; models serialize with `toPlain`/`fromPlain` and stable IDs.
+- Class 11: Routing — hash-based router; home list vs club detail; split `ui/render.js` and `ui/detail.js`.
+- Class 12: Async/Fetch — load seed from `data/seed.json` on first boot, simulated save, and global status messages.
 
-**Date:** Thu, Aug 14, 2025  
-**Lesson:** Variables, Numbers, Strings
-
-- **Teach:** `let/const`, template literals, basic math
-- **Build:** Seed clubs, compute seats left, render text to page
-- **Deliverable:** Static list with counts from variables/arrays
-
-## Class 3 — Booleans, Ifs, Functions (Create Club)
-
-**Date:** Mon, Aug 18, 2025  
-**Lesson:** Booleans, If Statements, Functions
-
-- **Teach:** Truthy/falsy, guards, pure functions
-- **Build:** **Create Club** form, validation, duplicate-name check; `renderClubs()`, `addClub()`
-- **Deliverable:** Users can add valid clubs; errors display
-
-## Class 4 — OOP: Classes & Composition
-
-**Date:** Thu, Aug 21, 2025  
-**Lesson:** OOP: Classes & Composition
-
-- **Teach:** `class`, constructor, methods; composition over inheritance
-- **Build:** `Club`, `Member`, `Event` classes; e.g., `Club.addMember()`, `Event.toggleRsvp()`
-- **Deliverable:** State changes go through class APIs
-
-## Class 5 — DOM Rendering Patterns
-
-**Date:** Mon, Aug 25, 2025  
-**Lesson:** DOM Rendering Patterns
-
-- **Teach:** Query/create, event delegation, render-from-state
-- **Build:** Dynamic club cards; **Add Member** UI; empty-state
-- **Deliverable:** Members can be added; UI updates without reload
-
-## Class 6 — Arrays & Loops (Search/Filter/Sort)
-
-**Date:** Thu, Aug 28, 2025  
-**Lesson:** Arrays & Loops (Search/Filter/Sort)
-
-- **Teach:** `map/filter/reduce`, `for…of`, comparator functions
-- **Build:** Search box, filter by category, sort by name/next event
-- **Deliverable:** Live search/filter/sort
-
-## (No Class — Labor Day)
-
-**Date:** Mon, Sep 1, 2025  
-**Note:** U.S. Holiday — skip / buffer / review
-
-## Class 7 — Advanced Functions (UX Helpers)
-
-**Date:** Thu, Sep 4, 2025  
-**Lesson:** Advanced Functions (UX Helpers)
-
-- **Teach:** Higher-order functions, closures; debounce vs throttle
-- **Build:** Debounce search; small `pipe()`/`compose()` utility; tiny controller helpers
-- **Deliverable:** Snappy search; tidy utilities
-
-## Class 8 — ES Modules & Dev Server
-
-**Date:** Mon, Sep 8, 2025  
-**Lesson:** ES Modules & Dev Server
-
-- **Teach:** `export`/`import`, file boundaries, index “barrels”, (optional) Vite
-- **Build:** Split into `models/`, `views/`, `controllers/`, `store/`, `ui/`
-- **Deliverable:** Same behavior, modular code; dev server running
-
-## Class 9 — External Libraries (Dates & IDs) + Events
-
-**Date:** Thu, Sep 11, 2025  
-**Lesson:** Dates & IDs with Libraries + Events
-
-- **Teach:** Picking libs, Day.js basics, nanoid
-- **Build:** Event form (title/date/desc); “days until”; unique IDs
-- **Deliverable:** Clubs have events; upcoming vs past clear
-
-## Class 10 — OOP Review: Rules, Roles & RSVP
-
-**Date:** Mon, Sep 15, 2025  
-**Lesson:** OOP Review: Rules, Roles & RSVP
-
-- **Teach:** Invariants, capacity checks, method chaining
-- **Build:** RSVP toggles; capacity enforcement; simple roles (`admin`/`member`)
-- **Deliverable:** Business rules enforced; UI reflects permissions
-
-## Class 11 — Async/Await & Persistence (json-server)
-
-**Date:** Thu, Sep 18, 2025  
-**Lesson:** Async/Await & Persistence
-
-- **Teach:** `fetch`, promises, async/await, optimistic UI + rollback
-- **Build:** `db.json` + `json-server`; `api/*.js` wrappers; replace in-memory CRUD; loading & retry states
-- **Deliverable:** Full CRUD persisted; resilient UX
-
-## Class 12 — Polish, Deploy, Demo Day
-
-**Date:** Mon, Sep 22, 2025  
-**Lesson:** Polish, Deploy, Demo Day
-
-- **Teach:** QA checklist, small perf wins, accessibility basics, deployment (GH Pages)
-- **Build:** Delete/edit club; percentage full; empty-state visuals; pagination; remember filters
-- **Deliverable:** Deployed app + 3–5 min student demos
-
----
-
-## Repo Structure (by Class 8+)
+## Current structure (Class 12)
 
 ```text
-/public/index.html
-/src/
-  app.js
-  store/index.js
-  models/Club.js
-  models/Member.js
-  models/Event.js
-  controllers/clubsController.js
-  views/ClubList.js
-  views/MemberForm.js
-  views/EventForm.js
-  ui/Toast.js
-  lib/pipe.js
-/api/
-  clubs.js
-  members.js
-  events.js
-db.json
+class_code/class_12/
+  index.html
+  styles.css
+  data/seed.json
+  src/
+    app.js
+    router.js
+    services/
+      api.js
+    store/
+      data.js
+      filters.js
+      persist.js
+    models/
+      Club.js
+      Member.js
+      EventItem.js
+    ui/
+      render.js
+      detail.js
+    utils/
+      debounce.js
+      externals.js   # dayjs, nanoid
+      pipe.js
 ```
 
-## Data Shapes
+## Data shapes (Class 12)
 
 ```js
-// Club
-{ id: "c_123", name: "Coding Club", category: "Tech", capacity: 25, members: ["m_1","m_2"], events: ["e_1"] }
+// Club (derived props computed in class)
+{
+  id: "clb_...",
+  name: "Coding Club",
+  capacity: 10,
+  members: Member[],
+  events: EventItem[],
+  // derived in code: current, seatsLeft, percentFull
+}
 
 // Member
-{ id: "m_1", name: "Ava", role: "member" } // or "admin"
+{ id: "mem_...", name: "Ava" }
 
-// Event
-{ id: "e_1", clubId: "c_123", title: "Hack Night", date: "2025-09-10", rsvps: ["m_1","m_2"], capacity: 30 }
+// EventItem
+{
+  id: "evt_...",
+  title: "Hack Night",
+  dateISO: "2025-09-10",
+  description?: "...",
+  capacity?: 30,
+  // derived in code: friendlyWhen, isPast
+}
 ```
 
-## Assessment & Checkpoints
+## Documentation per class
 
-- **Code Check-ins:** Tag each class (`c01-setup`, `c03-create-club`, `c09-events`, `c11-persisted-crud`).
-- **Rubric (10 pts each class):** 4 pts feature works, 3 pts organization, 2 pts readability, 1 pt commit quality.
-- **M1/M2/M3 reviews:** 5–10 min demos at end of Classes 5, 9, 11.
+Every class folder includes `Current_Lesson_Walkthrough.md` with:
 
-## Stretch Ideas
+- A delta section listing exactly what changed from the prior class.
+- Small rationale for each change and where to find it (file/path).
+- An appendix with the full code for that class for quick reference.
 
-- Dark mode toggle; keyboard focus states.
-- CSV export of members/events.
-- Hash-based routes (`#/clubs/:id`).
-- Simple unit tests for model methods (Jest).
+## Notes & troubleshooting
+
+- If you see errors fetching `./data/seed.json`, ensure you’re serving over HTTP (not `file://`). Use a local server (see above).
+- Import/Export/Reset work locally via `localStorage` (Class 10+).
+- The global status banner (Class 12) shows loading/success/error messages for async actions.
