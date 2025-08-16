@@ -1,21 +1,64 @@
 # Exercises — 8/14/25 (Variables, Numbers, Strings)
 
-1. Change due
+In this lesson we’ll practice with variables, numbers, and strings. No functions yet — just create variables and compute the values.
 
-- Given `price` and `cashGiven`, compute change due. Return a string like: `$3.41` (format to two decimals).
+1. Change due (formatting)
 
-2. Format item summary
+- Given:
+  - `const price = 6.59;`
+  - `const cashGiven = 10;`
+- Create variables:
+  - `rawChange` (cashGiven minus price)
+  - `change` (make sure it’s not negative)
+  - `changeLabel` (a string like `$3.41` with 2 decimals)
+- Tip: use `Math.max(0, rawChange)` and `.toFixed(2)`
+- Expected: `changeLabel` is `$3.41`
 
-- Produce a string like: `Pencils — 3 in stock ($1.25 each)` using template literals and variables.
+2. Item summary (template strings)
 
-3. Normalize full name
+- Given:
+  - `const title = 'Pencils';`
+  - `const qty = 3;`
+  - `const priceEach = 1.25;`
+- Create variables:
+  - `priceStr` (two decimals using `toFixed(2)`)
+  - `summary` like `Pencils — 3 in stock ($1.25 each)`
+- Expected: `summary` equals `"Pencils — 3 in stock ($1.25 each)"`
 
-- Given a user-entered full name, trim, collapse multiple spaces to one, and Title Case each word (e.g., `joHN   doE` → `John Doe`).
+3. Clean full name (trimming + casing)
 
-4. Validate positive integer
+- Given:
+  - `const firstName = '  joHN ';`
+  - `const lastName = '  doE  ';`
+- Create variables:
+  - `firstClean` → trimmed and capitalized (first letter uppercase, rest lowercase)
+  - `lastClean` → same idea
+  - `fullName` → `"John Doe"` using a space between them
+- Tips: `.trim()`, `.charAt(0).toUpperCase()`, `.slice(1).toLowerCase()`
 
-- Write `isPositiveInt(value)` that returns true only when `value` is a whole number ≥ 1.
+4. Positive whole number flag (booleans)
 
-5. Convert and map
+- Given:
+  - `let value = 3;`
+- Create `isPositiveWhole` which is true only when `value` is a whole number and at least 1.
+- Tip: `Number.isInteger(value) && value >= 1`
+- Try changing `value` to `0`, `2.2`, and `'5'` to see the result.
 
-- Given an array of temperatures in Celsius, return an array of formatted Fahrenheit strings like `"72°F"` (round to nearest whole number).
+5. Celsius → Fahrenheit label (numbers + formatting)
+
+- Given:
+  - `const celsius = 22.2;`
+- Create variables:
+  - `fahrenheit` (rounded) using `celsius * 9/5 + 32`
+  - `label` like `"72°F"`
+- Expected: `label` is `"72°F"`
+
+---
+
+## Hints
+
+If you get stuck, review the hints file for nudges and patterns. Try each step yourself before peeking.
+
+- Hints: `./hints.md`
+
+- Solutions: `./solutions.md`
