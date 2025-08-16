@@ -1,17 +1,17 @@
 # Exercises — 8/18/25 (Forms, Ifs, Functions)
 
-1. Validate create-club form
+1. Validate signup form
 
-- Prevent submit when name is empty or capacity < 1; show a message next to the form.
+- Prevent submit when `name` is empty or `age` < 13; show an inline message next to each invalid field.
 
-2. Duplicate check
+2. Duplicate username check
 
-- Given an array of clubs, ensure new club names are unique (case-insensitive). Return a helpful error.
+- Given an array of usernames, ensure a new username is unique (case-insensitive). Return a helpful error string or `null`.
 
-3. Pure addClub
+3. Pure addItem
 
-- Write addClub(state, name, capacity) that returns a new state array when valid; otherwise returns state unchanged and an error message.
+- Write `addItem(list, item)` that returns a new array with `item` appended only when `item` passes `isNonEmpty`. Otherwise return the original list and an error.
 
 4. Guard functions
 
-- Create tiny helpers: isNonEmpty(str), isPositiveInt(n). Use them inside addClub.
+- Implement small helpers: `isNonEmpty(str)`, `isPositiveInt(n)`, `isEmail(str)`. Use them in your validations.
