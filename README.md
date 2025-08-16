@@ -6,7 +6,6 @@ This repo is organized for our course. It contains the live lecture code and the
 
 - `JS_Mini_Project/`
   - `class_code/` — Per-class snapshots. Each class folder includes:
-    - `Introduction.md` — What we learned previously, today, and next.
     - `README.md` — Class summary and how to run.
     - `Current_Lesson_Walkthrough.md` — Step-by-step delta from the previous class.
 - `Lectures/` — Code typed during each lecture (dated folders).
@@ -19,8 +18,9 @@ This repo is organized for our course. It contains the live lecture code and the
 
 1. We build on the same project each week to apply new concepts in a real codebase.
 2. Use the files in `JS_Mini_Project/class_code/<class_XX>/` to follow along or catch up:
-   - Read the `Introduction.md` to see context.
-   - Use the `Current_Lesson_Walkthrough.md` to update your app from the last class.
+
+- Skim the class `README.md` for context (goals, what changed, how to run).
+- Use `Current_Lesson_Walkthrough.md` to update your app from the previous class, step by step.
 
 ## Getting Started
 
