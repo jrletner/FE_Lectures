@@ -23,4 +23,18 @@ Lectures/9_22_25_Lecture
 Lectures/9_22_25_Lecture/solution
 # Keep docs and Project_files tracked
 
+
 Angular_FE_Project/
+# Ignore Angular FE Project class folders individually
+Angular_FE_Project/class_13/
+Angular_FE_Project/class_14/
+Angular_FE_Project/class_15/
+Angular_FE_Project/class_16/
+Angular_FE_Project/class_17/
+Angular_FE_Project/class_18/
+Angular_FE_Project/class_19/
+Angular_FE_Project/class_20/
+Angular_FE_Project/class_21/
+Angular_FE_Project/class_22/
+Angular_FE_Project/class_23/
+Angular_FE_Project/class_24/
