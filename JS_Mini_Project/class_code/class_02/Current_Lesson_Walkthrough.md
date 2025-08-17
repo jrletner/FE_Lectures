@@ -390,7 +390,9 @@ function renderClubs() {
     card.className = "club-card";
 
     // Build a message with template literals and string interpolation
-  const message = `${club.name}: ${club.current}/${club.capacity} seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
+    const message = `${club.name}: ${club.current}/${
+      club.capacity
+    } seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
 
     card.textContent = message;
     container.appendChild(card);
