@@ -244,10 +244,3 @@ footer {
 // Quick sanity check in the DevTools console
 console.log("Class 1 setup complete. Ready for Class 2!");
 ```
-
-## Compliance checklist (fill before publishing)
-
-- [ ] Baseline established (initial class, no prior diffs)
-- [ ] Every step uses 📍 Where / ℹ️ What / 💡 Why / ✅ Check callouts
-- [ ] Checkpoints added (every 3–5 steps)
-- [ ] Troubleshooting and Appendix are present and accurate

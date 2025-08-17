@@ -374,13 +374,3 @@ function renderClubs() {
 // Initial paint
 renderClubs();
 ```
-
-## Compliance checklist (fill before publishing)
-
-- [ ] Previous class (N-1) repo files reviewed and used as baseline
-- [ ] Current class files reviewed and used as targets
-- [ ] Unified diff blocks reflect the actual changes for each touched file
-- [ ] Applying diff to baseline yields current files (spot-checked)
-- [ ] Every step uses 📍 Where / ℹ️ What / 💡 Why / ✅ Check callouts
-- [ ] Troubleshooting and Appendix are present and accurate
-- [ ] Checkpoints added every 3–5 steps
