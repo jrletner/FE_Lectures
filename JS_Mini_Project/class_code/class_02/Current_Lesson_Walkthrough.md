@@ -9,7 +9,7 @@
 
 ## How to run
 
-- Serve over http:// so ES module imports work. Use the VS Code Live Server extension (Right-click `index.html` → "Open with Live Server").
+- Use the VS Code Live Server extension (Right‑click `index.html` → "Open with Live Server"). Avoid opening via `file://` to ensure scripts and assets load consistently.
 
 ## How to use
 
@@ -184,6 +184,15 @@ function renderClubs() {
 > ✅ Check: Still nothing visible until we set text and call render.
 
 ```js
+// previous version — Step 3.4
+/*
+function renderClubs() {
+  const container = document.getElementById("club-info");
+  container.innerHTML = ""; // clear previous content
+}
+*/
+
+// updated version — build one .club-card per club
 function renderClubs() {
   const container = document.getElementById("club-info");
   container.innerHTML = "";
@@ -208,6 +217,17 @@ function renderClubs() {
 > ✅ Check (console): Temporarily `console.log(message)` shows a line per club.
 
 ```js
+// inside renderClubs(), in the forEach, after card.className
+/*
+clubs.forEach((club) => {
+  const card = document.createElement("div");
+  card.className = "club-card";
+  // text next
+  container.appendChild(card);
+});
+*/
+
+// now add the message directly after card.className and before append
 const message = `${club.name}: ${club.current}/${
   club.capacity
 } seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
@@ -224,6 +244,14 @@ const message = `${club.name}: ${club.current}/${
 > ✅ Check: After initial paint, cards display the message.
 
 ```js
+// inside renderClubs(), in the forEach (previous line — message)
+/*
+const message = `${club.name}: ${club.current}/${
+  club.capacity
+} seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
+*/
+
+// now set the text before appending
 card.textContent = message;
 ```
 
@@ -362,9 +390,7 @@ function renderClubs() {
     card.className = "club-card";
 
     // Build a message with template literals and string interpolation
-    const message = `${club.name}: ${club.current}/${
-      club.capacity
-    } seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
+  const message = `${club.name}: ${club.current}/${club.capacity} seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
 
     card.textContent = message;
     container.appendChild(card);
