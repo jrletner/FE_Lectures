@@ -1,55 +1,92 @@
-# Class 2 — Delta Walkthrough (from Class 1)
+# Class 2 — Seed, Helpers, Render (Delta from Class 1)
 
-Seed data, add tiny number helpers, and render a list. This shows only what changed from Class 1; anything not shown remains the same.
+## At a glance (optional)
 
-## How to use this guide
+- What you’ll build: Seed two clubs, add tiny math helpers, and render readable cards.
+- Files touched: index.html, styles.css, app.js
+- Est. time: 30–45 min
+- Prereqs: Finished Class 1
 
-- We’ll touch three files: `index.html`, `styles.css`, and `app.js`.
-- Each step shows:
-  - 📍 Where to paste or edit
-  - ℹ️ What you’re doing and 💡 Why it helps
-  - ✅ A quick check so you know it worked
-- Code blocks are small and copy-pasteable for live-coding.
+## How to run
+
+- Serve over http:// so ES module imports work. Use the VS Code Live Server extension (Right-click `index.html` → "Open with Live Server").
+
+## How to use
+
+- Live-code friendly. Paste tiny snippets in order. Verify the ✅ Check after each step.
+- Keep the browser open next to the editor; saves should auto-refresh with Live Server.
 
 ## Before you start
 
-1. Open the Class 2 folder in VS Code: `JS_Mini_Project/class_code/class_02`.
-2. Open `index.html`, `styles.css`, and `app.js` side-by-side.
-3. Use Live Server (or open `index.html` in your browser). Keep the page visible while coding.
+- Open: JS_Mini_Project/class_code/class_02
+- Baseline: Review Class 1 repo files vs. Class 2 files to know the exact diffs you’ll author.
+- Files to diff: index.html, styles.css, app.js
+- Pre-flight: Confirm you’re on Class 2 files; open all three.
+- Reset plan: If drift occurs, restore the Appendix code and resume from the last checkpoint.
 
----
+## What changed since last class
 
-## index.html — update the title to Class 2
+```diff
+# index.html
+- <title>Campus Club Manager — Class 1</title>
++ <title>Campus Club Manager — Class 2</title>
+```
 
-Replace the `<title>` so your browser tab reflects the current class.
+```diff
+# styles.css
+ .cards { display: grid; gap: 10px; }
++.club-card {
++  border: 1px solid #ccc;
++  background: #fff;
++  padding: 10px;
++  border-radius: 6px;
++}
+```
+
+```diff
+# app.js
+- // Class 1 — Kickoff & Setup
+- console.log("Class 1 setup complete. Ready for Class 2!");
++ // Class 2 — Variables, Numbers, Strings
++ const clubs = [
++   { name: "Coding Club", current: 12, capacity: 25 },
++   { name: "Art Club", current: 8, capacity: 15 },
++ ];
++ function seatsLeft(club) { return club.capacity - club.current; }
++ function percentFull(club) {
++   if (club.capacity <= 0) return 0;
++   const ratio = club.current / club.capacity;
++   return Math.round(ratio * 100);
++ }
++ function renderClubs() { /* build and append .club-card elements */ }
++ renderClubs();
+```
+
+## Live-coding steps
+
+### 1. index.html — update the title (Class 2)
+
+> 📍 Where: class_02/index.html → inside <head>
+>
+> ℹ️ What: Update the tab title so it reflects today’s class.
+>
+> 💡 Why: Keeps students oriented during demos and recordings.
+>
+> ✅ Check (visual): Browser tab reads “Campus Club Manager — Class 2”.
 
 ```html
 <title>Campus Club Manager — Class 2</title>
 ```
 
-> 📍 Where
->
-> File: `index.html` — in VS Code’s Explorer (left sidebar), click `index.html`. Near the top, find the `<head>` section and locate the existing `<title>...</title>`. Replace that entire line with the snippet above. If you don’t see `<head>`, you’re in the wrong file.
->
-> Tip: Use Find (Cmd+F on macOS) and search for `<title>` to jump to it.
+### 2. styles.css — add a simple card style
 
-> ℹ️ What
+> 📍 Where: class_02/styles.css → below the existing .cards rule or at end of file
 >
-> Update the page title (the text shown on the browser tab). This does not appear on the page body—only on the tab/window title.
+> ℹ️ What: A white “card” with a border, padding, and rounded corners.
 >
-> 💡 Why
+> 💡 Why: Improves readability and separation between items.
 >
-> Helps students and recordings stay oriented to the correct class.
-
-> ✅ Check
->
-> 1. Save (Cmd+S). 2) Refresh the browser tab. 3) The tab should read “Campus Club Manager — Class 2”. If not, make sure you edited the Class 2 `index.html` (not Class 1) and that your browser is on the Class 2 file.
-
----
-
-## styles.css — add a basic card style
-
-Paste this block to style each club as a simple white card.
+> ✅ Check: No visible change yet (cards appear after we render in app.js).
 
 ```css
 .club-card {
@@ -60,31 +97,17 @@ Paste this block to style each club as a simple white card.
 }
 ```
 
-> 📍 Where
->
-> File: `styles.css` — scroll until you see the `.cards { ... }` rule. Paste the `.club-card { ... }` block right below it. If you don’t have `.cards`, you can paste the card styles at the end of the file.
->
-> Tip: Use Find (Cmd+F) for `.cards`.
+### 3. app.js — seed, helpers, render, paint (tiny, safe steps)
 
-> ℹ️ What
+#### 3.1 Seed two example clubs
+
+> 📍 Where: class_02/app.js → at the top
 >
-> Adds a white box with padding and rounded corners so each club entry looks like a readable “card”.
+> ℹ️ What: An array of two club objects with name/current/capacity.
 >
-> 💡 Why
+> 💡 Why: Real-looking data lets us do math and show results immediately.
 >
-> A little structure goes a long way for beginners’ visual scanning.
-
-> ✅ Check
->
-> You won’t see a change yet until we render items in `app.js`. Later, the clubs will appear in white cards with rounded corners.
-
----
-
-## app.js — seed data, helpers, render, paint
-
-We’ll build this in tiny steps.
-
-### 1) Seed two example clubs
+> ✅ Check (console): Type `clubs` → see an array with two objects.
 
 ```js
 const clubs = [
@@ -93,27 +116,15 @@ const clubs = [
 ];
 ```
 
-> 📍 Where
->
-> File: `app.js` — open this file. Paste the array at the very top, below any comment lines. If you already have a `const clubs = [...]`, replace it with this two-item version for now.
+#### 3.2 Helper: seats left (subtraction)
 
-> ℹ️ What
+> 📍 Where: Below the seed array
 >
-> Real data to work with: an array (`[...]`) holding two objects (`{...}`). Each object has three keys:
+> ℹ️ What: Returns capacity minus current.
 >
-> - `name` (text)
-> - `current` (how many people are in the club right now)
-> - `capacity` (maximum number of people allowed)
+> 💡 Why: Keeps render code simple and consistent.
 >
-> 💡 Why
->
-> With real-looking data, we can do the math and draw something on the page immediately. Seeing results helps beginners stay oriented.
-
-> ✅ Check
->
-> Open DevTools (Cmd+Option+I on macOS) → Console tab → type `clubs` and press Enter. You should see an array of length 2 with objects for Coding Club and Art Club.
-
-### 2) Helper: seats left (subtraction)
+> ✅ Check (console): `seatsLeft(clubs[0])` → 13
 
 ```js
 function seatsLeft(club) {
@@ -121,23 +132,15 @@ function seatsLeft(club) {
 }
 ```
 
-> 📍 Where
->
-> File: `app.js` — paste this function directly below the `clubs` array.
+#### 3.3 Helper: percent full (division + round)
 
-> ℹ️ What
+> 📍 Where: Below seatsLeft(...)
 >
-> A tiny math helper that takes one `club` object and returns a number (capacity minus current). Input: `{ name, current, capacity }` → Output: seats left (a number).
+> ℹ️ What: Math helper that turns a ratio into a whole-number percent.
 >
-> 💡 Why
+> 💡 Why: Clean UI (no long decimals) and easy to reuse.
 >
-> Keeps display code simple. Instead of doing the subtraction everywhere, we do it in one named place—easier to read and fix later.
-
-> ✅ Check
->
-> In the Console: type `seatsLeft(clubs[0])` and press Enter. Expected: `25 - 12 = 13`. If you see an error, make sure you defined the function below the `clubs` array and saved the file.
-
-### 3) Helper: percent full (division + round)
+> ✅ Check (console): `percentFull(clubs[0])` → 48
 
 ```js
 function percentFull(club) {
@@ -147,25 +150,21 @@ function percentFull(club) {
 }
 ```
 
-> 📍 Where
+> Checkpoint 1
 >
-> File: `app.js` — paste this function below `seatsLeft(...)`.
+> - Run: Reload the page (no UI yet)
+> - Expect: Console checks pass for both helpers
+> - Console: `console.log('Checkpoint 1', percentFull(clubs[0])) // 48`
 
-> ℹ️ What
->
-> Converts a fraction to a whole-number percentage. If capacity is 0 or less, we return 0 to avoid division problems.
->
-> 💡 Why
->
-> Rounding removes messy decimals so the UI is clean and beginner-friendly.
+#### 3.4 Start the renderer (clear the container)
 
-> ✅ Check
+> 📍 Where: Below the helpers
 >
-> In the Console: type `percentFull(clubs[0])` and press Enter. With current=12, capacity=25 → `(12/25)*100 = 48`, so you should see `48`.
-
-### 4) Render function in small steps
-
-4.1 Start the function and clear the container:
+> ℹ️ What: Prepare `#club-info` for a fresh render by clearing previous content.
+>
+> 💡 Why: Prevents duplicate items if we render more than once.
+>
+> ✅ Check: No visible change yet; no errors.
 
 ```js
 function renderClubs() {
@@ -174,23 +173,15 @@ function renderClubs() {
 }
 ```
 
-> 📍 Where
->
-> File: `app.js` — create this function below both helper functions. Don’t put it inside another function.
+#### 3.5 Loop clubs and create a card per item
 
-> ℹ️ What
+> 📍 Where: Replace renderClubs with this version
 >
-> Grabs the container on the page where cards will go (`#club-info`) and clears out any previous content every time we render.
+> ℹ️ What: Build one .club-card per club object.
 >
-> 💡 Why
+> 💡 Why: Core render-from-state pattern: loop → element → configure → append.
 >
-> Prevents duplicate cards when we draw again later (clearing avoids the same items stacking up).
-
-> ✅ Check
->
-> No visible change yet (we haven’t added items). Optional: add `console.log('rendering')` inside the function to confirm it runs later.
-
-4.2 Loop clubs and create a card per item:
+> ✅ Check: Still nothing visible until we set text and call render.
 
 ```js
 function renderClubs() {
@@ -200,29 +191,21 @@ function renderClubs() {
   clubs.forEach((club) => {
     const card = document.createElement("div");
     card.className = "club-card";
-    // we'll set text next
+    // text next
     container.appendChild(card);
   });
 }
 ```
 
-> 📍 Where
->
-> File: `app.js` — replace your previous `renderClubs()` with this longer version that includes the loop. Keep the function name the same.
+#### 3.6 Build a readable message (template literal)
 
-> ℹ️ What
+> 📍 Where: Inside the forEach, after card.className
 >
-> Loops through the `clubs` array and makes a new `<div>` for each club. We’re just appending the empty card for now; we’ll add text next.
+> ℹ️ What: Construct a sentence with name, counts, seats left, and percent full.
 >
-> 💡 Why
+> 💡 Why: Separate formatting from math (helpers) for clarity.
 >
-> This is the core pattern of rendering from data: loop → create element → configure it → append to the page.
-
-> ✅ Check
->
-> Nothing visible yet until step 5. After we call `renderClubs()`, you’ll see two empty cards if you stop before adding text.
-
-4.3 Build a readable message with template literals:
+> ✅ Check (console): Temporarily `console.log(message)` shows a line per club.
 
 ```js
 const message = `${club.name}: ${club.current}/${
@@ -230,89 +213,48 @@ const message = `${club.name}: ${club.current}/${
 } seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
 ```
 
-> 📍 Where
->
-> File: `app.js` — inside the `clubs.forEach(...)` loop, immediately after `const card = document.createElement("div");` and setting `card.className`.
+#### 3.7 Put the text on the card
 
-> ℹ️ What
+> 📍 Where: Next line after `const message = ...`
 >
-> Build a readable sentence using template literals (backticks: ` \``) and  `${...}` placeholders to inject values and helper results.
+> ℹ️ What: Attach the message to the card element.
 >
-> 💡 Why
+> 💡 Why: textContent is safe and simple for plain text.
 >
-> Keeps the math in helpers and the message in one place, which is easier to test and change later.
-
-> ✅ Check
->
-> Temporarily add `console.log(message)` under the `message` line, save, and refresh. You should see a line per club in the Console (e.g., `Coding Club: 12/25 seats filled (13 left, 48% full)`).
-
-4.4 Put the text on the card:
+> ✅ Check: After initial paint, cards display the message.
 
 ```js
 card.textContent = message;
 ```
 
-> 📍 Where
->
-> File: `app.js` — on the next line after `const message = ...` inside the loop.
+#### 3.8 Initial paint
 
-> ℹ️ What
+> 📍 Where: Bottom of app.js (not inside a function)
 >
-> Put the message on the card using `textContent` (safer than `innerHTML` because it doesn’t interpret HTML tags).
+> ℹ️ What: Call the renderer once so we see the seed data.
 >
-> 💡 Why
+> 💡 Why: Without this, nothing appears.
 >
-> Prevents accidental HTML injection and keeps our content purely text for now.
-
-> ✅ Check
+> ✅ Check (triad):
 >
-> After step 5, reload the page and you’ll see each card show its full message.
-
-### 5) Initial paint
-
-Call the function once at the bottom to render your seed data.
+> - Visual: Two cards (“Coding Club…”, “Art Club…”) appear.
+> - Console: No errors.
+> - DOM: `document.querySelectorAll('.club-card').length` → 2
 
 ```js
 renderClubs();
 ```
 
-> 📍 Where
->
-> File: `app.js` — scroll to the bottom and add this on its own line. Keep it outside of any function.
+## Troubleshooting
 
-> ℹ️ What
->
-> Trigger the first render.
->
-> 💡 Why
->
-> Without this, nothing appears yet.
+- Nothing renders: Ensure `renderClubs()` is called and `#club-info` exists in index.html.
+- “null” errors: Double-check the ID matches exactly in HTML and JS (`club-info`).
+- Weird percentages: Use `Math.round(ratio * 100)` (not `Math.round(ratio) * 100`).
+- Duplicate cards: Confirm `container.innerHTML = "";` runs before the loop.
+- `clubs` undefined: Keep the `const clubs = [...]` at top-level (not inside a function).
+- Reset to baseline: Restore Appendix code for all three files and re-apply steps to the last checkpoint.
 
-> ✅ Check
->
-> Save and refresh. You should see two cards: Coding Club and Art Club, with counts (current/capacity), seats left, and percent full. If you see nothing, confirm `index.html` includes `<script src="app.js"></script>`.
-
----
-
-## Run and verify
-
-- Open `index.html` with Live Server (VS Code extension): right-click `index.html` → “Open with Live Server”.
-- Keep the browser and editor side-by-side; when you save, the browser auto-refreshes.
-- You should see one card per club with correct seats left and percent full.
-
----
-
-## Troubleshooting (quick fixes)
-
-- If you see nothing, make sure `renderClubs()` is called at the bottom of `app.js` and that `index.html` includes `<script src="app.js"></script>` before `</body>`.
-- If the console says an element is `null`, confirm the IDs in HTML and JS match exactly: `#club-info` in HTML and `document.getElementById("club-info")` in JS.
-- If percents look odd, ensure you’re using `Math.round(ratio * 100)` (round after multiplying), not `Math.round(ratio) * 100`.
-- If cards duplicate on refresh, make sure you clear with `container.innerHTML = "";` before the loop inside `renderClubs()`.
-- If `clubs` is `undefined`, ensure the `const clubs = [...]` definition is at the top of `app.js` and not inside another function.
-
----
-
-## Appendix — Full source code (Class 2)
+## Appendix — Full Source After This Class
 
 ### index.html
 
@@ -432,3 +374,13 @@ function renderClubs() {
 // Initial paint
 renderClubs();
 ```
+
+## Compliance checklist (fill before publishing)
+
+- [ ] Previous class (N-1) repo files reviewed and used as baseline
+- [ ] Current class files reviewed and used as targets
+- [ ] Unified diff blocks reflect the actual changes for each touched file
+- [ ] Applying diff to baseline yields current files (spot-checked)
+- [ ] Every step uses 📍 Where / ℹ️ What / 💡 Why / ✅ Check callouts
+- [ ] Troubleshooting and Appendix are present and accurate
+- [ ] Checkpoints added every 3–5 steps
