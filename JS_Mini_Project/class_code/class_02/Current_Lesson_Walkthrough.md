@@ -21,8 +21,8 @@ Add the script tag right before `</body>` so the DOM is loaded before your scrip
 
 Snippet to add:
 
-```html
-<script src="app.js"></script>
+```diff
++<script src="app.js"></script>
 ```
 
 Placement:
