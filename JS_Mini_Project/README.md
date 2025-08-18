@@ -1,100 +1,41 @@
-# Campus Club Manager — JS Mini Project (Class-by-Class)
+# Campus Club Manager — JS Mini Project
 
-This mini project evolves across folders `class_code/class_01` → `class_code/class_12`. Each folder contains the finished code for that class and a delta-style walkthrough (`Current_Lesson_Walkthrough.md`) describing what changed from the previous class.
+Break room, 8:47 AM.
 
-## How to run locally (VS Code Live Server)
+- Garrett: You know what a new app idea would be that would benefit the company?
+- Codi: Tell me! I’m fresh out of bootcamp and itching to ship something.
+- Garrett: We’ve got all these internal clubs—running, chess, book club, you name it. People want a simple spot to see what exists, how full they are, and maybe RSVP to events. Nothing huge. Just useful.
+- Codi: Love it. In bootcamp we started small and layered features each week. We can do the same here—ship a tiny slice, then keep leveling up.
 
-- We use the VS Code Live Server extension for all classes.
-- Class 12 requires HTTP for `fetch('./data/seed.json')`; Live Server provides this.
+- Garrett: What’s the tiniest possible version?
+- Codi: Start super small: a single page with a clean header, some basic styles, and a little JavaScript to prove everything’s wired. Then seed a couple of pretend clubs so we can see it.
+- Garrett: That sounds doable today.
+- Codi: Exactly. As I learn more, we keep growing it: add a form to create clubs, manage members on each card, then add events with friendly dates, save to the browser so changes stick, maybe even give each club its own URL.
 
-Steps:
+- Garrett: Walk me through how this grows as your bootcamp brain unlocks new stuff.
+- Codi: Sure!
 
-1. Install the VS Code extension: “Live Server” by Ritwick Dey.
-2. In VS Code, open the specific class folder (e.g., `JS_Mini_Project/class_code/class_12`).
-3. Open `index.html` and click “Go Live” (status bar) or right‑click → “Open with Live Server”.
-4. Your browser opens to a local URL (e.g., http://127.0.0.1:5500/…). Edits auto‑reload.
+  - Step 1 — Basics: HTML/CSS/JS scaffold. Serve it with Live Server so links and modules behave.
+  - Step 2 — Data on screen: Keep a tiny array of clubs, write small math helpers (seats left, percent full), and render simple cards.
+  - Step 3 — Forms & guardrails: Add a Create Club form, prevent page reload on submit, trim/validate inputs, and block duplicates.
+  - Step 4 — Real structure: Introduce small classes (Club, Member, Event) so behavior lives with data and the UI stays clean.
+  - Step 5 — Inline actions: Add/Remove Member directly on each card using event delegation (one listener, dynamic buttons).
+  - Step 6 — Findability: Search, filter to “has seats,” and sorting so people can discover clubs.
+  - Step 7 — Smoother UX: Debounce search and compose small list transforms so it feels snappy.
+  - Step 8 — Grown‑up folders: Split into ES modules (models, store, ui, utils) so files are small and teachable.
+  - Step 9 — Events done right: Use nanoid for unique IDs and dayjs for human‑friendly dates (“in 3 days”, “Past”).
+  - Step 10 — It remembers: Save to localStorage, plus Import/Export/Reset so data can move around or restart cleanly.
+  - Step 11 — Mini routing: Hash routes for Home and Club Detail so each club has a shareable URL.
+  - Step 12 — A taste of servers: Fetch seed JSON on first load and simulate a save with loading/success/error states.
 
-## Class-by-class overview
+- Garrett: That’s a neat path—useful from day one, and it gets more polished as you learn.
+- Codi: Exactly. Each step stays small, but together it turns into a legit little app the team can actually use.
 
-- Class 1: Kickoff & setup — HTML/CSS/JS scaffold, simple page text.
-- Class 2: Variables & arrays — compute counts and render basic info.
-- Class 3: Create Club form — validation, duplicate name guard, renderClubs, addClub.
-- Class 4: OOP models — `Club`, `Member`, `EventItem` with class methods.
-- Class 5: DOM patterns — event delegation; dynamic club cards; Add Member UI.
-- Class 6: Search/Filter/Sort — toolbar with derived list pipeline.
-- Class 7: UX helpers — `debounce`, small `pipe` utility; cleaner filtering.
-- Class 8: ES Modules — moved to `src/` with `models/`, `store/`, `ui/`, `utils/`, `router`.
-- Class 9: Libraries & Events — `dayjs` (relative-time) and `nanoid`; events with friendly dates.
-- Class 10: Persistence — `localStorage` save/load; Import/Export/Reset; models serialize with `toPlain`/`fromPlain` and stable IDs.
-- Class 11: Routing — hash-based router; home list vs club detail; split `ui/render.js` and `ui/detail.js`.
-- Class 12: Async/Fetch — load seed from `data/seed.json` on first boot, simulated save, and global status messages.
+- Garrett: What’s in it for the company right away?
+- Codi: Visibility and momentum. Day one you can point folks to a page that shows clubs exist. A week later they can add their own. Not long after, you’re browsing events, searching, sorting, and everything persists between visits.
 
-## Current structure (Class 12)
+- Garrett: I like it. Let’s kick it off.
+- Codi: I’ll spin up the skeleton today—clean header, styles, and a tiny script. Then we’ll drop in sample clubs and keep building from there. I’ll keep it clear and beginner‑friendly so anyone peeking at the code can follow along.
 
-```text
-class_code/class_12/
-  index.html
-  styles.css
-  data/seed.json
-  src/
-    app.js
-    router.js
-    services/
-      api.js
-    store/
-      data.js
-      filters.js
-      persist.js
-    models/
-      Club.js
-      Member.js
-      EventItem.js
-    ui/
-      render.js
-      detail.js
-    utils/
-      debounce.js
-      externals.js   # dayjs, nanoid
-      pipe.js
-```
-
-## Data shapes (Class 12)
-
-```js
-// Club (derived props computed in class)
-{
-  id: "clb_...",
-  name: "Coding Club",
-  capacity: 10,
-  members: Member[],
-  events: EventItem[],
-  // derived in code: current, seatsLeft, percentFull
-}
-
-// Member
-{ id: "mem_...", name: "Ava" }
-
-// EventItem
-{
-  id: "evt_...",
-  title: "Hack Night",
-  dateISO: "2025-09-10",
-  description?: "...",
-  capacity?: 30,
-  // derived in code: friendlyWhen, isPast
-}
-```
-
-## Documentation per class
-
-Every class folder includes `Current_Lesson_Walkthrough.md` with:
-
-- A delta section listing exactly what changed from the prior class.
-- Small rationale for each change and where to find it (file/path).
-- An appendix with the full code for that class for quick reference.
-
-## Notes & troubleshooting
-
-- If you see errors fetching `./data/seed.json`, make sure Live Server is running (HTTP) and you launched it from the class folder containing `index.html`.
-- Import/Export/Reset work locally via `localStorage` (Class 10+).
-- The global status banner (Class 12) shows loading/success/error messages for async actions.
+- Garrett: Perfect. Keep the vibe practical and the steps small.
+- Codi: Deal. Bootcamp habits engaged.
