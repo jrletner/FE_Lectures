@@ -17,6 +17,7 @@ We live-code during class in a separate repository named FE_Projects. That repo 
     - `Current_Lesson_Walkthrough.md` — Step-by-step delta from the previous class.
 - `Lectures/` — Code typed during each lecture (dated folders).
 - `Resources/` — Supporting docs and tools for the course:
+  - JavaScript Video Tutorial Link
   - `VSCode_Extensions.md` — Recommended VS Code extensions.
 - Live project repo — In-class working directory (updated live each session):
   - https://github.com/jrletner/FE_Projects
@@ -36,7 +37,7 @@ We live-code during class in a separate repository named FE_Projects. That repo 
 
 ## Resources
 
-- JavaScript Video Link
+- JavaScript Tutorial Video Link
 - VS Code extensions: `Resources/VSCode_Extensions.md`
   - What’s inside: A short, curated list of editor extensions we’ll use in class (formatting, HTML/JS helpers, Live Server, dotenv, and optional framework snippets like Svelte/React).
   - How to use: Open the file, install items you don’t have from the VS Code Marketplace. Prettier + Live Server are the key ones for this repo.
