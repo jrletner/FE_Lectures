@@ -26,6 +26,17 @@
 
 Initial baseline. No previous class; unified diffs are not applicable for Class 1.
 
+## File tree (current class)
+
+```text
+class_01/
+  index.html
+  styles.css
+  app.js
+```
+
+> Note: Required when structure changed since last class; recommended otherwise. Keep paths relative to the class folder.
+
 ## Live-coding steps
 
 ### 1. Create index.html

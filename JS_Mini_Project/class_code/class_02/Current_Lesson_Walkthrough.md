@@ -62,6 +62,17 @@
 + renderClubs();
 ```
 
+## File tree (current class)
+
+```text
+class_02/
+  index.html
+  styles.css
+  app.js
+```
+
+> Note: Required when structure changed since last class; recommended otherwise. Keep paths relative to the class folder.
+
 ## Live-coding steps
 
 ### 1. index.html — update the title (Class 2)
