@@ -1,10 +1,10 @@
 # Campus Club Manager — Class 1 (Completed)
 
-Break room, 9:05 AM.
+Morning Standup, 9:05 AM.
 
-- Garrett: Hey Codi, morning! I just need a page that opens and doesn’t look broken. Super simple.
-- Codi: Totally. In bootcamp we drilled the basics: one `index.html` for structure, a `styles.css` to make it not ugly, and a tiny `app.js` to prove the wiring works. If we serve it with Live Server, links behave and nothing 404s. We’ll keep it neat so we can build on it later.
-- Garrett: That’s exactly what I need—thank you!
+- Garrett: Quick status—where are we on the mini project?
+- Codi: Done: we agreed on the idea and opened the workspace. Today: I’ll put together a simple page with a clear title and a spot for the rest to grow. Bootcamp’s all about starting small and keeping things tidy, so I’ll keep it clean and easy to read. Blockers: none.
+- Garrett: Perfect. Let’s get that first page showing so people see something real.
 
 ## Codi’s requirements (from our chat)
 

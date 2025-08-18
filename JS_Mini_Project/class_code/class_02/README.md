@@ -1,10 +1,10 @@
 # Campus Club Manager — Class 2 (Completed)
 
-Break room, 9:12 AM.
+Morning Standup, 9:12 AM.
 
-- Garrett: Morning, Codi! I just want to see a couple of pretend clubs on the page. What does this even look like?
-- Codi: Nice and doable. In bootcamp we used arrays and little math helpers to keep numbers honest. I’ll seed a tiny `clubs` list, compute seats left and percent full, and render cards from that. I’ll clear the container each time so nothing duplicates.
-- Garrett: Love it—thanks!
+- Garrett: Status?
+- Codi: Done: the first page is up and neat. Today: I’ll add a couple of pretend clubs and show them on the page. Bootcamp taught me to keep numbers honest and keep the page in sync with the info we have, so I’ll do that in a simple way. Blockers: none.
+- Garrett: Sounds good—let’s make it feel alive.
 
 ## Codi’s requirements (from our chat)
 
@@ -29,5 +29,5 @@ Break room, 9:12 AM.
 
 ## Morning debrief (bootcamp tie‑in)
 
-- Codi: Super happy with this—total bootcamp move: stash data in an array, use tiny pure helpers for the math, then paint the UI from that. Clear the container first so it never gets messy. Feels clean and reliable.
+- Codi: Super happy with this—we kept it simple like bootcamp: keep the info tidy and show it clearly, no drama. Seeing the page update right from our list feels great.
 - Garrett: My problem was “show me a couple of pretend clubs.” Now I see real cards with current/capacity, seats left, and percent full, rendered cleanly from that data. Exactly what I was hoping for.
