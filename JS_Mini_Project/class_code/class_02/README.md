@@ -26,3 +26,8 @@ Break room, 9:12 AM.
 - Re-rendering does not duplicate cards (container is cleared first).
 - Percent is a whole number; capacity 0 yields 0% without errors.
 - No console errors during initial render.
+
+## Morning debrief (bootcamp tie‑in)
+
+- Codi: Super happy with this—total bootcamp move: stash data in an array, use tiny pure helpers for the math, then paint the UI from that. Clear the container first so it never gets messy. Feels clean and reliable.
+- Garrett: My problem was “show me a couple of pretend clubs.” Now I see real cards with current/capacity, seats left, and percent full, rendered cleanly from that data. Exactly what I was hoping for.

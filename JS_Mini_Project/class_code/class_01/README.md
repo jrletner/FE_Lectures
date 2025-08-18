@@ -26,3 +26,8 @@ Break room, 9:05 AM.
 - Header/title is visible; basic styles are applied.
 - JS prints a single console message on load (proof of wiring).
 - CSS/JS links resolve (no 404s in Network tab).
+
+## Morning debrief (bootcamp tie‑in)
+
+- Codi: I’m pumped—we solved it just like we practiced in bootcamp: set the table first. Clean scaffold, HTML for the bones, CSS for the look, JS for behavior, and run it over http so links just work. Love seeing the basics click.
+- Garrett: Right, my ask was “a page that opens and doesn’t look broken.” With the basic files linked and Live Server running, I get a neat title, working styles, and a console ping that proves JS is wired. That solves today’s need perfectly.
