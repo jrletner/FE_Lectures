@@ -3,6 +3,22 @@
 **Lesson:** Variables, Numbers, Strings  
 **Goal:** Seed club data, do simple math (seats left, percent full), and render to the page.
 
+## Manager → Developer: Story Brief
+
+Class 1 gave us the shell; now we need something real to look at. I want two believable sample clubs rendered on the page and a simple pattern we can keep using: state in memory, and the UI derived from that state. Keep the math helpers tiny and readable—this is about clarity, not micro-optimizations.
+
+Constraints and intent:
+
+- No external libraries; plain JavaScript only.
+- Keep data shape consistent: `{ name, current, capacity }`.
+- Helpers should be pure and small: `seatsLeft(club)`, `percentFull(club)`.
+- Rendering should clear the container and then append one card per club.
+- Percentages should be whole numbers (rounded) for readability.
+
+What “done” looks like today:
+
+- I open the page, see two club cards rendered with current/capacity, seats left, and percent full. No duplication on re-render, no console errors. The structure will carry forward into Class 3 when we add a form.
+
 ## What Students Should See
 
 - Two starter clubs displayed with seat counts and percent full.
@@ -40,6 +56,14 @@ This class connects the dots: data → render → visible UI.
 - Risks: Rendering directly from data without reusing code can lead to duplication later—acceptable for now.
 - Assumptions: We have a container (e.g., `#club-info`) in the HTML.
 - Dependencies: None; plain JavaScript only.
+
+## User Stories (Class 2)
+
+- As a visitor, I can see two example clubs rendered as cards so that the page feels alive and informative.
+- As a visitor, each card shows seats left and percent full so that I can quickly gauge capacity.
+- As a developer/instructor, the helpers return correct values for edge cases (0 capacity → 0%) so that demos don’t break.
+- As a developer/instructor, re-rendering clears the container first so that cards don’t duplicate.
+- As a developer/instructor, percent is rounded to a whole number so that the UI is easy to read.
 
 ## Acceptance Criteria
 
