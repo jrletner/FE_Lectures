@@ -18,13 +18,16 @@
 
 ## Before you start
 
-- Open: JS_Mini_Project/class_code/class_02
+- Open: `JS_Mini_Project/class_code/class_02`
 - Baseline: Review Class 1 repo files vs. Class 2 files to know the exact diffs you’ll author.
-- Files to diff: index.html, styles.css, app.js
+- Files to diff: `index.html`, `styles.css`, `app.js`
 - Pre-flight: Confirm you’re on Class 2 files; open all three.
 - Reset plan: If drift occurs, restore the Appendix code and resume from the last checkpoint.
 
 ## What changed since last class
+
+<details>
+  <summary>Diff — index.html: update title</summary>
 
 ```diff
 # index.html
@@ -32,16 +35,26 @@
 + <title>Campus Club Manager — Class 2</title>
 ```
 
+</details>
+
+<details>
+  <summary>Diff — styles.css: add .club-card</summary>
+
 ```diff
 # styles.css
  .cards { display: grid; gap: 10px; }
-+.club-card {
-+  border: 1px solid #ccc;
-+  background: #fff;
-+  padding: 10px;
-+  border-radius: 6px;
-+}
++ .club-card {
++   border: 1px solid #ccc;
++   background: #fff;
++   padding: 10px;
++   border-radius: 6px;
++ }
 ```
+
+</details>
+
+<details>
+  <summary>Diff — app.js: seed, helpers, render, initial paint</summary>
 
 ```diff
 # app.js
@@ -62,7 +75,12 @@
 + renderClubs();
 ```
 
+</details>
+
 ## File tree (current class)
+
+<details open>
+  <summary>File tree — class_02</summary>
 
 ```text
 class_02/
@@ -71,13 +89,13 @@ class_02/
   app.js
 ```
 
-> Note: Required when structure changed since last class; recommended otherwise. Keep paths relative to the class folder.
+</details>
 
 ## Live-coding steps
 
-### 1. index.html — update the title (Class 2)
+### 1) index.html — update the title (Class 2)
 
-> 📍 Where: class_02/index.html → inside <head>
+> 📍 Where: `class_02/index.html` → inside `<head>`
 >
 > ℹ️ What: Update the tab title so it reflects today’s class.
 >
@@ -85,19 +103,58 @@ class_02/
 >
 > ✅ Check (visual): Browser tab reads “Campus Club Manager — Class 2”.
 
+<details open>
+  <summary>Diff — index.html: title</summary>
+
+```diff
+<head>
+-  <title>Campus Club Manager — Class 1</title>
++  <title>Campus Club Manager — Class 2</title>
+  <link rel="stylesheet" href="styles.css" />
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — index.html: title</summary>
+
 ```html
 <title>Campus Club Manager — Class 2</title>
 ```
 
-### 2. styles.css — add a simple card style
+</details>
 
-> 📍 Where: class_02/styles.css → below the existing .cards rule or at end of file
+### 2) styles.css — add a simple card style
+
+> 📍 Where: `class_02/styles.css` → below the existing `.cards` rule or end of file.
 >
 > ℹ️ What: A white “card” with a border, padding, and rounded corners.
 >
 > 💡 Why: Improves readability and separation between items.
 >
 > ✅ Check: No visible change yet (cards appear after we render in app.js).
+
+<details open>
+  <summary>Diff — styles.css: add .club-card</summary>
+
+```diff
+.cards { display: grid; gap: 10px; }
++ .club-card {
++   border: 1px solid #ccc;
++   background: #fff;
++   padding: 10px;
++   border-radius: 6px;
++ }
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — styles.css: .club-card</summary>
 
 ```css
 .club-card {
@@ -108,11 +165,21 @@ class_02/
 }
 ```
 
-### 3. app.js — seed, helpers, render, paint (tiny, safe steps)
+</details>
+
+<br><br>
+
+> Checkpoint 1
+>
+> - Run: Reload the page (no UI yet)
+> - Expect: Console checks pass for both helpers
+> - Console: `console.log('Checkpoint 1', 48)` as a quick percent sanity check
+
+### 3) app.js — seed, helpers, render, paint (tiny, safe steps)
 
 #### 3.1 Seed two example clubs
 
-> 📍 Where: class_02/app.js → at the top
+> 📍 Where: `class_02/app.js` → at the top
 >
 > ℹ️ What: An array of two club objects with name/current/capacity.
 >
@@ -120,12 +187,31 @@ class_02/
 >
 > ✅ Check (console): Type `clubs` → see an array with two objects.
 
+<details open>
+  <summary>Diff — app.js: seed array</summary>
+
+```diff
++ const clubs = [
++   { name: "Coding Club", current: 12, capacity: 25 },
++   { name: "Art Club", current: 8, capacity: 15 },
++ ];
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — app.js: seed</summary>
+
 ```js
 const clubs = [
   { name: "Coding Club", current: 12, capacity: 25 },
   { name: "Art Club", current: 8, capacity: 15 },
 ];
 ```
+
+</details>
 
 #### 3.2 Helper: seats left (subtraction)
 
@@ -137,21 +223,57 @@ const clubs = [
 >
 > ✅ Check (console): `seatsLeft(clubs[0])` → 13
 
+<details open>
+  <summary>Diff — app.js: seatsLeft helper</summary>
+
+```diff
++ function seatsLeft(club) {
++   return club.capacity - club.current;
++ }
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — app.js: seatsLeft</summary>
+
 ```js
 function seatsLeft(club) {
   return club.capacity - club.current;
 }
 ```
 
+</details>
+
 #### 3.3 Helper: percent full (division + round)
 
-> 📍 Where: Below seatsLeft(...)
+> 📍 Where: Below `seatsLeft(...)`
 >
 > ℹ️ What: Math helper that turns a ratio into a whole-number percent.
 >
 > 💡 Why: Clean UI (no long decimals) and easy to reuse.
 >
 > ✅ Check (console): `percentFull(clubs[0])` → 48
+
+<details open>
+  <summary>Diff — app.js: percentFull helper</summary>
+
+```diff
++ function percentFull(club) {
++   if (club.capacity <= 0) return 0;
++   const ratio = club.current / club.capacity;
++   return Math.round(ratio * 100);
++ }
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — app.js: percentFull</summary>
 
 ```js
 function percentFull(club) {
@@ -161,11 +283,7 @@ function percentFull(club) {
 }
 ```
 
-> Checkpoint 1
->
-> - Run: Reload the page (no UI yet)
-> - Expect: Console checks pass for both helpers
-> - Console: `console.log('Checkpoint 1', percentFull(clubs[0])) // 48`
+</details>
 
 #### 3.4 Start the renderer (clear the container)
 
@@ -177,6 +295,23 @@ function percentFull(club) {
 >
 > ✅ Check: No visible change yet; no errors.
 
+<details open>
+  <summary>Diff — app.js: render skeleton</summary>
+
+```diff
++ function renderClubs() {
++   const container = document.getElementById("club-info");
++   container.innerHTML = ""; // clear previous content
++ }
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — app.js: render skeleton</summary>
+
 ```js
 function renderClubs() {
   const container = document.getElementById("club-info");
@@ -184,42 +319,39 @@ function renderClubs() {
 }
 ```
 
+</details>
+
 #### 3.5 Loop clubs and create a card per item
 
-> 📍 Where: Replace renderClubs with this version
+> 📍 Where: Replace the render body with loop + element creation
 >
-> ℹ️ What: Build one .club-card per club object.
+> ℹ️ What: Build one `.club-card` per club object.
 >
 > 💡 Why: Core render-from-state pattern: loop → element → configure → append.
 >
 > ✅ Check: Still nothing visible until we set text and call render.
 
-```js
-// previous version — Step 3.4
-/*
-function renderClubs() {
-  const container = document.getElementById("club-info");
-  container.innerHTML = ""; // clear previous content
-}
-*/
+<details open>
+  <summary>Diff — app.js: render loop</summary>
 
-// updated version — build one .club-card per club
-function renderClubs() {
-  const container = document.getElementById("club-info");
-  container.innerHTML = "";
-
-  clubs.forEach((club) => {
-    const card = document.createElement("div");
-    card.className = "club-card";
-    // text next
-    container.appendChild(card);
-  });
-}
+```diff
+  function renderClubs() {
+    const container = document.getElementById("club-info");
+    container.innerHTML = "";
++   clubs.forEach((club) => {
++     const card = document.createElement("div");
++     card.className = "club-card";
++     // message next
++     container.appendChild(card);
++   });
+  }
 ```
+
+</details>
 
 #### 3.6 Build a readable message (template literal)
 
-> 📍 Where: Inside the forEach, after card.className
+> 📍 Where: Inside the forEach, after `card.className`
 >
 > ℹ️ What: Construct a sentence with name, counts, seats left, and percent full.
 >
@@ -227,22 +359,33 @@ function renderClubs() {
 >
 > ✅ Check (console): Temporarily `console.log(message)` shows a line per club.
 
-```js
-// inside renderClubs(), in the forEach, after card.className
-/*
-clubs.forEach((club) => {
-  const card = document.createElement("div");
-  card.className = "club-card";
-  // text next
-  container.appendChild(card);
-});
-*/
+<details open>
+  <summary>Diff — app.js: message string</summary>
 
-// now add the message directly after card.className and before append
+```diff
+    clubs.forEach((club) => {
+      const card = document.createElement("div");
+      card.className = "club-card";
++     const message = `${club.name}: ${club.current}/${club.capacity} seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
+      // message next
+      container.appendChild(card);
+    });
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — app.js: message</summary>
+
+```js
 const message = `${club.name}: ${club.current}/${
   club.capacity
 } seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
 ```
+
+</details>
 
 #### 3.7 Put the text on the card
 
@@ -254,21 +397,35 @@ const message = `${club.name}: ${club.current}/${
 >
 > ✅ Check: After initial paint, cards display the message.
 
-```js
-// inside renderClubs(), in the forEach (previous line — message)
-/*
-const message = `${club.name}: ${club.current}/${
-  club.capacity
-} seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
-*/
+<details open>
+  <summary>Diff — app.js: set text</summary>
 
-// now set the text before appending
+```diff
+    clubs.forEach((club) => {
+      const card = document.createElement("div");
+      card.className = "club-card";
+      const message = `${club.name}: ${club.current}/${club.capacity} seats filled (${seatsLeft(club)} left, ${percentFull(club)}% full)`;
++     card.textContent = message;
+      container.appendChild(card);
+    });
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — app.js: set text</summary>
+
+```js
 card.textContent = message;
 ```
 
+</details>
+
 #### 3.8 Initial paint
 
-> 📍 Where: Bottom of app.js (not inside a function)
+> 📍 Where: Bottom of `app.js` (not inside a function)
 >
 > ℹ️ What: Call the renderer once so we see the seed data.
 >
@@ -280,9 +437,25 @@ card.textContent = message;
 > - Console: No errors.
 > - DOM: `document.querySelectorAll('.club-card').length` → 2
 
+<details open>
+  <summary>Diff — app.js: initial paint</summary>
+
+```diff
++ renderClubs();
+```
+
+</details>
+
+Clean copy/paste snippet:
+
+<details>
+  <summary>Clean copy/paste — app.js: initial paint</summary>
+
 ```js
 renderClubs();
 ```
+
+</details>
 
 ## Troubleshooting
 
@@ -296,6 +469,9 @@ renderClubs();
 ## Appendix — Full Source After This Class
 
 ### index.html
+
+<details>
+  <summary>Full source — index.html</summary>
 
 ```html
 <!DOCTYPE html>
@@ -322,7 +498,12 @@ renderClubs();
 </html>
 ```
 
+</details>
+
 ### styles.css
+
+<details>
+  <summary>Full source — styles.css</summary>
 
 ```css
 /* Simple, beginner-friendly styles for Class 2 */
@@ -368,7 +549,12 @@ footer {
 }
 ```
 
+</details>
+
 ### app.js
+
+<details>
+  <summary>Full source — app.js</summary>
 
 ```javascript
 // Class 2 — Variables, Numbers, Strings
@@ -413,3 +599,5 @@ function renderClubs() {
 // Initial paint
 renderClubs();
 ```
+
+</details>
