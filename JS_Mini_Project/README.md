@@ -1,26 +1,77 @@
-# Campus Club Manager — JS Mini Project
+# Campus Club Manager — Project Overview
 
-Break room, 8:47 AM.
+## Kickoff chat
 
-- Garrett: You know what a new app idea would be that would benefit the company?
-- Codi: Tell me! I just started a bootcamp, and I’d love to build this while I learn.
-- Garrett: We’ve got a bunch of internal clubs—running, chess, book club. Folks want a simple spot to see what exists, how full they are, and maybe RSVP to events. Nothing huge—just useful.
-- Codi: Perfect. In bootcamp we start small and layer features over time. We can ship a tiny slice now and grow it as I progress.
+- Codi: Garrett! I just joined a coding bootcamp and I’m so excited. I’m learning something called MEAN Full Stack Development.
+- Garrett: That’s awesome—congrats! I’ve got a project we can work on together while you learn. We’ll meet every morning for a quick standup and do a short debrief later in the day.
 
-- Garrett: What’s the tiniest version?
-- Codi: One page with a clean header, basic styles, and a tiny JavaScript file to prove wiring. Seed a couple of pretend clubs so we can see it.
-- Codi: As I learn more, I’ll keep adding features in small steps:
+## How we’ll work
 
-  - letting people add new clubs themselves with friendly messages if something’s off
-  - managing members right on the card without jumping around
-  - quick search, hide full clubs, and simple sorting so it’s easy to find things
-  - adding events that show dates in a way humans actually read
-  - having your changes stick when you come back, and an easy way to back things up
-  - giving each club its own link you can share
-  - showing little loading and success/error notes so it feels like a real app
+- Morning Standup: quick check-in in plain English—what’s done, what’s next, any blockers.
+- Afternoon Debrief: short recap tying what we built back to what Codi learned in bootcamp.
+- Keep it simple and welcoming; we’ll grow the app step by step.
 
-- Garrett: Love the roadmap—useful from day one and more polished as you learn.
-- Codi: Exactly. I’ll spin up the skeleton today and keep building while I learn.
+## Our idea board (classes become features as Codi learns)
 
-- Garrett: Let’s kick it off.
-- Codi: Deal.
+- Class 1 — A real starting page
+
+  - What we’ll try: Show a simple page with a clear title so it feels real.
+  - Why it helps: People see something working right away.
+
+- Class 2 — Example clubs on the page
+
+  - What we’ll try: Show a couple of pretend clubs with friendly info.
+  - Why it helps: The page starts to feel alive.
+
+- Class 3 — Add a club
+
+  - What we’ll try: A small form so someone can add a club, with friendly messages.
+  - Why it helps: You can do something and see it right away.
+
+- Class 4 — Edit or remove a club
+
+  - What we’ll try: Let people fix a name or remove a club that’s not needed.
+  - Why it helps: Keeps things tidy and up to date.
+
+- Class 5 — Simple status and highlights
+
+  - What we’ll try: Show when a club is full or has plenty of room; highlight it.
+  - Why it helps: Makes the page easier to scan.
+
+- Class 6 — Remember choices
+
+  - What we’ll try: When someone refreshes, their clubs are still there.
+  - Why it helps: It feels dependable.
+
+- Class 7 — Search and filter
+
+  - What we’ll try: A quick way to find a club by name or show only the ones with room.
+  - Why it helps: Saves time and reduces scrolling.
+
+- Class 8 — Friendly layout
+
+  - What we’ll try: Make it look neat on phones and laptops.
+  - Why it helps: Easier to use anywhere.
+
+- Class 9 — Pages that make sense
+
+  - What we’ll try: Simple navigation so the app feels organized.
+  - Why it helps: People don’t get lost.
+
+- Class 10 — Share a link
+
+  - What we’ll try: Make it easy to share a link that opens to the right spot.
+  - Why it helps: Better for clubs and friends.
+
+- Class 11 — Bring in outside info
+
+  - What we’ll try: Show helpful details from another source when it makes sense.
+  - Why it helps: More useful without extra typing.
+
+- Class 12 — Polish and celebrate
+  - What we’ll try: Clean up rough edges, small wins everywhere.
+  - Why it helps: It feels finished and friendly.
+
+## What we’re building
+
+A simple, friendly “Campus Club Manager” that grows with Codi’s skills. We’ll keep the language plain, the steps small, and the app useful from day one. Each class is just another idea we turn into something real together.
