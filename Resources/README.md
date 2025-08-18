@@ -18,3 +18,5 @@ https://youtu.be/EerdGm-ehJQ?si=lKpe0Xrrh3C5SKiK
 - Svelte Intellisense
 - vscode-styled-components
 - DotENV
+- Postman
+- MongoDB
