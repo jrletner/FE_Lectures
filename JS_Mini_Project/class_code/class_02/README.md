@@ -1,33 +1,32 @@
 # Campus Club Manager — Class 2 (Completed)
 
-Morning Standup, 9:12 AM.
+## Conversation
 
-- Garrett: Status?
-- Codi: Done: the first page is up and neat. Today: I’ll add a couple of pretend clubs and show them on the page. Bootcamp taught me to keep numbers honest and keep the page in sync with the info we have, so I’ll do that in a simple way. Blockers: none.
-- Garrett: Sounds good—let’s make it feel alive.
+- Garrett: What’s the plan for today?
+- Codi: Morning standup — Done: a clean page with our title and wiring. Today: add two pretend clubs in JavaScript, do a little math, and show them on the page. Blockers: none. Bootcamp lesson I’ll use: keep the info in one place and let the page read from it.
+- Garrett: Great, let’s see the list come to life.
 
 ## Codi’s requirements (from our chat)
 
 - Add a `clubs` array with two example clubs shaped like `{ name, current, capacity }`.
-- Write helpers: `seatsLeft(club)` and `percentFull(club)` (rounded, safe for 0 capacity).
+- Write helpers: `seatsLeft(club)` and `percentFull(club)` (rounded; safe for capacity 0).
 - Implement `renderClubs()` that clears the container and renders one card per club.
-- Ensure the container exists in HTML and there are no console errors.
+- Keep styles simple and ensure there are no console errors.
 
 ## Codi’s user stories
 
-- As a visitor, I can see two example clubs rendered as cards with current/capacity.
-- As a visitor, I see seats left and a rounded percent full on each card.
-- As a developer, re-rendering clears the container so cards never duplicate.
-- As a developer, edge cases like capacity 0 render safely (percent = 0%).
+- As a visitor, I see two example clubs with numbers I can understand.
+- As a visitor, I see seats left and a rounded percent full for each club.
+- As a developer, the page renders from the `clubs` array so it’s easy to change.
+- As a developer, re-rendering clears old content so nothing duplicates.
 
 ## What good looks like
 
-- Two sample clubs render as cards with current/capacity, seats left, and percent full.
-- Re-rendering does not duplicate cards (container is cleared first).
+- Two clubs render as cards with current/capacity, seats left, and percent full.
 - Percent is a whole number; capacity 0 yields 0% without errors.
 - No console errors during initial render.
 
-## Morning debrief (bootcamp tie‑in)
+## Afternoon debrief (bootcamp tie‑in)
 
-- Codi: Super happy with this—we kept it simple like bootcamp: keep the info tidy and show it clearly, no drama. Seeing the page update right from our list feels great.
-- Garrett: My problem was “show me a couple of pretend clubs.” Now I see real cards with current/capacity, seats left, and percent full, rendered cleanly from that data. Exactly what I was hoping for.
+- Codi: We kept the info tidy and let the page read from it—exactly how bootcamp taught us to avoid chaos.
+- Garrett: This solves it—now the app looks alive with real numbers on screen.

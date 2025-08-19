@@ -1,33 +1,33 @@
 # Campus Club Manager — Class 1 (Completed)
 
-Morning Standup, 9:05 AM.
+## Conversation
 
-- Garrett: Quick status—where are we on the mini project?
-- Codi: Done: we agreed on the idea and opened the workspace. Today: I’ll put together a simple page with a clear title and a spot for the rest to grow. Bootcamp’s all about starting small and keeping things tidy, so I’ll keep it clean and easy to read. Blockers: none.
-- Garrett: Perfect. Let’s get that first page showing so people see something real.
+- Garrett: What are we kicking off today?
+- Codi: Morning standup — Done: opened the workspace. Today: get a clean page up with our title and an empty spot for clubs, and prove JS is wired with a tiny console message. Blockers: none. Bootcamp lesson I’ll use: start tiny and keep it visible.
+- Garrett: Perfect. Let’s get something real on screen.
 
 ## Codi’s requirements (from our chat)
 
 - Create `index.html`, `styles.css`, and `app.js` in the same folder.
-- Link CSS and JS correctly; no 404s. Add a tiny console.log so we see JS running.
-- Put a visible header/title and a clean main area for future features.
-- Run with VS Code Live Server so paths and modules behave over http.
+- Add a header with the title “Campus Club Manager” and a short subtitle.
+- Add an empty section with id `club-info` where clubs will render later.
+- Link `styles.css` and `app.js` correctly; no 404s.
+- In `app.js`, log a short “setup complete” message so we know JS runs.
 
 ## Codi’s user stories
 
-- As a visitor, I can open the site and see a clear title so I know I’m in the right place.
-- As a visitor, I see a simple main area reserved for future content.
-- As a developer, CSS/JS are linked without errors so setup is dependable.
-- As a developer, I see a console message on load so the JS pipeline is confirmed.
+- As a visitor, I see a clear app title at the top of the page.
+- As a developer, I see a console message on load that confirms JavaScript is connected.
+- As a developer, there’s a dedicated `#club-info` area ready for future content.
 
 ## What good looks like
 
-- Page is served via Live Server and loads with no console errors.
-- Header/title is visible; basic styles are applied.
-- JS prints a single console message on load (proof of wiring).
-- CSS/JS links resolve (no 404s in Network tab).
+- Title and subtitle are visible.
+- The `#club-info` section exists (it’s empty for now).
+- The console shows: “Class 1 setup complete. Ready for Class 2!”.
+- No console errors.
 
-## Morning debrief (bootcamp tie‑in)
+## Afternoon debrief (bootcamp tie‑in)
 
-- Codi: I’m pumped—we solved it just like we practiced in bootcamp: set the table first. Clean scaffold, HTML for the bones, CSS for the look, JS for behavior, and run it over http so links just work. Love seeing the basics click.
-- Garrett: Right, my ask was “a page that opens and doesn’t look broken.” With the basic files linked and Live Server running, I get a neat title, working styles, and a console ping that proves JS is wired. That solves today’s need perfectly.
+- Codi: This is the bootcamp move—keep it tiny, real, and visible. Now we have clean bones to build on.
+- Garrett: That nails it—clear title, JS wired, and a place for clubs next class.
