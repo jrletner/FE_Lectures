@@ -1,9 +1,10 @@
+# SYSTEM / SETTINGS
 .DS_Store
 copilot instructions.md
 copilot readme instructions.md
 copilot exercises instructions.md
 
-# Lectures
+# JAVASCRIPT LECTURES
 Lectures/Javascript/8_21_25_Lecture
 Lectures/Javascript/8_25_25_Lecture
 Lectures/Javascript/8_28_25_Lecture
@@ -12,18 +13,8 @@ Lectures/Javascript/9_8_25_Lecture
 Lectures/Javascript/9_11_25_Lecture
 Lectures/Javascript/9_15_25_Lecture
 Lectures/Javascript/9_18_25_Lecture
-Lectures/Javascript/9_22_25_Lecture
-Lectures/TypeScript/9_22_25_Lecture/JavaScript/solution/
 
-# Always ignore node_modules for the TypeScript lesson
-Lectures/TypeScript/9_22_25_Lecture/JavaScript/solution/node_modules
-
-# Sections
-Lectures/TypeScript/
-Lectures/Angular
-Lectures/NodeJS
-
-# JS_Mini_Project
+# JAVASCRIPT PROJECT
 # JS_Mini_Project/class_code/class_03/
 JS_Mini_Project/class_code/class_04/
 JS_Mini_Project/class_code/class_05/
@@ -35,22 +26,26 @@ JS_Mini_Project/class_code/class_10/
 JS_Mini_Project/class_code/class_11/
 JS_Mini_Project/class_code/class_12/
 
-# Angular Portion
-Angular_FE_Project/
-Angular_FE_Project/class_13/
-Angular_FE_Project/class_14/
-Angular_FE_Project/class_15/
-Angular_FE_Project/class_16/
-Angular_FE_Project/class_17/
-Angular_FE_Project/class_18/
-Angular_FE_Project/class_19/
-Angular_FE_Project/class_20/
-Angular_FE_Project/class_21/
-Angular_FE_Project/class_22/
-Angular_FE_Project/class_23/
-Angular_FE_Project/class_24/
+# TYPESCRIPT LECTURES
+Lectures/TypeScript/
+Lectures/Javascript/9_22_25_Lecture
+Lectures/TypeScript/9_22_25_Lecture/JavaScript/solution/
 
-# NodeJS Portion
+# Always ignore node_modules for the TypeScript lesson
+Lectures/TypeScript/9_22_25_Lecture/JavaScript/solution/node_modules
+
+# TYPESCRIPT PROJECT
+
+# Angular Lectures
+Lectures/Angular
+
+# ANGULAR PROJECT
+Angular_FE_Project/
+
+# NODEJS Lectures
+Lectures/NodeJS
+
+# NODEJS PROJECT
 NodeJS_Project
 NodeJS_Project/class_code/class_25/
 NodeJS_Project/class_code/class_26/
