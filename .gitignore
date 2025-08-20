@@ -13,10 +13,13 @@ Lectures/Javascript/9_11_25_Lecture
 Lectures/Javascript/9_15_25_Lecture
 Lectures/Javascript/9_18_25_Lecture
 Lectures/Javascript/9_22_25_Lecture
-# Always ignore node_modules for the TypeScript lesson
-Lectures/9_22_25_Lecture/JavaScript/solution/
-Lectures/9_22_25_Lecture/JavaScript/solution/node_modules
+Lectures/TypeScript/9_22_25_Lecture/JavaScript/solution/
 
+# Always ignore node_modules for the TypeScript lesson
+Lectures/TypeScript/9_22_25_Lecture/JavaScript/solution/node_modules
+
+# Sections
+Lectures/TypeScript/
 Lectures/Angular
 Lectures/NodeJS
 
