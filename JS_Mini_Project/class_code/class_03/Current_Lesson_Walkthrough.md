@@ -213,6 +213,9 @@ Clean copy/paste snippet:
   <button type="submit" class="btn">Add Club</button>
   <p id="error-message" class="error" role="alert" aria-live="polite"></p>
 </form>
+
+<!-- Club Cards render here -->
+<section id="club-info" class="cards"></section>
 ```
 
 </details>
