@@ -20,13 +20,13 @@ https://youtu.be/3dHNOWTI7H8?si=PeHXVKOgICgki0oK
 
 https://nodejs.org/en/download
 
-## Download Angular 19
-
-`npm install -g @angular/cli@19.2.3`
-
 ## Download Typescript
 
 `npm i --save-dev typescript`
+
+## Download Angular 19
+
+`npm install -g @angular/cli@19.2.3`
 
 ## Recommended VS Code Extensions
 
