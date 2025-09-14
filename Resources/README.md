@@ -16,13 +16,13 @@ https://nodejs.org/en/download
 
 `npm i --save-dev typescript`
 
-## Download Angular 19
-
-`npm install -g @angular/cli@19.2.3`
-
 ## TypeScript Video
 
 https://youtu.be/jBmrduvKl5w?si=KjnmQEqtg8nuGg9V
+
+## Download Angular 19
+
+`npm install -g @angular/cli@19.2.3`
 
 ## Angular Crash Course
 
