@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Run Script: start (Campus-Club-Manager)",
+      "request": "launch",
+      "command": "npm run start",
+      "cwd": "${workspaceFolder}/Angular_FE_Project/class_code/class_24/Campus-Club-Manager"
+    }
+  ]
+}
