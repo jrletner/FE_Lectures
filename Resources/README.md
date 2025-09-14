@@ -28,6 +28,24 @@ https://youtu.be/jBmrduvKl5w?si=KjnmQEqtg8nuGg9V
 
 https://youtu.be/3dHNOWTI7H8?si=PeHXVKOgICgki0oK
 
+## NodeJS Crash Course
+
+https://www.youtube.com/watch?v=bxsemcrY4gQ
+
+## MongoDB Schemas and Data Models
+
+https://www.youtube.com/watch?v=jZ-dzj6ut54
+
+## Node/Express/MongoDB
+
+- Build a Blog
+
+  - https://youtu.be/-foo92lFIto?si=zOx1dxxModfzuJZE
+
+- Build your first API
+
+  - https://www.youtube.com/watch?v=fgTGADljAeg&pp=ygUSbW9uZ29kYiBhbmQgbm9kZWpz
+
 ## Recommended VS Code Extensions
 
 - Auto Rename Tag
