@@ -1,0 +1,13 @@
+{
+  "name": "ts-class-13",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc -p .",
+    "dev": "tsc -w -p ."
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
