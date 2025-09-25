@@ -23,7 +23,7 @@ Plain‑language goal:
 
 ```bash
 # From your Angular workspace root
-ng g c counter-signal --standalone --skip-tests
+ng g c counter-signal --skip-tests
 ```
 
 </details>
@@ -119,10 +119,10 @@ Plain‑language goal:
 
 ```bash
 # Child component
-ng g c color-badge --standalone --skip-tests
+ng g c color-badge --skip-tests
 
 # Optional parent demo component
-ng g c color-demo --standalone --skip-tests
+ng g c color-demo --skip-tests
 ```
 
 </details>
@@ -214,8 +214,8 @@ Plain‑language goal:
 
 ```bash
 # Child like button and parent demo
-ng g c like-button --standalone --skip-tests
-ng g c parent-like-demo --standalone --skip-tests
+ng g c like-button --skip-tests
+ng g c parent-like-demo --skip-tests
 ```
 
 </details>
@@ -325,10 +325,10 @@ Plain‑language goal:
 <summary>Generate with Angular CLI</summary>
 
 ```bash
-ng g c search-box --standalone --skip-tests
+ng g c search-box --skip-tests
 
 # Optional parent demo for two-way binding showcase
-ng g c parent-search-demo --standalone --skip-tests
+ng g c parent-search-demo --skip-tests
 ```
 
 </details>
@@ -447,7 +447,7 @@ Plain‑language goal:
 <summary>Generate with Angular CLI</summary>
 
 ```bash
-ng g c temp-converter --standalone --skip-tests
+ng g c temp-converter --skip-tests
 ```
 
 </details>
@@ -528,7 +528,7 @@ Plain‑language goal:
 <summary>Generate with Angular CLI</summary>
 
 ```bash
-ng g c tag-list --standalone --skip-tests
+ng g c tag-list --skip-tests
 ```
 
 </details>
@@ -656,8 +656,8 @@ Plain‑language goal:
 <summary>Generate with Angular CLI</summary>
 
 ```bash
-ng g c star-rating --standalone --skip-tests
-ng g c parent-rating-demo --standalone --skip-tests
+ng g c star-rating --skip-tests
+ng g c parent-rating-demo --skip-tests
 ```
 
 </details>
@@ -778,8 +778,8 @@ Plain‑language goal:
 <summary>Generate with Angular CLI</summary>
 
 ```bash
-ng g c username-form --standalone --skip-tests
-ng g c parent-username-demo --standalone --skip-tests
+ng g c username-form --skip-tests
+ng g c parent-username-demo --skip-tests
 ```
 
 </details>
