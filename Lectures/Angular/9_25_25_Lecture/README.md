@@ -304,9 +304,9 @@ export class ParentLikeDemoComponent {
 
 ```html
 <app-like-button (likeChanged)="onLikeChanged($event)"></app-like-button>
-<p *ngIf="lastLiked() !== null">
-  Last status: {{ lastLiked() ? 'Liked' : 'Unliked' }}
-</p>
+@if (lastLiked() !== null) {
+<p>Last status: {{ lastLiked() ? 'Liked' : 'Unliked' }}</p>
+}
 ```
 
 </details>
@@ -371,7 +371,9 @@ export class SearchBoxComponent {
     [style.borderColor]="valid() ? 'seagreen' : 'crimson'"
   />
   <p>Searching for: "{{ query() }}" ({{ length() }})</p>
-  <p *ngIf="!valid()" class="warn">Please enter at least 3 characters.</p>
+  @if (!valid()) {
+  <p class="warn">Please enter at least 3 characters.</p>
+  }
 </div>
 ```
 
@@ -580,15 +582,17 @@ export class TagListComponent {
     <button (click)="add()">Add</button>
   </div>
 
-  <div class="tags" *ngIf="count() > 0; else empty">
-    <span class="tag" *ngFor="let t of tags(); let i = index">
+  @if (count() > 0) {
+  <div class="tags">
+    @for (t of tags(); let i = $index; track i) {
+    <span class="tag">
       {{ t }} <button class="x" (click)="remove(i)">×</button>
     </span>
+    }
   </div>
-
-  <ng-template #empty>
-    <small>No tags yet.</small>
-  </ng-template>
+  } @else {
+  <small>No tags yet.</small>
+  }
 
   <p>Total: {{ count() }}</p>
 </div>
@@ -690,12 +694,9 @@ export class StarRatingComponent {
 
 ```html
 <div class="stars">
-  <span
-    *ngFor="let s of [1,2,3,4,5]"
-    (click)="set(s)"
-    [class.on]="rating() >= s"
-    >★</span
-  >
+  @for (s of [1,2,3,4,5]; track s) {
+  <span (click)="set(s)" [class.on]="rating() >= s">★</span>
+  }
   <span class="val">{{ rating() }}/5</span>
 </div>
 ```
@@ -817,7 +818,9 @@ export class UsernameFormComponent {
     placeholder="Min 3 chars"
   />
   <button [disabled]="!valid()">Submit</button>
-  <p *ngIf="!valid()" class="warn">Username must be at least 3 characters.</p>
+  @if (!valid()) {
+  <p class="warn">Username must be at least 3 characters.</p>
+  }
 </form>
 ```
 
