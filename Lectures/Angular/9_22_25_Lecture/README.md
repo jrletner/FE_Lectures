@@ -22,7 +22,7 @@ Run either project from its own folder.
 ```bash
 cd angular-demo
 npm install
-npx ng serve --open
+ng serve -o
 ```
 
 - App will start at http://localhost:4200/
@@ -33,7 +33,7 @@ npx ng serve --open
 ```bash
 cd QuoteGenerator
 npm install
-npx ng serve --open
+ng serve -o
 ```
 
 - App will start at http://localhost:4200/ by default.
@@ -42,7 +42,7 @@ npx ng serve --open
 ```bash
 cd QuoteGenerator
 npm install
-npx ng serve --port 4201 --open
+ng serve --port 4201 -o
 ```
 
 ## Common Angular CLI Tasks
@@ -50,19 +50,19 @@ npx ng serve --port 4201 --open
 - Generate a component:
 
 ```bash
-npx ng generate component my-feature
+ng generate component my-feature
 ```
 
 - Build for production:
 
 ```bash
-npx ng build --configuration production
+ng build --configuration production
 ```
 
 - Run unit tests:
 
 ```bash
-npx ng test
+ng test
 ```
 
 ## Project Notes
