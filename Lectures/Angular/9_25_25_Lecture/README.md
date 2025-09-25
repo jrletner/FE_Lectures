@@ -12,6 +12,8 @@ Use these to live‑code quickly (2–4 minutes each).
 
 ## Exercise 1: Counter (signals)
 
+We’ll build a tiny counter using a signal to hold the number. Simple methods (inc/dec/reset) update the signal, and the template reflects changes automatically without extra wiring.
+
 Plain‑language goal:
 
 - Make a number that remembers its value (a signal)
@@ -108,6 +110,8 @@ button {
 
 ## Exercise 2: Color Badge (signal input)
 
+Create a small child component that accepts a color via a signal input and renders a styled badge. A parent can pass different colors to show how signal inputs replace classic @Input().
+
 Plain‑language goal:
 
 - Build a child component that takes a color from its parent
@@ -202,6 +206,8 @@ export class ColorDemoComponent {}
 ---
 
 ## Exercise 3: Like Button (signal output)
+
+Make a like/unlike button that toggles internal state and emits the new value to the parent using a signal output. The parent listens and displays the last status it received.
 
 Plain‑language goal:
 
@@ -314,6 +320,8 @@ export class ParentLikeDemoComponent {
 ---
 
 ## Exercise 4: Search Box (model())
+
+Use model() to get a two‑way bound text field with almost no boilerplate. We’ll update the screen as the user types and show a tiny validation to prove it’s reactive; optionally bind to a parent with [(query)].
 
 Plain‑language goal:
 
@@ -437,6 +445,8 @@ export class ParentSearchDemoComponent {
 
 ## Exercise 5: Temperature Converter (signals + computed)
 
+Type a Celsius value and see Fahrenheit update automatically. A computed() derives its value from the celsius signal so the UI always stays in sync.
+
 Plain‑language goal:
 
 - Type a temperature in Celsius
@@ -517,6 +527,8 @@ input {
 ---
 
 ## Exercise 6: Tag List (signals array + computed)
+
+Manage a list of tags with a signal-backed array. We’ll add/remove items immutably with update(), compute a count, and render the list with @for/@if.
 
 Plain‑language goal:
 
@@ -646,6 +658,8 @@ input {
 
 ## Exercise 7: Star Rating (signal output)
 
+Render five clickable stars powered by a signal and emit the selected rating to a parent. We’ll style active stars based on the current value and show how outputs flow upward.
+
 Plain‑language goal:
 
 - Click stars to set a rating (1–5)
@@ -767,6 +781,8 @@ export class ParentRatingDemoComponent {
 ---
 
 ## Exercise 8: Username Form (model() + simple validation)
+
+Two‑way bind a username field with model() and compute a simple validity rule. We’ll disable submit until valid and optionally demonstrate parent two‑way with [(username)].
 
 Plain‑language goal:
 
