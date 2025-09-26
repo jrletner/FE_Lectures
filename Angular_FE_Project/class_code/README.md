@@ -10,21 +10,6 @@ Legend:
 
 Target pacing: Short bursts of focused coding, frequent `ng serve` (or `npm start`) confirmations. Cumulative live‑coding minutes stay ≤ 120.
 
-| Class | Focus Summary                      | Files Created (by path)                                                                                                                                                                                                                                           | Live Coding Minutes (est.) | Cumulative |
-| ----- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ---------- |
-| 14    | Scaffold + Dev Backend             | angular.json (CLI), package.json (CLI), tsconfig\*.json (CLI), src/main.ts (CLI), src/index.html (final title), src/styles.css (base tokens), proxy.conf.json (LC), server.js (LC), db.json (LC)                                                                  | 15                         | 15         |
-| 15    | Domain Models + Token              | src/app/shared/models/user.model.ts (LC), member.model.ts (LC), event-item.model.ts (LC), club.model.ts (LC), src/app/shared/tokens/api-base.token.ts (LC)                                                                                                        | 10                         | 25         |
-| 16    | Core Services + Interceptors       | auth.service.ts (LC), toast.service.ts (LC), users.service.ts (LC), club.service.ts (LC – walkthrough key regions), http/auth.interceptor.ts (CP), http/http-error.interceptor.ts (CP)                                                                            | 25                         | 50         |
-| 17    | Layout Shell                       | shared/layout/footer/footer.component.ts (LC), app.component.ts (LC), app.component.html (LC), app.component.css (CP)                                                                                                                                             | 8                          | 58         |
-| 18    | Routing + Infra UI + List          | app.routes.ts (LC), app.config.ts (LC), shared/ui/loading-bar/_ (TS+HTML+CSS) (CP), shared/ui/error-banner/_ (TS+HTML+CSS) (LC TS+HTML, CP CSS), shared/ui/toast-container/_ (CP), clubs/club-list/_ (TS+HTML) (LC), clubs/club-list/club-list.component.css (CP) | 18                         | 76         |
-| 19    | Auth UI + Club Detail              | auth/login.component.(ts+html) (LC), login.component.css (CP), auth/change-pin.component.(ts+html) (LC), change-pin.component.css (CP), clubs/club-detail/club-detail.component.(ts+html) (LC), club-detail.component.css (CP)                                    | 15                         | 91         |
-| 20    | Create Club Feature                | clubs/club-new/club-new.component.(ts+html) (LC), club-new.component.css (CP)                                                                                                                                                                                     | 6                          | 97         |
-| 21    | Edit + Quick Event + Import/Export | clubs/club-edit/club-edit.component.(ts+html) (LC), club-edit.component.css (CP), shared/ui/quick-event/\* (TS+HTML) (LC, CSS CP), shared/tools/import-export.component.(ts+html) (LC), import-export.component.css (CP)                                          | 12                         | 109        |
-| 22    | Members Overview + Pipe            | clubs/members-overview/members-overview.component.(ts+html) (LC), members-overview.component.css (CP), shared/pipes/friendly-date.pipe.ts (LC)                                                                                                                    | 6                          | 115        |
-| 23    | Admin Users Page                   | admin/users-admin.component.(ts+html) (LC), users-admin.component.css (CP)                                                                                                                                                                                        | 5                          | 120        |
-
-> Total Live‑Coding Time ≈ 120 minutes (2 hours). Remaining class time each day is available for explanation, Q&A, and feature demos.
-
 ---
 
 ## Detailed Per-Class File Lists
@@ -149,38 +134,12 @@ Verification: Admin user CRUD working; toasts & error handling integrated.
 
 ---
 
-## Time Budget Summary
-
-| Segment   | Minutes |
-| --------- | ------- |
-| Class 14  | 15      |
-| Class 15  | 10      |
-| Class 16  | 25      |
-| Class 17  | 8       |
-| Class 18  | 18      |
-| Class 19  | 15      |
-| Class 20  | 6       |
-| Class 21  | 12      |
-| Class 22  | 6       |
-| Class 23  | 5       |
-| **Total** | **120** |
-
 ## Prioritization Heuristics
 
 - Longest conceptual surface (ClubService) front‑loaded while students are fresh (Class 16).
 - UI infra (routing + shared shells) delayed until models/services exist (Class 18) to avoid stubs.
 - High‑impact features (auth + detail) precede admin CRUD & tooling.
 - Import/Export and reset moved later (Class 21) after core CRUD patterns learned.
-
-## Facilitation Tips
-
-- For large files (ClubService, import/export component) live‑code only structural spine + one exemplar method, then paste remaining sections explaining patterns.
-- Keep a visible running cumulative minute counter to maintain pacing.
-- After each class, commit with tag `class-XX-complete` for rollback safety.
-
-## Exit Criteria Before Class 24
-
-By end of Class 23 repository matches final `class_24` application byte‑for‑byte (excluding generated build artifacts and timestamps).
 
 ---
 
