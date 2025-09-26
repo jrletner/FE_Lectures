@@ -47,11 +47,11 @@ Verification: `npm start` (or `ng serve --proxy-config proxy.conf.json`) + separ
 
 ### Class 15 – Domain Models & Token
 
-1. src/app/shared/models/user.model.ts
-2. src/app/shared/models/member.model.ts
-3. src/app/shared/models/event-item.model.ts
-4. src/app/shared/models/club.model.ts (+ helper `toPlainClub`)
-5. src/app/shared/tokens/api-base.token.ts
+1. src/app/shared/models/user.model.ts -- DONE
+2. src/app/shared/models/member.model.ts -- DONE
+3. src/app/shared/models/event-item.model.ts -- DONE
+4. src/app/shared/models/club.model.ts (+ helper `toPlainClub`) -- DONE
+5. src/app/shared/tokens/api-base.token.ts -- DONE
 
 Verification: All model imports compile; no unused circular imports.
 
