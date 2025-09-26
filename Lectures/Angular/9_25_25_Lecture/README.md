@@ -34,11 +34,11 @@ ng g c counter-signal --skip-tests
 <summary>counter-signal.component.ts</summary>
 
 ```typescript
-import { Component, signal } from "@angular/core";
+import { Component, OnInit, signal } from "@angular/core";
 
 @Component({
   selector: "app-counter-signal",
-  standalone: true,
+  imports: [],
   templateUrl: "./counter-signal.component.html",
   styleUrl: "./counter-signal.component.css",
 })
@@ -48,9 +48,11 @@ export class CounterSignalComponent {
   inc() {
     this.count.update((c) => c + 1);
   }
+
   dec() {
     this.count.update((c) => c - 1);
   }
+
   reset() {
     this.count.set(0);
   }
@@ -135,11 +137,11 @@ ng g c color-demo --skip-tests
 <summary>color-badge.component.ts</summary>
 
 ```typescript
-import { Component, input } from "@angular/core";
+import { Component, Input, input } from "@angular/core";
 
 @Component({
   selector: "app-color-badge",
-  standalone: true,
+  imports: [],
   templateUrl: "./color-badge.component.html",
   styleUrl: "./color-badge.component.css",
 })
@@ -180,13 +182,13 @@ Parent usage (example):
 
 ```typescript
 import { Component } from "@angular/core";
-import { ColorBadgeComponent } from "./color-badge/color-badge.component";
+import { ColorBadgeComponent } from "../color-badge/color-badge.component";
 
 @Component({
   selector: "app-color-demo",
-  standalone: true,
   imports: [ColorBadgeComponent],
   templateUrl: "./color-demo.component.html",
+  styleUrl: "./color-demo.component.css",
 })
 export class ColorDemoComponent {}
 ```
@@ -230,20 +232,36 @@ ng g c parent-like-demo --skip-tests
 <summary>like-button.component.ts</summary>
 
 ```typescript
-import { Component, signal, output } from "@angular/core";
+import { Component, EventEmitter, output, signal, effect } from "@angular/core";
 
 @Component({
   selector: "app-like-button",
-  standalone: true,
+  imports: [],
   templateUrl: "./like-button.component.html",
   styleUrl: "./like-button.component.css",
 })
 export class LikeButtonComponent {
+  // I am the button on the screen
   isLiked = signal(false);
+
+  // I need to let parent know
   likeChanged = output<boolean>();
 
+  // Effect example: automatically runs when isLiked changes
+  likeEffect = effect(() => {
+    console.log("Like status changed to:", this.isLiked());
+    if (this.isLiked()) {
+      console.log("❤️ Button is now liked!");
+    } else {
+      console.log("💔 Button is now unliked!");
+    }
+  });
+
+  // Someone clicked me
   toggle() {
+    // notify my button style
     this.isLiked.update((v) => !v);
+    // notify my parent
     this.likeChanged.emit(this.isLiked());
   }
 }
@@ -256,7 +274,7 @@ export class LikeButtonComponent {
 
 ```html
 <button (click)="toggle()" [class.liked]="isLiked()">
-  {{ isLiked() ? '❤️ Liked' : '🤍 Like' }}
+  {{ isLiked() ? "❤️ Liked" : "� Like" }}
 </button>
 ```
 
@@ -287,16 +305,21 @@ Parent usage (example):
 
 ```typescript
 import { Component, signal } from "@angular/core";
-import { LikeButtonComponent } from "./like-button.component";
+import { LikeButtonComponent } from "../like-button/like-button.component";
 
 @Component({
   selector: "app-parent-like-demo",
-  standalone: true,
   imports: [LikeButtonComponent],
   templateUrl: "./parent-like-demo.component.html",
+  styleUrl: "./parent-like-demo.component.css",
 })
 export class ParentLikeDemoComponent {
+  // I am the container that the button lives in
+
+  // i need to update my text based off of child's value
   lastLiked = signal<boolean | null>(null);
+
+  // when child emits i need to react
   onLikeChanged(liked: boolean) {
     this.lastLiked.set(liked);
   }
@@ -311,7 +334,7 @@ export class ParentLikeDemoComponent {
 ```html
 <app-like-button (likeChanged)="onLikeChanged($event)"></app-like-button>
 @if (lastLiked() !== null) {
-<p>Last status: {{ lastLiked() ? 'Liked' : 'Unliked' }}</p>
+<p>Last status: {{ lastLiked() ? "Liked" : "Unliked" }}</p>
 }
 ```
 
@@ -346,18 +369,14 @@ ng g c parent-search-demo --skip-tests
 
 ```typescript
 import { Component, computed, model } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-search-box",
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [],
   templateUrl: "./search-box.component.html",
   styleUrl: "./search-box.component.css",
 })
 export class SearchBoxComponent {
-  // Model signal supports parent two-way binding: <app-search-box [(query)]="parentQuery">
   query = model("");
   length = computed(() => this.query().length);
   valid = computed(() => this.length() >= 3);
@@ -371,10 +390,10 @@ export class SearchBoxComponent {
 
 ```html
 <div class="search">
-  <!-- Bind ngModel to the signal in a compatible way -->
+  <!-- Bind model signal for two-way binding -->
   <input
-    [ngModel]="query()"
-    (ngModelChange)="query.set($event)"
+    [value]="query()"
+    (input)="query.set($any($event.target).value)"
     placeholder="Type 3+ chars..."
     [style.borderColor]="valid() ? 'seagreen' : 'crimson'"
   />
@@ -415,13 +434,13 @@ Optional parent two‑way binding demo:
 
 ```typescript
 import { Component, signal } from "@angular/core";
-import { SearchBoxComponent } from "./search-box.component";
+import { SearchBoxComponent } from "../search-box/search-box.component";
 
 @Component({
   selector: "app-parent-search-demo",
-  standalone: true,
   imports: [SearchBoxComponent],
   templateUrl: "./parent-search-demo.component.html",
+  styleUrl: "./parent-search-demo.component.css",
 })
 export class ParentSearchDemoComponent {
   parentQuery = signal("");
