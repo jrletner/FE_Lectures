@@ -1,0 +1,13 @@
+<div class="search">
+  <!-- Bind model signal for two-way binding -->
+  <input
+    [value]="query()"
+    (input)="query.set($any($event.target).value)"
+    placeholder="Type 3+ chars..."
+    [style.borderColor]="valid() ? 'seagreen' : 'crimson'"
+  />
+  <p>Searching for: "{{ query() }}" ({{ length() }})</p>
+  @if (!valid()) {
+  <p class="warn">Please enter at least 3 characters.</p>
+  }
+</div>

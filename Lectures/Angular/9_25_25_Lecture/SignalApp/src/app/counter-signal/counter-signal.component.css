@@ -1,0 +1,22 @@
+.counter {
+  display: inline-block;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.value {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}

@@ -1,0 +1,4 @@
+<app-like-button (likeChanged)="onLikeChanged($event)"></app-like-button>
+@if (lastLiked() !== null) {
+<p>Last status: {{ lastLiked() ? "Liked" : "Unliked" }}</p>
+}
