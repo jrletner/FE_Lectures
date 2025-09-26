@@ -33,15 +33,15 @@ Below each class is the authoritative list of files created that day (single‑t
 
 ### Class 14 – Project Scaffold & Backend
 
-1. (CLI) angular.json
-2. (CLI) package.json
-3. (CLI) tsconfig.json / tsconfig.app.json / tsconfig.spec.json
-4. (CLI) src/main.ts
-5. (CLI) src/index.html (ensure final title)
-6. LC: src/styles.css (design tokens + global resets)
-7. LC: proxy.conf.json
-8. LC: server.js (custom json-server auth + rules)
-9. LC: db.json (seed data)
+1. (CLI) angular.json -- DONE
+2. (CLI) package.json -- DONE
+3. (CLI) tsconfig.json / tsconfig.app.json / tsconfig.spec.json -- DONE
+4. (CLI) src/main.ts -- DONE
+5. (CLI) src/index.html (ensure final title) -- DONE
+6. LC: src/styles.css (design tokens + global resets) -- DONE
+7. LC: proxy.conf.json -- DONE
+8. LC: server.js (custom json-server auth + rules) -- DONE
+9. LC: db.json (seed data) -- DONE
 
 Verification: `npm start` (or `ng serve --proxy-config proxy.conf.json`) + separate `node server.js` (if not integrated). Confirm API endpoints reachable via `/api/clubs`.
 
