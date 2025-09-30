@@ -775,13 +775,11 @@ body {
       1200px 1200px at 10% -10%,
       rgba(99, 102, 241, 0.1),
       transparent 60%
-    ),
-    radial-gradient(
+    ), radial-gradient(
       1000px 1000px at 110% 10%,
       rgba(16, 185, 129, 0.06),
       transparent 60%
-    ),
-    var(--bg);
+    ), var(--bg);
   color: var(--text);
   line-height: 1.5;
 }
@@ -1081,8 +1079,8 @@ button:disabled {
   background: rgba(255, 255, 255, 0.6);
   color: #3730a3; /* indigo-800 */
   box-shadow: 0 2px 8px rgba(2, 6, 23, 0.06);
-  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.2s ease,
-    transform 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, transform
+      0.15s ease;
 }
 .btn-hero:hover {
   background: linear-gradient(180deg, var(--primary), var(--primary-700));
