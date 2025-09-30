@@ -1,0 +1,170 @@
+<section>
+  <header class="users-header">
+    <h2>Users</h2>
+    <button class="btn btn-outline" (click)="showCreate.set(true)">
+      + Add User
+    </button>
+  </header>
+
+  <div *ngIf="showCreate()" class="card create-card">
+    <div class="card-inner">
+      <h3>Create User</h3>
+      <form (ngSubmit)="create()" #f="ngForm" class="form-grid">
+        <label>
+          Username
+          <input name="username" [(ngModel)]="createForm.username" required />
+        </label>
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            [(ngModel)]="createForm.isAdmin"
+            name="isAdmin"
+          />
+          Admin
+        </label>
+        <label>
+          PIN
+          <input
+            name="pin"
+            [(ngModel)]="createForm.pin"
+            required
+            minlength="4"
+            maxlength="4"
+            pattern="[0-9]{4}"
+            inputmode="numeric"
+            type="password"
+          />
+        </label>
+        <div class="row-actions">
+          <button class="btn btn-primary" [disabled]="f.invalid || busy()">
+            Create
+          </button>
+          <button class="btn" type="button" (click)="cancelCreate()">
+            Cancel
+          </button>
+        </div>
+        <p class="muted" *ngIf="message">{{ message }}</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-wrap" *ngIf="users().length; else empty">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>ID</th>
+          <th class="ta-center" style="width: 220px">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users(); trackBy: trackId">
+          <ng-container *ngIf="editId() !== u.id; else editRow">
+            <td>{{ u.username }}</td>
+            <td>
+              <span
+                class="chip"
+                [class.-danger]="u.isAdmin"
+                [class.-member]="!u.isAdmin"
+              >
+                {{ u.isAdmin ? "Admin" : "Member" }}
+              </span>
+            </td>
+            <td class="muted">{{ u.id }}</td>
+            <td class="row-actions">
+              <button class="btn btn-pill btn-sm" (click)="startEdit(u)">
+                Edit
+              </button>
+              <button class="btn btn-pill btn-sm" (click)="openPin(u)">
+                Change PIN
+              </button>
+              <button
+                class="btn btn-pill btn-sm"
+                (click)="remove(u)"
+                [disabled]="isSelf(u)"
+              >
+                remove
+              </button>
+            </td>
+          </ng-container>
+          <ng-template #editRow>
+            <td>
+              <input
+                [(ngModel)]="editForm.username"
+                name="edit_username_{{ u.id }}"
+              />
+            </td>
+            <td>
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="editForm.isAdmin"
+                  name="edit_admin_{{ u.id }}"
+                />
+                Admin
+              </label>
+            </td>
+            <td class="muted">{{ u.id }}</td>
+            <td class="row-actions">
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="saveEdit(u)"
+                [disabled]="busy()"
+              >
+                Save
+              </button>
+              <button class="btn btn-sm" type="button" (click)="cancelEdit()">
+                Cancel
+              </button>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #empty>
+    <p class="muted">No users found.</p>
+  </ng-template>
+</section>
+
+<div class="modal-overlay" *ngIf="pinUser()" (click)="$event.stopPropagation()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h3>Change PIN for {{ pinUser()?.username }}</h3>
+    <form (ngSubmit)="applyPin()" #pf="ngForm" class="form-grid">
+      <label>
+        New PIN
+        <input
+          name="pin"
+          [(ngModel)]="pinForm.pin"
+          required
+          minlength="4"
+          maxlength="4"
+          pattern="[0-9]{4}"
+          inputmode="numeric"
+          type="password"
+        />
+      </label>
+      <label>
+        Confirm PIN
+        <input
+          name="confirm"
+          [(ngModel)]="pinForm.confirm"
+          required
+          minlength="4"
+          maxlength="4"
+          pattern="[0-9]{4}"
+          inputmode="numeric"
+          type="password"
+        />
+      </label>
+      <div class="row-actions">
+        <button class="btn btn-primary" [disabled]="pf.invalid || busy()">
+          Update
+        </button>
+        <button class="btn" type="button" (click)="closePin()">Cancel</button>
+      </div>
+      <p class="muted" *ngIf="message">{{ message }}</p>
+    </form>
+  </div>
+</div>

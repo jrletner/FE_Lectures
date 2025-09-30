@@ -1,0 +1,231 @@
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-block: 1rem;
+}
+.toolbar input[type="search"] {
+  flex: 1;
+  padding: 0.5rem;
+}
+.toolbar .new-btn {
+  margin-left: auto;
+}
+
+/* Status */
+.status {
+  margin: 0.5rem 0;
+}
+.status.error {
+  color: #b00020;
+}
+.empty {
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* Grid & Card */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.1rem;
+}
+
+/* Make cards wider on larger screens */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr); /* exactly 3 cards per row */
+  }
+}
+@media (min-width: 1440px) {
+  .grid {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* keep 3 across on very large screens */
+  }
+}
+.card {
+  overflow: hidden;
+}
+
+/* Title band (header) */
+.card header {
+  background: linear-gradient(180deg, var(--primary-700), var(--primary));
+  border-top: 2px solid #4338ca; /* darker purple */
+  border-bottom: 2px solid #4338ca; /* darker purple */
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0 0.5rem;
+  /* Override global header flex to center content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card header h3 {
+  margin: 0;
+  color: #fff;
+}
+
+/* Whole title clickable */
+.card .card-title {
+  position: relative;
+}
+.card .title-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+}
+/* Do not change background on hover */
+/* Dropdown menu (lighter shade of parent) */
+.card .title-menu {
+  position: relative; /* in-flow so it pushes content below */
+  margin-top: 4px;
+  background: #eef2ff; /* light indigo */
+  border: 1px solid #c7d2fe;
+  border-radius: 10px;
+  box-shadow: 0 10px 16px rgba(2, 6, 23, 0.08);
+  overflow: hidden;
+  /* collapsed by default */
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: max-height 1.5s ease, opacity 1.5s ease, transform 1.5s ease;
+}
+/* During delayed opening phase */
+.card .title-menu.-opening {
+  /* begin animating open slowly, but still can be canceled by leaving */
+  max-height: 220px; /* allow wrap to second row */
+  opacity: 0.6;
+  transform: translateY(0);
+  visibility: visible;
+}
+/* Fully open state - remains until X clicked */
+.card .title-menu.-open {
+  max-height: 220px; /* enough room for wrapped buttons */
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+/* Layout of items and close button */
+.card .title-menu .menu-items {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* allow items to wrap to new line */
+  gap: 0.5rem;
+  justify-content: space-evenly; /* evenly space items within container */
+  width: 100%;
+  /* Reserve space for close button + one extra icon width */
+  padding: 0.3rem 6rem 0.3rem 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .card .title-menu .menu-items {
+    flex-wrap: nowrap; /* keep items on one row on large screens */
+    justify-content: space-evenly; /* keep even spacing on large screens */
+  }
+  .card .title-menu.-opening,
+  .card .title-menu.-open {
+    max-height: 120px; /* smaller height since items don't wrap */
+  }
+}
+.card .title-menu .menu-close {
+  position: absolute;
+  top: 50%;
+  right: 16px; /* align within the expanded reserved area */
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #1e1b4b;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.card .title-menu .menu-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 24px;
+  padding: 0 6px;
+  min-width: 40px;
+  border-radius: 9999px; /* pill */
+  text-decoration: none;
+  border: 1px solid #e5e7eb; /* neutral default */
+  background: #ffffff;
+  color: #1e1b4b;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.card .title-menu .menu-item:hover {
+  border-color: var(--primary-300);
+  box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.35) inset;
+}
+.card .title-menu .menu-item.-details {
+  background: #ffffff;
+  border-color: #c7d2fe; /* indigo-200 */
+  color: #1e1b4b;
+}
+.card .title-menu .menu-item.-edit {
+  background: #ede9fe; /* violet-100 */
+  border-color: #ddd6fe; /* violet-200 */
+  color: #3730a3; /* indigo-800 */
+}
+.card .title-menu .menu-item.-danger {
+  color: #991b1b;
+  background: #fee2e2;
+  border-color: #fecaca;
+}
+
+/* Stronger centering override on the header inside the link */
+.card .card-title header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card .card-title header h3 {
+  width: 100%;
+  text-align: center;
+}
+
+/* Metadata badges band */
+.card .badges {
+  /* Light purple band for metadata */
+  background: #eef2ff; /* light indigo */
+  border: 1px solid #c7d2fe; /* indigo-200 */
+  border-radius: 10px;
+  padding: 0.4rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the chips */
+  gap: 0.5rem; /* space between chips */
+  flex-wrap: wrap; /* allow wrapping on small screens */
+  text-align: center; /* fallback centering for inline content */
+}
+
+/* Footer actions */
+.card footer {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: center; /* center the button(s) */
+  align-items: center;
+}
+
+/* Soft danger button for "Give up spot" */
+.card footer .btn-soft-danger {
+  background: #fee2e2; /* rose-200 */
+  border: 1px solid #fecaca; /* rose-300 */
+  color: #991b1b; /* red-900 */
+}
+.card footer .btn-soft-danger:hover {
+  background: #fecaca;
+  border-color: #fca5a5;
+}
+
+/* Removed Edit footer button styles */

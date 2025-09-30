@@ -1,8 +1,10 @@
-# Class 17 — Dev API, proxy, scripts, provider wiring (exact contents)
+# Class 17 — Application Layout Shell (Authoritative Single‑Touch Version)
 
-Goal: Introduce a local API (json-server with custom rules), add a dev proxy, add scripts, and wire Angular providers exactly like the final app.
+Goal: Establish the FINAL root layout shell (`AppComponent`) and footer so we never revisit these files. The shell already references future infrastructure (loading bar, error banner, toast container) and features (Change PIN modal) that will be created in upcoming classes. This preserves the single‑touch rule: when those components arrive later, we do NOT edit the root component.
 
-Timebox: ~90–120 minutes (server + scripts + Angular config)
+Timebox Suggestion: ~12–15 min (explain signals, dynamic summary, header UX; then paste code).
+
+Not Included Yet: Routing (Class 18), UI infra component files (Class 18), auth/login + change‑pin implementation (Change PIN component file lands Class 19), club list (Class 18), detail/create/edit (19–21), import/export tools (21), members overview (22), users admin (23), FriendlyDatePipe (19).
 
 ---
 
@@ -14,445 +16,652 @@ Diff legend for live coding:
   - Plain lines are context
 - After the diff, the full final file is shown so students can paste cleanly.
 
----
-
-## 1) Dev API server
-
-Place these at the project root (same folder as package.json):
-
-### server.js
-
-Beginner “what/why”:
-
-- What: A small Node server that wraps json-server. It seeds data, handles login (JWT token), and enforces rules (admins can write anything, non-admins have limited capabilities like add one event or hold/give up a spot).
-- Why: Lets students work locally without a real backend while still practicing realistic rules and auth.
-
-# Class 17 — Dev API, proxy, scripts, provider wiring
-
-Set up the local API server, proxy, npm scripts, and wire Angular providers so this project runs exactly like the final app and remains compatible with future classes.
-
-## Diff legend
-
-- [ADDED] brand new file or block
-- [UPDATED] edited existing file
-- [UNCHANGED] shown for context
-- [REMOVED] deleted line or file
+All files below are NEW in this class.
 
 ---
 
-## Change diffs
+## Scope (Files Introduced Today)
 
-### 1) Add dev API server — [ADDED] `server.js`
+1. `src/app/app.component.ts`
+2. `src/app/app.component.html`
+3. `src/app/app.component.css`
+4. `src/app/shared/layout/footer/footer.component.ts`
 
-Change diff (from Class 16 → Class 17):
+These are final. Do not edit them in later classes.
 
-```diff
- + server.js /* custom json-server with auth and rules; identical to Class 24 */
-```
+---
 
-```js
-// server.js
-/* Custom json-server with authentication and authorization (Class 24 version). */
-// ...full file appears below in "Full file contents (new files)"...
-```
+## Concept Highlights
 
-### 2) Seed database file — [ADDED] `db.json`
+- Single‑Touch Root: We lock in the production root structure early; later feature components plug into `<router-outlet />` without shell edits.
+- Header Navigation: Semantic `<nav>` + accessible triggers. Links anticipate routes that will exist after Class 18; they may 404 or not render until those components exist—acceptable during incremental build.
+- Signals & Computed: `pageSummary` uses a `computed` reactive derivation based on the current URL (updated inside a router subscription once routing is configured next class).
+- Conditional Modal: Boolean flag `showPin` toggles future Change PIN modal. Component is imported now to avoid a future shell edit (file created in Class 19).
+- Defensive Styling: Encapsulated CSS chooses tokens / variables expected to exist in global theme (defined earlier in project setup) without later modifications.
+- Error / Loading / Toast Placeholders: Imported infrastructure components (files not yet created) reflect final dependency graph; they will exist after Class 18 (toast container + loading + error banner). Until then, temporary TypeScript errors may appear—see Verification notes.
 
-Change diff (from Class 16 → Class 17):
+---
 
-```diff
- + db.json /* initial clubs + users=[]; users are seeded on first run */
-```
-
-```json
-// db.json
-{
-  "clubs": [
-    {
-      "id": "c-robotics",
-      "name": "Robotics Club",
-      "capacity": 6,
-      "members": [
-        { "id": "m-r1", "name": "Alex" },
-        { "id": "m-r2", "name": "Jordan" },
-        { "id": "m-r3", "name": "Taylor" },
-        { "id": "m-r4", "name": "Blake" },
-        { "id": "m-r5", "name": "Robin" },
-        { "id": "m-r6", "name": "Shawn" }
-      ],
-      "events": [
-        {
-          "id": "e-r1",
-          "title": "Kickoff Night",
-          "dateIso": "2025-09-10",
-          "capacity": 40,
-          "description": "Project ideas and team formation"
-        },
-        {
-          "id": "e-r2",
-          "title": "Arduino Workshop",
-          "dateIso": "2025-10-05",
-          "capacity": 20,
-          "description": "Intro to microcontrollers"
-        }
-      ]
-    }
-  ],
-  "users": []
-}
-```
-
-### 3) Proxy config — [ADDED] `proxy.conf.json`
-
-Change diff (from Class 16 → Class 17):
+## 1) `src/app/app.component.ts`
 
 ```diff
- + { "/api": { "target": "http://localhost:3000", "secure": false, "changeOrigin": true, "logLevel": "debug", "pathRewrite": { "^/api": "" } } }
-```
-
-```json
-// proxy.conf.json
-{
-  "/api": {
-    "target": "http://localhost:3001",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": { "^/api": "" }
-  }
-}
-```
-
-### 4) NPM scripts — [UPDATED] `package.json`
-
-Change diff (from Class 16 → Class 17):
-
-```diff
-   "scripts": {
-     "start": "npm run serve:web",
-     "serve:web": "ng serve --proxy-config proxy.conf.json",
-     "serve:api": "node server.js",
-     "dev": "concurrently \"npm run serve:web\" \"npm run serve:api\""
-   }
-```
-
-```json
-// package.json (scripts)
-{
-  "scripts": {
-    "start": "npm run serve:web",
-    "serve:web": "ng serve --proxy-config proxy.conf.json",
-    "serve:api": "node server.js",
-    "dev": "concurrently \"npm run serve:web\" \"npm run serve:api\""
-  }
-}
-```
-
-### 5) Angular providers — [UPDATED] `src/app/app.config.ts`
-
-Change diff (from Class 16 → Class 17):
-
-```diff
- + provideZoneChangeDetection({ eventCoalescing: true })
- + provideRouter(routes, withRouterConfig({ onSameUrlNavigation: 'reload' }))
- + provideHttpClient(withFetch(), withInterceptors([authInterceptor, httpErrorInterceptor]))
- - { provide: API_BASE, useValue: 'http://localhost:3001' }
- + { provide: API_BASE, useValue: '/api' } /* use proxy path exactly like Class 24 */
- + { provide: ErrorHandler, useClass: GlobalErrorHandler }
++ ADDED src/app/app.component.ts
 ```
 
 ```ts
-// src/app/app.config.ts
+import { Component, computed, inject, signal } from "@angular/core";
 import {
-  ApplicationConfig,
-  ErrorHandler,
-  provideZoneChangeDetection,
-} from "@angular/core";
-import { provideRouter, withRouterConfig } from "@angular/router";
-import {
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-} from "@angular/common/http";
-import { routes } from "./app.routes";
-import { API_BASE } from "./shared/tokens/api-base.token";
-import { httpErrorInterceptor } from "./shared/http/http-error.interceptor";
-import { authInterceptor } from "./shared/http/auth.interceptor";
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { FooterComponent } from "./shared/layout/footer/footer.component";
+// Infrastructure + feature components (files created in later classes):
+import { LoadingBarComponent } from "./shared/ui/loading-bar/loading-bar.component"; // Class 18
+import { ErrorBannerComponent } from "./shared/ui/error-banner/error-banner.component"; // Class 18
+import { ToastContainerComponent } from "./shared/ui/toast-container/toast-container.component"; // Class 18
+import { ChangePinComponent } from "./auth/change-pin.component"; // Class 19
+import { ClubService } from "./shared/services/club.service";
+import { AuthService } from "./shared/services/auth.service";
 
-class GlobalErrorHandler implements ErrorHandler {
-  handleError(error: unknown): void {
-    // eslint-disable-next-line no-console
-    console.error("GlobalError", error);
-  }
-}
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withRouterConfig({ onSameUrlNavigation: "reload" })),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([authInterceptor, httpErrorInterceptor])
-    ),
-    { provide: API_BASE, useValue: "/api" },
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+@Component({
+  selector: "app-root",
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    FooterComponent,
+    LoadingBarComponent,
+    ErrorBannerComponent,
+    ToastContainerComponent,
+    ChangePinComponent,
   ],
-};
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
+})
+export class AppComponent {
+  title = "Campus-Club-Manager";
+  svc = inject(ClubService);
+  auth = inject(AuthService);
+  private router = inject(Router);
+  isHome = signal(true);
+  private currentUrl = signal<string>("");
+  showPin = false;
+
+  // Dynamic page summary text shown in the subheader
+  pageSummary = computed(() => {
+    const url = this.currentUrl();
+    if (!url) return "";
+    if (url === "/" || url.startsWith("/?")) {
+      return "Welcome! Use search and filters to explore clubs.";
+    }
+    if (url.startsWith("/clubs/new")) {
+      return "Create a new club: name it, set capacity, and add it to your directory.";
+    }
+    if (/^\/clubs\/.+\/edit/.test(url)) {
+      return "Edit club details and manage its settings.";
+    }
+    if (/^\/clubs\/.+/.test(url)) {
+      return "View club details, manage members, and add events.";
+    }
+    if (url.startsWith("/tools")) {
+      return "Import, export, or reset your data. Preview the JSON before downloading.";
+    }
+    return "Explore and manage your campus clubs.";
+  });
+
+  constructor() {
+    // Activated once router is configured (Class 18). Safe now; no events until then.
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        const url = ev.urlAfterRedirects || ev.url;
+        this.isHome.set(url === "/" || url.startsWith("/?"));
+        this.currentUrl.set(url);
+      }
+    });
+  }
+
+  onRetry() {
+    this.svc.load();
+  }
+
+  onLogout() {
+    this.auth.logout();
+  }
+}
 ```
 
 ---
 
-## Full file contents (new files)
+## 2) `src/app/app.component.html`
 
-### `server.js`
+```diff
++ ADDED src/app/app.component.html
+```
 
-```js
-/*
-  Custom json-server with authentication and authorization.
-  - POST /auth/login { username, pin } -> { token, user }
-  - JWT Bearer required for all routes except /auth/login
-  - Only admins can create/update/delete clubs and users
-  - Non-admins may only add an event to a club (other writes forbidden)
-  - Seeds users on first run if none exist
-*/
-const jsonServer = require("json-server");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const fs = require("fs");
-const path = require("path");
-
-const DB_FILE = path.join(__dirname, "db.json");
-const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
-const TOKEN_TTL_SEC = 60 * 60 * 8; // 8 hours
-
-const server = jsonServer.create();
-const router = jsonServer.router(DB_FILE);
-const middlewares = jsonServer.defaults();
-
-server.use(middlewares);
-server.use(jsonServer.bodyParser);
-
-function db() {
-  return router.db;
-}
-
-function safePickUser(u) {
-  if (!u) return null;
-  return { id: u.id, username: u.username, isAdmin: !!u.isAdmin };
-}
-
-function seedUsersIfEmpty() {
-  const users = db().get("users").value();
-  if (Array.isArray(users) && users.length > 0) return;
-  const seed = [
-    { id: "u-admin", username: "admin", pin: "1234", isAdmin: true },
-    { id: "u-user", username: "user", pin: "1111", isAdmin: false },
-  ];
-  const hashed = seed.map((u) => ({
-    id: u.id,
-    username: u.username,
-    pinHash: bcrypt.hashSync(u.pin, 10),
-    isAdmin: !!u.isAdmin,
-  }));
-  db().set("users", hashed).write();
-  try {
-    const raw = JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
-    raw.users = db().get("users").value();
-    fs.writeFileSync(DB_FILE, JSON.stringify(raw, null, 2));
-  } catch (e) {}
-}
-
-if (!db().has("users").value()) {
-  db().set("users", []).write();
-}
-seedUsersIfEmpty();
-
-server.post("/auth/login", (req, res) => {
-  const { username, pin } = req.body || {};
-  if (!username || !pin)
-    return res.status(400).json({ error: "Missing credentials" });
-  const user = db().get("users").find({ username }).value();
-  if (!user || !user.pinHash) {
-    return res.status(401).json({ error: "Invalid credentials" });
-  }
-  const ok = bcrypt.compareSync(String(pin), String(user.pinHash));
-  if (!ok) return res.status(401).json({ error: "Invalid credentials" });
-  const payload = {
-    sub: user.id,
-    username: user.username,
-    isAdmin: !!user.isAdmin,
-  };
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: TOKEN_TTL_SEC });
-  res.json({ token, user: safePickUser(user) });
-});
-
-server.get("/auth/me", authRequired, (req, res) => {
-  const u = req.user;
-  res.json({ user: { id: u.sub, username: u.username, isAdmin: !!u.isAdmin } });
-});
-
-server.use((req, res, next) => {
-  if (req.path.startsWith("/auth/")) return next();
-  return authRequired(req, res, next);
-});
-
-server.use((req, res, next) => {
-  if (req.path.startsWith("/users")) {
-    const isWrite = ["POST", "PUT", "PATCH", "DELETE"].includes(req.method);
-    if (!req.user?.isAdmin) {
-      if (isWrite && req.method === "PATCH") {
-        const id = (req.path.split("/")[2] || "").trim();
-        if (!id || id !== req.user?.sub) {
-          return res.status(403).json({ error: "Admins only" });
-        }
-        return next();
+```html
+<header class="app-header">
+  <div class="container app-header-inner">
+    <div class="brand">
+      <span class="badge">CC</span>
+      <span>Campus Club Manager</span>
+    </div>
+    <nav class="top-nav">
+      <a routerLink="/" class="nav-pill">Home</a>
+      @if (auth.isAdmin()) { <a routerLink="/clubs/new">New Club</a> } @if
+      (auth.isAdmin()) { <a routerLink="/admin/users">Users</a> } @if
+      (auth.isAdmin()) { <a routerLink="/tools">Tools</a> } @if (!auth.user()) {
+      <a routerLink="/login">Sign in</a>
+      } @else {
+      <span class="current-user" title="Current user"
+        >👤 {{ auth.user()?.username }}@if (auth.isAdmin()) {
+        <span class="chip -danger" style="margin-left: 0.5rem">Admin</span>
+        }</span
+      >
+      <button class="btn btn-ghost btn-sm" (click)="showPin = !showPin">
+        Change PIN
+      </button>
+      <button class="btn btn-outline" (click)="onLogout()">Logout</button>
       }
-      if (isWrite) return res.status(403).json({ error: "Admins only" });
-      if (req.method === "GET") {
-        const id = (req.path.split("/")[2] || "").trim();
-        if (!id || id !== req.user?.sub) {
-          return res.status(403).json({ error: "Admins only" });
-        }
-      }
-    }
-  }
-  next();
-});
+    </nav>
+  </div>
+  <div style="border-top: 1px solid var(--border)"></div>
+</header>
 
-server.use((req, res, next) => {
-  if (!req.path.startsWith("/clubs")) return next();
-  const isWrite = ["POST", "PUT", "PATCH", "DELETE"].includes(req.method);
-  if (!isWrite) return next();
-  if (req.user?.isAdmin) return next();
-  if (req.method === "PUT") {
-    const id = req.path.split("/")[2];
-    const existing = db().get("clubs").find({ id }).value();
-    if (!existing) return res.status(404).json({ error: "Not found" });
-    const incoming = req.body;
-    const sameCore =
-      incoming.name === existing.name &&
-      incoming.capacity === existing.capacity &&
-      JSON.stringify(incoming.members) === JSON.stringify(existing.members);
-    if (!sameCore) return res.status(403).json({ error: "Read-only" });
-    const prevEvents = existing.events || [];
-    const nextEvents = incoming.events || [];
-    if (nextEvents.length !== prevEvents.length + 1) {
-      return res.status(403).json({ error: "Only adding one event allowed" });
-    }
-    const prefixSame =
-      JSON.stringify(prevEvents) === JSON.stringify(nextEvents.slice(0, -1));
-    if (!prefixSame)
-      return res.status(403).json({ error: "Only adding one event allowed" });
-    return next();
-  }
-  if (req.method === "PATCH") {
-    const id = req.path.split("/")[2];
-    const existing = db().get("clubs").find({ id }).value();
-    if (!existing) return res.status(404).json({ error: "Not found" });
-    const incoming = req.body || {};
-    const keys = Object.keys(incoming);
-    if (keys.length === 0) return res.status(400).json({ error: "No changes" });
-    if (keys.some((k) => k !== "members"))
-      return res.status(403).json({ error: "Read-only" });
-    const prevMembers = Array.isArray(existing.members) ? existing.members : [];
-    const nextMembers = Array.isArray(incoming.members) ? incoming.members : [];
-    const userId = req.user?.sub;
-    const userName = req.user?.username;
-    const prevWithoutUser = prevMembers.filter((m) => m.id !== userId);
-    const nextWithoutUser = nextMembers.filter((m) => m.id !== userId);
-    const sameOthers =
-      JSON.stringify(prevWithoutUser) === JSON.stringify(nextWithoutUser);
-    if (!sameOthers) return res.status(403).json({ error: "Read-only" });
-    const hadSeat = prevMembers.some((m) => m.id === userId);
-    const hasSeatNext = nextMembers.some((m) => m.id === userId);
-    if (!hadSeat && hasSeatNext) {
-      if (nextMembers.length !== prevMembers.length + 1)
-        return res.status(403).json({ error: "Invalid change" });
-      if ((existing.capacity || 0) < nextMembers.length)
-        return res.status(403).json({ error: "At capacity" });
-      const added = nextMembers.find((m) => m.id === userId);
-      if (!added || added.name !== userName)
-        return res.status(403).json({ error: "Invalid member" });
-      return next();
-    }
-    if (hadSeat && !hasSeatNext) {
-      if (nextMembers.length !== prevMembers.length - 1)
-        return res.status(403).json({ error: "Invalid change" });
-      return next();
-    }
-    return res.status(403).json({ error: "Read-only" });
-  }
-  return res.status(403).json({ error: "Admins only" });
-});
+<div class="subheader">
+  <div class="inner">
+    <p class="page-summary">{{ pageSummary() }}</p>
+  </div>
+  <div style="border-top: 1px solid var(--border); opacity: 0.5"></div>
+</div>
 
-function authRequired(req, res, next) {
-  const auth = req.headers.authorization || "";
-  const parts = auth.split(" ");
-  if (parts[0] !== "Bearer" || !parts[1]) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-  try {
-    const decoded = jwt.verify(parts[1], JWT_SECRET);
-    req.user = decoded;
-    return next();
-  } catch (e) {
-    return res.status(401).json({ error: "Invalid token" });
-  }
-}
+<!-- Infrastructure components (files appear in Class 18) -->
+<app-loading-bar [active]="svc.loading()"></app-loading-bar>
+<app-error-banner
+  [message]="svc.error()"
+  (retry)="onRetry()"
+  (dismiss)="svc.error.set(null)"
+></app-error-banner>
 
-server.post("/users", (req, res) => {
-  try {
-    const { username, pin, isAdmin } = req.body || {};
-    if (!username || !pin)
-      return res.status(400).json({ error: "username and pin required" });
-    const exists = db().get("users").find({ username }).value();
-    if (exists) return res.status(409).json({ error: "username exists" });
-    const user = {
-      id: `u-${Date.now()}`,
-      username,
-      pinHash: bcrypt.hashSync(String(pin), 10),
-      isAdmin: !!isAdmin,
-    };
-    db().get("users").push(user).write();
-    return res.status(201).json(safePickUser(user));
-  } catch (e) {
-    return res.status(500).json({ error: "Failed to create user" });
+<main class="app-main container">
+  @if (showPin) {
+  <div class="modal-overlay" aria-modal="true" role="dialog">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <app-change-pin (close)="showPin = false" />
+    </div>
+  </div>
   }
-});
+  <router-outlet />
+</main>
 
-server.patch("/users/:id", (req, res) => {
-  const id = req.params.id;
-  const curr = db().get("users").find({ id }).value();
-  if (!curr) return res.status(404).json({ error: "Not found" });
-  const changes = { ...req.body };
-  if (changes.pin) {
-    changes.pinHash = bcrypt.hashSync(String(changes.pin), 10);
-    delete changes.pin;
-  }
-  const updated = db().get("users").find({ id }).assign(changes).write();
-  return res.json(safePickUser(updated));
-});
+<app-toast-container />
 
-server.use(router);
-router.render = (req, res) => {
-  res.jsonp(res.locals.data);
-};
-
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`API running on http://localhost:${PORT}`);
-});
+<app-footer />
 ```
 
 ---
 
-## Try it
+## 3) `src/app/app.component.css`
 
-- Install deps for the API: `npm i -D concurrently bcryptjs jsonwebtoken json-server`
-- Start both servers: `npm run dev`
-- Open Angular at http://localhost:4200 and log in after Class 18 is in place; network calls should hit `/api/...` and proxy to port 3001.
+```diff
++ ADDED src/app/app.component.css
+```
 
-## Notes
+```css
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-pill {
+  border: 2px solid var(--primary-200);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+.current-user {
+  opacity: 0.85;
+  margin: 0 0.25rem 0 0.5rem;
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+}
+.btn-sm {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+}
+:host {
+  display: block;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.app-header {
+  display: grid;
+  gap: 0.25rem;
+  background: radial-gradient(
+      1200px 800px at 0% 100%,
+      rgba(99, 102, 241, 0.1),
+      transparent 60%
+    ), radial-gradient(
+      1000px 700px at 100% 0%,
+      rgba(99, 102, 241, 0.06),
+      transparent 60%
+    ), rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.app-header nav {
+  display: flex;
+  gap: 1rem;
+}
+.app-main {
+  padding-block: 1rem;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  width: min(92vw, 420px);
+}
+.brand .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.4rem;
+  border-radius: 10px;
+  background: var(--primary-700);
+  color: #fff;
+  font-weight: 800;
+  line-height: 1;
+}
+.app-header .top-nav a {
+  color: #3730a3;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid #c7d2fe;
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color
+      0.15s ease, transform 0.15s ease;
+}
+.app-header .top-nav a:hover,
+.app-header .top-nav a:focus-visible {
+  background: linear-gradient(180deg, var(--primary), var(--primary-700));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.22);
+  transform: translateY(-1px);
+}
+```
 
-- The client must use `API_BASE = '/api'` exactly (not a full host) to match the final project and avoid CORS in dev.
-- Users are seeded automatically if none exist; db.json will be updated as you interact with the app.
+---
+
+## 4) `src/app/shared/layout/footer/footer.component.ts`
+
+```diff
++ ADDED src/app/shared/layout/footer/footer.component.ts
+```
+
+```ts
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "app-footer",
+  standalone: true,
+  template: `<footer class="footer">© {{ year }} Campus Club Manager</footer>`,
+  styles: [
+    `
+      .footer {
+        margin-top: 2rem;
+        padding: 1rem 0;
+        color: #666;
+        border-top: 1px solid #eee;
+        text-align: center;
+      }
+    `,
+  ],
+})
+export class FooterComponent {
+  year = new Date().getFullYear();
+}
+```
+
+---
+
+## Verification / Demo Script
+
+1. Paste files. Expect temporary TypeScript import errors for referenced components not yet created (loading bar, error banner, toast container, change pin). This is acceptable under the single‑touch contract; they resolve in Classes 18–19.
+2. (Optional) Temporarily comment those specific import lines + usages if you need a clean build right now; UNDO those comments before committing so the shell remains final.
+3. Run dev server — root layout renders header + footer skeleton.
+4. Toggle `showPin = true` in dev tools to see modal container structure (component body missing until Class 19, so leave commented or accept a template error if not yet present).
+5. Add a dummy route manually (or wait for Class 18) to confirm `<router-outlet />` placeholder.
+
+Edge Talking Points:
+
+- Why import ahead of file creation? Ensures zero future edits to the shell; trade‑off is short‑lived red squiggles.
+- `pageSummary` gracefully returns empty until router begins emitting events (after routing added in Class 18).
+
+---
+
+## Single‑Touch Reminder
+
+Do NOT edit these files again. All future visual or navigational changes (toasts, error surfacing, loading, auth modals, feature navigation) occur via the components themselves or routing, never by reshaping the shell.
+
+---
+
+## Next Class Preview (Class 18)
+
+Add full routing configuration, global providers (`app.config.ts`), UI infrastructure components (loading bar, error banner, toast container), and the club list feature. That class resolves the current placeholder imports and removes any build errors.
+
+---
+
+End of Class 17 Walkthrough (Authoritative)
+
+\n+## Full file contents created/updated in Class 17
+\n+Reference appendix (single-touch). Click to expand each file introduced this class.
+\n+<details>
+
+<summary>src/app/app.component.ts</summary>
+
+```ts
+import { Component, computed, inject, signal } from "@angular/core";
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { FooterComponent } from "./shared/layout/footer/footer.component";
+// Infrastructure + feature components (files created in later classes):
+import { LoadingBarComponent } from "./shared/ui/loading-bar/loading-bar.component"; // Class 18
+import { ErrorBannerComponent } from "./shared/ui/error-banner/error-banner.component"; // Class 18
+import { ToastContainerComponent } from "./shared/ui/toast-container/toast-container.component"; // Class 18
+import { ChangePinComponent } from "./auth/change-pin.component"; // Class 19
+import { ClubService } from "./shared/services/club.service";
+import { AuthService } from "./shared/services/auth.service";
+
+@Component({
+  selector: "app-root",
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    FooterComponent,
+    LoadingBarComponent,
+    ErrorBannerComponent,
+    ToastContainerComponent,
+    ChangePinComponent,
+  ],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
+})
+export class AppComponent {
+  title = "Campus-Club-Manager";
+  svc = inject(ClubService);
+  auth = inject(AuthService);
+  private router = inject(Router);
+  isHome = signal(true);
+  private currentUrl = signal<string>("");
+  showPin = false;
+
+  // Dynamic page summary text shown in the subheader
+  pageSummary = computed(() => {
+    const url = this.currentUrl();
+    if (!url) return "";
+    if (url === "/" || url.startsWith("/?")) {
+      return "Welcome! Use search and filters to explore clubs.";
+    }
+    if (url.startsWith("/clubs/new")) {
+      return "Create a new club: name it, set capacity, and add it to your directory.";
+    }
+    if (/^\/clubs\/.+\/edit/.test(url)) {
+      return "Edit club details and manage its settings.";
+    }
+    if (/^\/clubs\/.+/.test(url)) {
+      return "View club details, manage members, and add events.";
+    }
+    if (url.startsWith("/tools")) {
+      return "Import, export, or reset your data. Preview the JSON before downloading.";
+    }
+    return "Explore and manage your campus clubs.";
+  });
+
+  constructor() {
+    // Activated once router is configured (Class 18). Safe now; no events until then.
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        const url = ev.urlAfterRedirects || ev.url;
+        this.isHome.set(url === "/" || url.startsWith("/?"));
+        this.currentUrl.set(url);
+      }
+    });
+  }
+
+  onRetry() {
+    this.svc.load();
+  }
+
+  onLogout() {
+    this.auth.logout();
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>src/app/app.component.html</summary>
+
+```html
+<header class="app-header">
+  <div class="container app-header-inner">
+    <div class="brand">
+      <span class="badge">CC</span>
+      <span>Campus Club Manager</span>
+    </div>
+    <nav class="top-nav">
+      <a routerLink="/" class="nav-pill">Home</a>
+      @if (auth.isAdmin()) { <a routerLink="/clubs/new">New Club</a> } @if
+      (auth.isAdmin()) { <a routerLink="/admin/users">Users</a> } @if
+      (auth.isAdmin()) { <a routerLink="/tools">Tools</a> } @if (!auth.user()) {
+      <a routerLink="/login">Sign in</a>
+      } @else {
+      <span class="current-user" title="Current user"
+        >👤 {{ auth.user()?.username }}@if (auth.isAdmin()) {
+        <span class="chip -danger" style="margin-left: 0.5rem">Admin</span>
+        }</span
+      >
+      <button class="btn btn-ghost btn-sm" (click)="showPin = !showPin">
+        Change PIN
+      </button>
+      <button class="btn btn-outline" (click)="onLogout()">Logout</button>
+      }
+    </nav>
+  </div>
+  <div style="border-top: 1px solid var(--border)"></div>
+</header>
+
+<div class="subheader">
+  <div class="inner">
+    <p class="page-summary">{{ pageSummary() }}</p>
+  </div>
+  <div style="border-top: 1px solid var(--border); opacity: 0.5"></div>
+</div>
+
+<!-- Infrastructure components (files appear in Class 18) -->
+<app-loading-bar [active]="svc.loading()"></app-loading-bar>
+<app-error-banner
+  [message]="svc.error()"
+  (retry)="onRetry()"
+  (dismiss)="svc.error.set(null)"
+></app-error-banner>
+
+<main class="app-main container">
+  @if (showPin) {
+  <div class="modal-overlay" aria-modal="true" role="dialog">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <app-change-pin (close)="showPin = false" />
+    </div>
+  </div>
+  }
+  <router-outlet />
+</main>
+
+<app-toast-container />
+
+<app-footer />
+```
+
+</details>
+
+<details>
+<summary>src/app/app.component.css</summary>
+
+```css
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-pill {
+  border: 2px solid var(--primary-200);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+.current-user {
+  opacity: 0.85;
+  margin: 0 0.25rem 0 0.5rem;
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+}
+.btn-sm {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+}
+:host {
+  display: block;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.app-header {
+  display: grid;
+  gap: 0.25rem;
+  background: radial-gradient(
+      1200px 800px at 0% 100%,
+      rgba(99, 102, 241, 0.1),
+      transparent 60%
+    ), radial-gradient(
+      1000px 700px at 100% 0%,
+      rgba(99, 102, 241, 0.06),
+      transparent 60%
+    ), rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.app-header nav {
+  display: flex;
+  gap: 1rem;
+}
+.app-main {
+  padding-block: 1rem;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  width: min(92vw, 420px);
+}
+.brand .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.4rem;
+  border-radius: 10px;
+  background: var(--primary-700);
+  color: #fff;
+  font-weight: 800;
+  line-height: 1;
+}
+.app-header .top-nav a {
+  color: #3730a3;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid #c7d2fe;
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color
+      0.15s ease, transform 0.15s ease;
+}
+.app-header .top-nav a:hover,
+.app-header .top-nav a:focus-visible {
+  background: linear-gradient(180deg, var(--primary), var(--primary-700));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.22);
+  transform: translateY(-1px);
+}
+```
+
+</details>
+
+<details>
+<summary>src/app/shared/layout/footer/footer.component.ts</summary>
+
+```ts
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "app-footer",
+  standalone: true,
+  template: `<footer class="footer">© {{ year }} Campus Club Manager</footer>`,
+  styles: [
+    `
+      .footer {
+        margin-top: 2rem;
+        padding: 1rem 0;
+        color: #666;
+        border-top: 1px solid #eee;
+        text-align: center;
+      }
+    `,
+  ],
+})
+export class FooterComponent {
+  year = new Date().getFullYear();
+}
+```
+
+</details>

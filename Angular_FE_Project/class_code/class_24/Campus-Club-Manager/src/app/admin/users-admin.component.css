@@ -1,0 +1,126 @@
+.users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0 1rem;
+}
+.create-card {
+  margin-bottom: 1rem;
+}
+.form-grid {
+  display: grid;
+  gap: 0.5rem;
+  align-items: start;
+}
+.row-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+.muted {
+  color: var(--muted);
+}
+.table-wrap {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: 0.9rem 1rem;
+  border-top: 1px solid var(--border);
+}
+.table thead th {
+  font-weight: 700;
+  border-top: none;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #5b47f6, #4f46e5);
+  color: #fff;
+}
+.ta-right {
+  text-align: right;
+}
+.ta-center {
+  text-align: center;
+}
+.table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.08);
+}
+.table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.16);
+}
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.row-actions .btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.chip {
+  padding: 0 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+.chip.-danger {
+  background: #ffe2e2;
+  border-color: #ffc9c9;
+}
+.chip.-member {
+  background: #e8f0ff;
+  border-color: #cfe0ff;
+}
+.checkbox {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.btn-sm {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+}
+.btn-pill {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  line-height: 1;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+.btn-pill:hover {
+  background: #f7f7f9;
+}
+.btn-pill:active {
+  background: #f0f0f3;
+}
+.btn-pill[disabled] {
+  background: #eef1f6;
+  color: #8a94a6;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  width: min(92vw, 420px);
+}

@@ -1,0 +1,21 @@
+.banner {
+  position: sticky;
+  top: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #fdecec;
+  color: #8a1f1f;
+  border-bottom: 1px solid #f5c2c2;
+}
+.spacer {
+  flex: 1;
+}
+button {
+  background: transparent;
+  border: 1px solid currentColor;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: inherit;
+}

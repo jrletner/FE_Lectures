@@ -1,0 +1,31 @@
+<section class="card">
+  <div class="card-inner">
+    <h2>Sign in</h2>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <label>
+        Username
+        <input name="username" [(ngModel)]="username" required />
+      </label>
+      <label>
+        4-digit PIN
+        <input
+          name="pin"
+          [(ngModel)]="pin"
+          required
+          minlength="4"
+          maxlength="4"
+          pattern="[0-9]{4}"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          type="password"
+        />
+      </label>
+      <div class="actions">
+        <button class="btn btn-primary" [disabled]="form.invalid || busy()">
+          Login
+        </button>
+        <span *ngIf="busy()">Signing in…</span>
+      </div>
+    </form>
+  </div>
+</section>

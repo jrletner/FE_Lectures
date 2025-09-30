@@ -1,0 +1,17 @@
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f06, #70f);
+  animation: w 1s linear infinite;
+}
+@keyframes w {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

@@ -42,12 +42,12 @@ Verification: All model imports compile; no unused circular imports.
 
 ### Class 16 – Core Services & Interceptors
 
-1. src/app/shared/services/auth.service.ts
-2. src/app/shared/services/toast.service.ts
-3. src/app/shared/services/users.service.ts
-4. src/app/shared/services/club.service.ts
-5. src/app/shared/http/auth.interceptor.ts
-6. src/app/shared/http/http-error.interceptor.ts
+1. src/app/shared/services/auth.service.ts -- DONE
+2. src/app/shared/services/toast.service.ts -- DONE
+3. src/app/shared/services/users.service.ts -- DONE
+4. src/app/shared/services/club.service.ts -- DONE
+5. src/app/shared/http/auth.interceptor.ts -- DONE
+6. src/app/shared/http/http-error.interceptor.ts -- DONE
 
 Verification: Temporary bootstrap (if routing not yet added) still compiles; services idle.
 

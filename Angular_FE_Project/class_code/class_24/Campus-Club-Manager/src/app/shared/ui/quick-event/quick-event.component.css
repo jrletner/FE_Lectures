@@ -1,0 +1,50 @@
+.quick-event {
+  margin-top: 0.75rem;
+  /* Enable container queries so layout adapts to the card width */
+  container-type: inline-size;
+}
+.wrap {
+  background: #f3f4ff; /* very light indigo */
+  border: 1px solid #e0e7ff; /* indigo-100 */
+  border-radius: 12px;
+  padding: 0.75rem;
+}
+.title {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #4f46e5; /* indigo-600 */
+}
+.row {
+  display: grid;
+  /* Flexible columns that shrink without overflowing */
+  grid-template-columns: minmax(0, 1.2fr) 160px 90px minmax(0, 1.4fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+.row > * {
+  min-width: 0;
+}
+.row input {
+  width: 100%;
+}
+/* When the card is narrower, move description to its own row */
+@container (max-width: 640px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) 140px 84px;
+  }
+  /* 4th child is description */
+  .row > :nth-child(4) {
+    grid-column: 1 / -1;
+  }
+}
+/* Stack completely for very narrow cards */
+@container (max-width: 420px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+  .row > :nth-child(4),
+  .row > :nth-child(5) {
+    grid-column: auto;
+  }
+}

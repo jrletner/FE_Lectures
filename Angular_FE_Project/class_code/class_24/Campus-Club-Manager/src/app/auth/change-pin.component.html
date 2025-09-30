@@ -1,0 +1,36 @@
+<h4>Change PIN</h4>
+<form (ngSubmit)="submit()" class="pin-form">
+  <label>
+    New PIN
+    <input
+      type="password"
+      [(ngModel)]="pin"
+      name="pin"
+      minlength="4"
+      maxlength="4"
+      pattern="[0-9]{4}"
+      inputmode="numeric"
+      required
+    />
+  </label>
+  <label>
+    Confirm PIN
+    <input
+      type="password"
+      [(ngModel)]="confirm"
+      name="confirm"
+      minlength="4"
+      maxlength="4"
+      pattern="[0-9]{4}"
+      inputmode="numeric"
+      required
+    />
+  </label>
+  <div class="actions">
+    <button class="btn btn-primary" type="submit" [disabled]="busy()">
+      Update
+    </button>
+    <button class="btn" type="button" (click)="close.emit()">Cancel</button>
+  </div>
+  <p class="muted" *ngIf="message">{{ message }}</p>
+</form>

@@ -1,0 +1,139 @@
+<section class="toolbar">
+  <input
+    type="search"
+    placeholder="Search clubs..."
+    [value]="search()"
+    (input)="search.set($any($event.target).value)"
+  />
+  <label>
+    <input
+      type="checkbox"
+      (change)="onToggleOnlyOpen($any($event.target).checked)"
+    />
+    Only open
+  </label>
+  <select (change)="onSortChange($any($event.target).value)">
+    <option value="name-asc">Name (A→Z)</option>
+    <option value="name-desc">Name (Z→A)</option>
+    <option value="seats-desc">Seats left (high→low)</option>
+    <option value="capacity-desc">Capacity (high→low)</option>
+  </select>
+  <a routerLink="/clubs/new" class="btn btn-outline btn-hero">+ New Club</a>
+</section>
+
+@if (svc.loading()) {
+<p class="status">Loading…</p>
+} @else if (svc.error()) {
+<p class="status error">{{ svc.error() }}</p>
+} @if (svc.visible().length === 0 && !svc.loading()) {
+<p class="empty">No clubs match your filters.</p>
+}
+
+<div class="grid">
+  @for (club of svc.visible(); track club.id) {
+  <article class="card">
+    <div class="card-inner">
+      <div
+        class="card-title"
+        (mouseenter)="onTitleEnter(club.id)"
+        (mouseleave)="onTitleLeave(club.id)"
+      >
+        <div class="title-link">
+          <header>
+            <h3>{{ club.name }}</h3>
+          </header>
+        </div>
+        <nav
+          class="title-menu"
+          aria-label="Club options"
+          [class.-opening]="getMenuState(club.id) === 'opening'"
+          [class.-open]="getMenuState(club.id) === 'open'"
+        >
+          <div class="menu-items">
+            <a
+              class="menu-item -details"
+              [routerLink]="['/clubs', club.id]"
+              title="Details"
+              aria-label="View details"
+            >
+              🔍
+            </a>
+            <a
+              class="menu-item"
+              [routerLink]="['/members']"
+              [queryParams]="{ clubId: club.id }"
+              title="View members"
+              aria-label="View members"
+            >
+              👁️
+            </a>
+            @if (auth.isAdmin()) {
+            <a
+              class="menu-item -edit"
+              [routerLink]="['/clubs', club.id, 'edit']"
+              title="Edit"
+              aria-label="Edit club"
+            >
+              ✏️
+            </a>
+            } @if (!!auth.user() && !hasHeld(club.id) && seatsLeft(club) > 0) {
+            <button
+              type="button"
+              class="menu-item"
+              (click)="onHoldSpot(club.id)"
+              title="Hold a spot"
+              aria-label="Hold a spot"
+            >
+              🟢
+            </button>
+            } @if (!!auth.user() && hasHeld(club.id)) {
+            <button
+              type="button"
+              class="menu-item -danger"
+              (click)="onGiveUpSpot(club.id)"
+              title="Give up spot"
+              aria-label="Give up spot"
+            >
+              🚩
+            </button>
+            } @if (auth.isAdmin()) {
+            <button
+              type="button"
+              class="menu-item -danger"
+              (click)="onDeleteClick($event, club.id)"
+              title="Delete"
+              aria-label="Delete club"
+            >
+              🗑️
+            </button>
+            }
+          </div>
+          <button
+            type="button"
+            class="menu-close"
+            aria-label="Close menu"
+            title="Close"
+            (click)="onMenuClose(club.id)"
+          >
+            x
+          </button>
+        </nav>
+      </div>
+      <div class="badges">
+        <span class="chip -info">
+          {{ club.members.length }}/{{ club.capacity }}
+        </span>
+        <span class="chip -primary">{{ percentFull(club) }}% full</span>
+        <span
+          class="chip"
+          [class.-success]="seatsLeft(club) > 0"
+          [class.-danger]="seatsLeft(club) === 0"
+          >Seats left: {{ seatsLeft(club) }}</span
+        >
+      </div>
+
+      <app-quick-event (add)="addQuickEvent(club.id, $event)"></app-quick-event>
+    </div>
+  </article>
+  }
+</div>
