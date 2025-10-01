@@ -12,13 +12,19 @@ Child emits new count; parent holds state and passes it down.
 
 Scaffold (CLI):
 
+<details>
+<summary>Generate</summary>
+
 ```bash
 ng g c examples/counter/counter-parent --skip-tests
 ng g c examples/counter/counter-child --skip-tests
 ng g s examples/counter/counter --skip-tests
 ```
 
-`counter-parent.component.ts`
+</details>
+
+<details>
+<summary>counter-parent.component.ts</summary>
 
 ```ts
 @Component({
@@ -35,7 +41,10 @@ export class CounterParentComponent {
 }
 ```
 
-`counter-parent.component.html`
+</details>
+
+<details>
+<summary>counter-parent.component.html</summary>
 
 ```html
 <h3>Count: {{ count }}</h3>
@@ -45,7 +54,10 @@ export class CounterParentComponent {
 ></app-counter-child>
 ```
 
-`counter-child.component.ts`
+</details>
+
+<details>
+<summary>counter-child.component.ts</summary>
 
 ```ts
 @Component({
@@ -62,17 +74,23 @@ export class CounterChildComponent {
 }
 ```
 
-`counter-child.component.html`
+</details>
+
+<details>
+<summary>counter-child.component.html</summary>
 
 ```html
 <button (click)="inc()">+1 ({{ count }})</button>
 ```
 
+</details>
+
 _Refactor Change: We move the count from the parent component into a `CounterService`. The child no longer emits an event; it just calls `increment()`. The parent no longer receives or passes values—both read the same reactive signal._
 
 ### Service Version
 
-`counter.service.ts`
+<details>
+<summary>counter.service.ts</summary>
 
 ```ts
 @Injectable({ providedIn: "root" })
@@ -90,7 +108,10 @@ export class CounterService {
 }
 ```
 
-`counter-parent.component.ts`
+</details>
+
+<details>
+<summary>counter-parent.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -105,14 +126,20 @@ export class CounterParentComponent {
 }
 ```
 
-`counter-parent.component.html`
+</details>
+
+<details>
+<summary>counter-parent.component.html (service version)</summary>
 
 ```html
 <h3>Count: {{ count() }}</h3>
 <app-counter-child></app-counter-child>
 ```
 
-`counter-child.component.ts`
+</details>
+
+<details>
+<summary>counter-child.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -129,11 +156,16 @@ export class CounterChildComponent {
 }
 ```
 
-`counter-child.component.html`
+</details>
+
+<details>
+<summary>counter-child.component.html (service version)</summary>
 
 ```html
 <button (click)="inc()">+1 ({{ count() }})</button>
 ```
+
+</details>
 
 ### Why Better
 
@@ -155,11 +187,19 @@ Goal: Show parent→child one-way data replaced by service so unrelated componen
 
 Scaffold (CLI):
 
+<details>
+<summary>Generate</summary>
+
 ```bash
 ng g c examples/theme/theme-parent --skip-tests
 ng g c examples/theme/theme-child --skip-tests
 ng g s examples/theme/theme --skip-tests
 ```
+
+</details>
+
+<details>
+<summary>theme-parent.component.ts</summary>
 
 ```ts
 @Component({
@@ -176,7 +216,10 @@ export class ThemeParentComponent {
 }
 ```
 
-`theme-parent.component.html`
+</details>
+
+<details>
+<summary>theme-parent.component.html</summary>
 
 ```html
 <button (click)="setTheme('light')">Light</button>
@@ -184,7 +227,10 @@ export class ThemeParentComponent {
 <app-theme-child [theme]="theme"></app-theme-child>
 ```
 
-`theme-child.component.ts`
+</details>
+
+<details>
+<summary>theme-child.component.ts</summary>
 
 ```ts
 @Component({
@@ -197,17 +243,23 @@ export class ThemeChildComponent {
 }
 ```
 
-`theme-child.component.html`
+</details>
+
+<details>
+<summary>theme-child.component.html</summary>
 
 ```html
 <p>Theme is: {{ theme }}</p>
 ```
 
+</details>
+
 _Refactor Change: Theme string state leaves the parent and lives in `ThemeService`. Both parent and child inject the service: parent sets it; child (and any other component) reads it directly. No more @Input handoff._
 
 ### Service Version
 
-`theme.service.ts`
+<details>
+<summary>theme.service.ts</summary>
 
 ```ts
 @Injectable({ providedIn: "root" })
@@ -225,7 +277,10 @@ export class ThemeService {
 }
 ```
 
-`theme-parent.component.ts`
+</details>
+
+<details>
+<summary>theme-parent.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -246,7 +301,10 @@ export class ThemeParentComponent {
 }
 ```
 
-`theme-parent.component.html`
+</details>
+
+<details>
+<summary>theme-parent.component.html (service version)</summary>
 
 ```html
 <button (click)="setLight()">Light</button>
@@ -254,7 +312,10 @@ export class ThemeParentComponent {
 <app-theme-child></app-theme-child>
 ```
 
-`theme-child.component.ts`
+</details>
+
+<details>
+<summary>theme-child.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -268,11 +329,16 @@ export class ThemeChildComponent {
 }
 ```
 
-`theme-child.component.html`
+</details>
+
+<details>
+<summary>theme-child.component.html (service version)</summary>
 
 ```html
 <p>Theme is: {{ theme() }}</p>
 ```
+
+</details>
 
 ### Why Better
 
@@ -294,12 +360,20 @@ Goal: Child→parent repeated events replaced by shared message store; parent ju
 
 Scaffold (CLI):
 
+<details>
+<summary>Generate</summary>
+
 ```bash
 ng g c examples/chat/chat-parent --skip-tests
 ng g c examples/chat/chat-input --skip-tests
 ng g c examples/chat/chat-list --skip-tests
 ng g s examples/chat/chat --skip-tests
 ```
+
+</details>
+
+<details>
+<summary>chat-parent.component.ts</summary>
 
 ```ts
 @Component({
@@ -316,14 +390,20 @@ export class ChatParentComponent {
 }
 ```
 
-`chat-parent.component.html`
+</details>
+
+<details>
+<summary>chat-parent.component.html</summary>
 
 ```html
 <app-chat-input (send)="add($event)"></app-chat-input>
 <app-chat-list [messages]="messages"></app-chat-list>
 ```
 
-`chat-input.component.ts`
+</details>
+
+<details>
+<summary>chat-input.component.ts</summary>
 
 ```ts
 @Component({
@@ -342,7 +422,10 @@ export class ChatInputComponent {
 }
 ```
 
-`chat-input.component.html`
+</details>
+
+<details>
+<summary>chat-input.component.html</summary>
 
 ```html
 <input [(ngModel)]="draft" placeholder="Say something" /><button
@@ -352,7 +435,10 @@ export class ChatInputComponent {
 </button>
 ```
 
-`chat-list.component.ts`
+</details>
+
+<details>
+<summary>chat-list.component.ts</summary>
 
 ```ts
 @Component({
@@ -365,7 +451,10 @@ export class ChatListComponent {
 }
 ```
 
-`chat-list.component.html`
+</details>
+
+<details>
+<summary>chat-list.component.html</summary>
 
 ```html
 <ul>
@@ -373,11 +462,14 @@ export class ChatListComponent {
 </ul>
 ```
 
+</details>
+
 _Refactor Change: Message array moves into `ChatService`. Input component adds directly; list component reads directly; parent becomes a thin container (or can disappear entirely). Emission + prop wiring removed._
 
 ### Service Version
 
-`chat.service.ts`
+<details>
+<summary>chat.service.ts</summary>
 
 ```ts
 @Injectable({ providedIn: "root" })
@@ -395,7 +487,10 @@ export class ChatService {
 }
 ```
 
-`chat-input.component.ts`
+</details>
+
+<details>
+<summary>chat-input.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -414,7 +509,10 @@ export class ChatInputComponent {
 }
 ```
 
-`chat-list.component.ts`
+</details>
+
+<details>
+<summary>chat-list.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -428,7 +526,10 @@ export class ChatListComponent {
 }
 ```
 
-`chat-list.component.html`
+</details>
+
+<details>
+<summary>chat-list.component.html (service version)</summary>
 
 ```html
 <ul>
@@ -436,7 +537,10 @@ export class ChatListComponent {
 </ul>
 ```
 
-`chat-parent.component.ts`
+</details>
+
+<details>
+<summary>chat-parent.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -450,6 +554,8 @@ export class ChatListComponent {
 })
 export class ChatParentComponent {}
 ```
+
+</details>
 
 ### Why Better
 
@@ -470,6 +576,9 @@ Goal: Show one update powering multiple consumers without additional prop plumbi
 Child emits term; parent stores; passes to two children (list + badge) via @Input.
 Scaffold (CLI):
 
+<details>
+<summary>Generate</summary>
+
 ```bash
 ng g c examples/filter/filter-parent --skip-tests
 ng g c examples/filter/filter-box --skip-tests
@@ -478,7 +587,10 @@ ng g c examples/filter/filter-list --skip-tests
 ng g s examples/filter/filter --skip-tests
 ```
 
-`filter-parent.component.ts`
+</details>
+
+<details>
+<summary>filter-parent.component.ts</summary>
 
 ```ts
 @Component({
@@ -495,7 +607,10 @@ export class FilterParentComponent {
 }
 ```
 
-`filter-parent.component.html`
+</details>
+
+<details>
+<summary>filter-parent.component.html</summary>
 
 ```html
 <app-filter-box (termChange)="setTerm($event)"></app-filter-box>
@@ -503,11 +618,14 @@ export class FilterParentComponent {
 <app-filter-list [term]="term"></app-filter-list>
 ```
 
+</details>
+
 _Refactor Change: The term shifts into `FilterService`. The input writes it once; any component (badge, list, future chips/stats) injects and reads the same signal. Parent no longer owns or distributes the term._
 
 ### Service Version
 
-`filter.service.ts`
+<details>
+<summary>filter.service.ts</summary>
 
 ```ts
 @Injectable({ providedIn: "root" })
@@ -524,7 +642,10 @@ export class FilterService {
 }
 ```
 
-`filter-box.component.ts`
+</details>
+
+<details>
+<summary>filter-box.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -540,7 +661,10 @@ export class FilterBoxComponent {
 }
 ```
 
-`filter-box.component.html`
+</details>
+
+<details>
+<summary>filter-box.component.html (service version)</summary>
 
 ```html
 <input
@@ -549,7 +673,10 @@ export class FilterBoxComponent {
 />
 ```
 
-`filter-badge.component.ts`
+</details>
+
+<details>
+<summary>filter-badge.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -563,7 +690,10 @@ export class FilterBadgeComponent {
 }
 ```
 
-`filter-list.component.ts`
+</details>
+
+<details>
+<summary>filter-list.component.ts (service version)</summary>
 
 ```ts
 import { computed } from "@angular/core";
@@ -581,7 +711,10 @@ export class FilterListComponent {
 }
 ```
 
-`filter-list.component.html`
+</details>
+
+<details>
+<summary>filter-list.component.html (service version)</summary>
 
 ```html
 <ul>
@@ -589,7 +722,10 @@ export class FilterListComponent {
 </ul>
 ```
 
-`filter-parent.component.ts`
+</details>
+
+<details>
+<summary>filter-parent.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -604,6 +740,8 @@ export class FilterListComponent {
 })
 export class FilterParentComponent {}
 ```
+
+</details>
 
 ### Why Better
 
@@ -625,12 +763,20 @@ Goal: Remove bubbling events; any component can advance or observe step state se
 
 Scaffold (CLI):
 
+<details>
+<summary>Generate</summary>
+
 ```bash
 ng g c examples/wizard/wizard-parent --skip-tests
 ng g c examples/wizard/wizard-step --skip-tests
 ng g c examples/wizard/wizard-progress --skip-tests
 ng g s examples/wizard/wizard --skip-tests
 ```
+
+</details>
+
+<details>
+<summary>wizard-parent.component.ts</summary>
 
 ```ts
 @Component({
@@ -647,18 +793,24 @@ export class WizardParentComponent {
 }
 ```
 
-`wizard-parent.component.html`
+</details>
+
+<details>
+<summary>wizard-parent.component.html</summary>
 
 ```html
 <app-wizard-progress [step]="step"></app-wizard-progress>
 <app-wizard-step [step]="step" (next)="onNext($event)"></app-wizard-step>
 ```
 
+</details>
+
 _Refactor Change: Step state and step-advancement logic move into `WizardService`. Child calls `advance()` directly; progress bar and any observer just read the signal. Parent holds no step logic._
 
 ### Service Version
 
-`wizard.service.ts`
+<details>
+<summary>wizard.service.ts</summary>
 
 ```ts
 @Injectable({ providedIn: "root" })
@@ -676,7 +828,10 @@ export class WizardService {
 }
 ```
 
-`wizard-step.component.ts`
+</details>
+
+<details>
+<summary>wizard-step.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -693,7 +848,10 @@ export class WizardStepComponent {
 }
 ```
 
-`wizard-step.component.html`
+</details>
+
+<details>
+<summary>wizard-step.component.html (service version)</summary>
 
 ```html
 <p>Step {{ step() }}</p>
@@ -701,7 +859,10 @@ export class WizardStepComponent {
 <span *ngIf="step() === 3">Done!</span>
 ```
 
-`wizard-progress.component.ts`
+</details>
+
+<details>
+<summary>wizard-progress.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -715,7 +876,10 @@ export class WizardProgressComponent {
 }
 ```
 
-`wizard-parent.component.ts`
+</details>
+
+<details>
+<summary>wizard-parent.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -729,6 +893,8 @@ export class WizardProgressComponent {
 })
 export class WizardParentComponent {}
 ```
+
+</details>
 
 ### Why Better
 
@@ -749,6 +915,9 @@ Goal: Global ephemeral state triggered anywhere without wiring every path throug
 Each child emits up; parent holds a message & timer; more children require additional wiring.
 Scaffold (CLI):
 
+<details>
+<summary>Generate</summary>
+
 ```bash
 ng g c examples/toast/toast-parent --skip-tests
 ng g c examples/toast/toast-button --skip-tests
@@ -756,7 +925,10 @@ ng g c examples/toast/toast-display --skip-tests
 ng g s examples/toast/toast --skip-tests
 ```
 
-`toast-parent.component.ts`
+</details>
+
+<details>
+<summary>toast-parent.component.ts</summary>
 
 ```ts
 @Component({
@@ -774,14 +946,20 @@ export class ToastParentComponent {
 }
 ```
 
-`toast-parent.component.html`
+</details>
+
+<details>
+<summary>toast-parent.component.html</summary>
 
 ```html
 <p *ngIf="msg">Toast: {{ msg }}</p>
 <app-toast-button (show)="show($event)"></app-toast-button>
 ```
 
-`toast-button.component.ts`
+</details>
+
+<details>
+<summary>toast-button.component.ts</summary>
 
 ```ts
 @Component({
@@ -797,17 +975,23 @@ export class ToastButtonComponent {
 }
 ```
 
-`toast-button.component.html`
+</details>
+
+<details>
+<summary>toast-button.component.html</summary>
 
 ```html
 <button (click)="click()">Show Toast</button>
 ```
 
+</details>
+
 _Refactor Change: Toast message and hide timing move into `ToastService`. Any component invokes `show()`. Any display component subscribes to the same signal—parent becomes optional._
 
 ### Service Version
 
-`toast.service.ts`
+<details>
+<summary>toast.service.ts</summary>
 
 ```ts
 @Injectable({ providedIn: "root" })
@@ -822,7 +1006,10 @@ export class ToastService {
 }
 ```
 
-`toast-button.component.ts`
+</details>
+
+<details>
+<summary>toast-button.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -838,7 +1025,10 @@ export class ToastButtonComponent {
 }
 ```
 
-`toast-display.component.ts`
+</details>
+
+<details>
+<summary>toast-display.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -852,7 +1042,10 @@ export class ToastDisplayComponent {
 }
 ```
 
-`toast-parent.component.ts`
+</details>
+
+<details>
+<summary>toast-parent.component.ts (service version)</summary>
 
 ```ts
 @Component({
@@ -866,6 +1059,8 @@ export class ToastDisplayComponent {
 })
 export class ToastParentComponent {}
 ```
+
+</details>
 
 ### Why Better
 
