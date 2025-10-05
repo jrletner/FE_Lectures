@@ -21,7 +21,7 @@ Goal: Filter items and show empty state using `@if` and `@for`.
 <summary>Generate</summary>
 
 ```bash
-ng g c filter-list --standalone --skip-tests
+ng g c filter-list --skip-tests
 ```
 
 </details>
@@ -94,7 +94,7 @@ Goal: Toggle a simple auth flag.
 <summary>Generate</summary>
 
 ```bash
-ng g c auth-block --standalone --skip-tests
+ng g c auth-block --skip-tests
 ```
 
 </details>
@@ -142,7 +142,7 @@ Goal: Start a timer on init; stop on destroy.
 <summary>Generate</summary>
 
 ```bash
-ng g c tick-timer --standalone --skip-tests
+ng g c tick-timer --skip-tests
 ```
 
 </details>
@@ -193,7 +193,7 @@ Goal: Switch visible panel by clicking a tab.
 <summary>Generate</summary>
 
 ```bash
-ng g c mini-tabs --standalone --skip-tests
+ng g c mini-tabs --skip-tests
 ```
 
 </details>
@@ -271,7 +271,7 @@ Goal: Add/remove todos with a count.
 <summary>Generate</summary>
 
 ```bash
-ng g c mini-todos --standalone --skip-tests
+ng g c mini-todos --skip-tests
 ```
 
 </details>
@@ -338,7 +338,7 @@ Goal: Click a chip to select a rating and emit it.
 <summary>Generate</summary>
 
 ```bash
-ng g c rating-chips --standalone --skip-tests
+ng g c rating-chips --skip-tests
 ```
 
 </details>
@@ -411,7 +411,7 @@ Goal: Show time and clean up interval.
 <summary>Generate</summary>
 
 ```bash
-ng g c mini-clock --standalone --skip-tests
+ng g c mini-clock --skip-tests
 ```
 
 </details>
@@ -454,7 +454,7 @@ Goal: Copy a message to clipboard and show feedback.
 <summary>Generate</summary>
 
 ```bash
-ng g c copy-btn --standalone --skip-tests
+ng g c copy-btn --skip-tests
 ```
 
 </details>
