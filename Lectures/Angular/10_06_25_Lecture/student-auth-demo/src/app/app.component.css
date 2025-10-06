@@ -1,0 +1,14 @@
+label {
+  display: inline-block;
+  margin: 0.35rem 0;
+}
+button {
+  margin-top: 0.5rem;
+}
+section {
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

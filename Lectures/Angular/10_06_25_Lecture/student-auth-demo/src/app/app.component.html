@@ -1,0 +1,53 @@
+<h2>Student Auth Demo</h2>
+
+<!-- Demo accounts list (purely educational) -->
+<section>
+  <h4>Available Demo Accounts</h4>
+  <ul>
+    @for (acct of demoAccounts; track acct.username) {
+    <li>{{ acct.username }} (role: {{ acct.role }})</li>
+    }
+  </ul>
+</section>
+
+@if (!isAuthenticated()) {
+<!-- Login Form -->
+<div>
+  <label>
+    Username:
+    <input
+      [value]="usernameInput()"
+      (input)="usernameInput.set($any($event.target).value)"
+    />
+  </label>
+  <br />
+  <label>
+    Password:
+    <input
+      type="password"
+      [value]="passwordInput()"
+      (input)="passwordInput.set($any($event.target).value)"
+    />
+  </label>
+  <br />
+  <button [disabled]="!canSubmit() || isLoading()" (click)="submit()">
+    Login
+  </button>
+  @if (isLoading()) { <span>Logging in...</span> } @if (errorMessage()) {
+  <p style="color: red">{{ errorMessage() }}</p>
+  }
+</div>
+} @else {
+<!-- Authenticated View -->
+<div>
+  <p>
+    Welcome, {{ currentUser()!.username }} (role: {{ currentUser()!.role }}).
+  </p>
+  @if (isAdmin()) {
+  <app-admin-panel></app-admin-panel>
+  } @else {
+  <p><em>You do not have admin privileges.</em></p>
+  }
+  <button (click)="logout()">Logout</button>
+</div>
+}
