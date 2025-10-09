@@ -1,0 +1,30 @@
+<form [formGroup]="signupForm" (ngSubmit)="submit()" novalidate>
+  <label
+    >Email
+    <input formControlName="email" type="email" />
+  </label>
+  @if ((signupForm.get('email')?.touched || submitted) &&
+  signupForm.get('email')?.errors) { @if
+  (signupForm.get('email')?.errors?.['required']) {
+  <small class="error">Email required</small> } @if
+  (signupForm.get('email')?.errors?.['email']) {
+  <small class="error">Invalid email</small> } }
+  <label
+    >Password
+    <input formControlName="password" type="password" />
+  </label>
+  @if ((signupForm.get('password')?.touched || submitted) &&
+  signupForm.get('password')?.errors) { @if
+  (signupForm.get('password')?.errors?.['required']) {
+  <small class="error">Password required</small> } @if
+  (signupForm.get('password')?.errors?.['minlength']) {
+  <small class="error">Min 6 chars</small> } }
+  <label class="checkbox">
+    <input formControlName="agree" type="checkbox" /> I agree to terms
+  </label>
+  @if ((signupForm.get('agree')?.touched || submitted) &&
+  signupForm.get('agree')?.errors?.['required']) {
+  <small class="error">You must agree</small>
+  }
+  <button type="submit" [disabled]="signupForm.invalid">Create Account</button>
+</form>

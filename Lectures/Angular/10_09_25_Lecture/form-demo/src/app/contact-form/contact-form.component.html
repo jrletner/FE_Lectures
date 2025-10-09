@@ -1,0 +1,40 @@
+<form #form="ngForm" (ngSubmit)="submit(form)" novalidate>
+  <label
+    >Name
+    <input name="name" [(ngModel)]="name" required #nameCtrl="ngModel" />
+  </label>
+  @if ((nameCtrl.touched || submitted) && nameCtrl.errors?.['required']) {
+  <small class="error">Name required</small> }
+  <label
+    >Email
+    <input
+      name="email"
+      type="email"
+      [(ngModel)]="email"
+      required
+      email
+      #emailCtrl="ngModel"
+    />
+  </label>
+  @if ((emailCtrl.touched || submitted) && emailCtrl.errors) { @if
+  (emailCtrl.errors['required']) { <small class="error">Email required</small> }
+  @if (emailCtrl.errors['email']) { <small class="error">Invalid email</small> }
+  }
+  <label
+    >Message
+    <textarea
+      name="message"
+      [(ngModel)]="message"
+      required
+      minlength="10"
+      maxlength="200"
+      #msgCtrl="ngModel"
+    ></textarea>
+  </label>
+  @if ((msgCtrl.touched || submitted) && msgCtrl.errors) { @if
+  (msgCtrl.errors['required']) { <small class="error">Message required</small> }
+  @if (msgCtrl.errors['minlength']) {
+  <small class="error">Min 10 chars</small> } }
+  <p class="muted">{{ (message || "").length }}/200</p>
+  <button type="submit" [disabled]="form.invalid">Send</button>
+</form>
