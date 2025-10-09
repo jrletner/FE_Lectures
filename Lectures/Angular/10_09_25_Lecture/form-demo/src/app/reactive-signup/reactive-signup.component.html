@@ -19,6 +19,18 @@
   <small class="error">Password required</small> } @if
   (signupForm.get('password')?.errors?.['minlength']) {
   <small class="error">Min 6 chars</small> } }
+  <label
+    >Confirm Password
+    <input formControlName="confirmPassword" type="password" />
+  </label>
+  @if ((signupForm.get('confirmPassword')?.touched || submitted) &&
+  signupForm.get('confirmPassword')?.errors) { @if
+  (signupForm.get('confirmPassword')?.errors?.['required']) {
+  <small class="error">Confirm required</small> } } @if ((submitted ||
+  signupForm.get('confirmPassword')?.touched) &&
+  signupForm.errors?.['passwordMismatch']) {
+  <small class="error">Passwords must match</small>
+  }
   <label class="checkbox">
     <input formControlName="agree" type="checkbox" /> I agree to terms
   </label>
