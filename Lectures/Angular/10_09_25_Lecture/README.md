@@ -698,7 +698,7 @@ Trigger each validation path (empty, invalid email, short message, success).
 
 ### B7. Stretch (Optional)
 
-Add a character counter under the message: `{{ message.length }}/200` and cap length.
+Add a character counter under the message: `{{ (message || "").length }}/200` and cap length.
 
 <details><summary><code>src/app/contact-form/contact-form.component.ts (Hint Solution)</code></summary>
 
@@ -738,7 +738,7 @@ export class ContactFormComponent {
 
 ```html
 <!-- Character counter + errors showcase -->
-<p class="muted">{{ message.length }}/200</p>
+<p class="muted">{{ (message || "").length }}/200</p>
 ```
 
 </details>
