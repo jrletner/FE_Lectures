@@ -1,0 +1,37 @@
+<section>
+  <h3>Legacy: *ngIf with else + *ngFor</h3>
+  <input #newItem placeholder="Add item" />
+  <button (click)="add(newItem.value); newItem.value = ''">Add</button>
+  <button (click)="clear()">Clear</button>
+
+  <ng-container *ngIf="items.length > 0; else emptyTpl">
+    <ul>
+      <li *ngFor="let item of items; trackBy: trackItem">{{ item }}</li>
+    </ul>
+  </ng-container>
+  <ng-template #emptyTpl>
+    <p class="muted">No items (legacy else)</p>
+  </ng-template>
+
+  <hr />
+
+  <h3>Modern: &#64;if/&#64;else + &#64;for/&#64;empty</h3>
+  @if (items.length > 0) {
+  <ul>
+    @for (item of items; track item) {
+    <li>{{ item }}</li>
+    }
+  </ul>
+  } @else {
+  <p class="muted">No items (modern &#64;if &#64;else)</p>
+  }
+
+  <h4>&#64;for with &#64;empty</h4>
+  <ul>
+    @for (item of items; track item) {
+    <li>{{ item }}</li>
+    } @empty {
+    <li class="muted">No items (&#64;empty)</li>
+    }
+  </ul>
+</section>

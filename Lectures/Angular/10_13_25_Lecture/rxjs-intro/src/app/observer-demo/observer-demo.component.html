@@ -1,0 +1,21 @@
+<section>
+  <p>
+    Status: <strong>{{ status() }}</strong>
+  </p>
+  <button (click)="start()">Start</button>
+  <button (click)="stop()">Stop</button>
+  <ul>
+    @for (m of messages; track $index) {
+    <li>{{ m }}</li>
+    }
+  </ul>
+  @if (status() === 'idle') {
+  <p class="muted">Press Start to run the countdown</p>
+  } @if (status() === 'running') {
+  <p class="muted">Counting…</p>
+  } @if (status() === 'done') {
+  <p class="muted">Done!</p>
+  } @if (status() === 'error') {
+  <p class="muted" style="color: #c62828">Error occurred</p>
+  }
+</section>

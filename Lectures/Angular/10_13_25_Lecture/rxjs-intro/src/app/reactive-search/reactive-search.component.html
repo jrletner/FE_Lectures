@@ -1,0 +1,19 @@
+<div class="search-box">
+  <!-- (input) pushes the current value into the query$ Subject; $any casts event.target to HTMLInputElement for safe .value access -->
+  <input
+    [(ngModel)]="query"
+    (input)="query$.next($any($event.target).value)"
+    placeholder="Search..."
+  />
+  @if (!query.trim()) {
+  <p class="muted">Type to search…</p>
+  } @else { @if (isSearching()) {
+  <p class="muted">Searching…</p>
+  }
+  <ul>
+    @for (item of (results$ | async) || []; track item) {
+    <li>{{ item }}</li>
+    }
+  </ul>
+  }
+</div>

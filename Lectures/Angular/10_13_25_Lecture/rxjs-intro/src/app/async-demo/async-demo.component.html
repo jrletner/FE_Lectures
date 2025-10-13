@@ -1,0 +1,10 @@
+<section>
+  <p>
+    Seconds elapsed: <strong>{{ tick$ | async }}</strong>
+  </p>
+  <p>
+    Latest quote: <em>{{ (quote$ | async) || "Loading…" }}</em>
+  </p>
+  <button (click)="toggle()">Toggle Quotes</button>
+  <p class="muted">Quotes on: {{ on() }}</p>
+</section>
