@@ -1,23 +1,28 @@
-import { Component, signal } from '@angular/core';
-import { interval, map, Observable, Subscription, take } from 'rxjs';
+import { Component, OnDestroy, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { interval, Observable, Subscription, throwError } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-observer-demo',
-  imports: [],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './observer-demo.component.html',
   styleUrl: './observer-demo.component.css',
 })
-export class ObserverDemoComponent {
-  // A simple countdown and an observer object that logs events
-  countdown$(start: number = 3): Observable<number> {
+export class ObserverDemoComponent implements OnDestroy {
+  messages: string[] = [];
+  status = signal<'idle' | 'running' | 'done' | 'error'>('idle');
+  subscription?: Subscription;
+  startValue = 3;
+
+  countdown$(start: number = this.startValue): Observable<number> {
+    if (start > 9) return throwError(() => new Error('Max 9'));
     return interval(500).pipe(
       map((i) => start - i),
       take(start + 1)
     );
   }
-
-  messages: string[] = [];
-  status = signal<'idle' | 'running' | 'done' | 'error'>('idle');
 
   observer = {
     next: (val: number) => this.messages.push(`Next: ${val}`),
@@ -31,13 +36,13 @@ export class ObserverDemoComponent {
     },
   };
 
-  subscription?: Subscription;
-
   start(): void {
     this.stop();
     this.messages = [];
     this.status.set('running');
-    this.subscription = this.countdown$().subscribe(this.observer);
+    this.subscription = this.countdown$(this.startValue).subscribe(
+      this.observer
+    );
   }
 
   stop(): void {

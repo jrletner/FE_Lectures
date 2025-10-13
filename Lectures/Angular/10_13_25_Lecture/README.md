@@ -872,12 +872,14 @@ button {
 
 ```ts
 import { Component, OnDestroy, signal } from "@angular/core";
-import { interval, Observable, Subscription } from "rxjs";
+import { FormsModule } from "@angular/forms";
+import { interval, Observable, Subscription, throwError } from "rxjs";
 import { map, take } from "rxjs/operators";
 
 @Component({
   selector: "app-observer-demo",
   standalone: true,
+  imports: [FormsModule],
   templateUrl: "./observer-demo.component.html",
   styleUrl: "./observer-demo.component.css",
 })
@@ -885,8 +887,10 @@ export class ObserverDemoComponent implements OnDestroy {
   messages: string[] = [];
   status = signal<"idle" | "running" | "done" | "error">("idle");
   subscription?: Subscription;
+  startValue = 3;
 
-  countdown$(start: number = 3): Observable<number> {
+  countdown$(start: number = this.startValue): Observable<number> {
+    if (start > 9) return throwError(() => new Error("Max 9"));
     return interval(500).pipe(
       map((i) => start - i),
       take(start + 1)
@@ -909,7 +913,9 @@ export class ObserverDemoComponent implements OnDestroy {
     this.stop();
     this.messages = [];
     this.status.set("running");
-    this.subscription = this.countdown$().subscribe(this.observer);
+    this.subscription = this.countdown$(this.startValue).subscribe(
+      this.observer
+    );
   }
 
   stop(): void {
@@ -934,6 +940,10 @@ export class ObserverDemoComponent implements OnDestroy {
 
 ```html
 <section>
+  <label>
+    Start value (0-9):
+    <input type="number" [(ngModel)]="startValue" min="0" max="9" />
+  </label>
   <p>Status: <strong>{{ status() }}</strong></p>
   <button (click)="start()">Start</button>
   <button (click)="stop()">Stop</button>

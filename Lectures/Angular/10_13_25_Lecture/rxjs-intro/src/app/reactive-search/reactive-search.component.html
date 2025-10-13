@@ -1,5 +1,4 @@
 <div class="search-box">
-  <!-- (input) pushes the current value into the query$ Subject; $any casts event.target to HTMLInputElement for safe .value access -->
   <input
     [(ngModel)]="query"
     (input)="query$.next($any($event.target).value)"

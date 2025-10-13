@@ -1,4 +1,8 @@
 <section>
+  <label>
+    Start value (0-9):
+    <input type="number" [(ngModel)]="startValue" min="0" max="9" />
+  </label>
   <p>
     Status: <strong>{{ status() }}</strong>
   </p>
