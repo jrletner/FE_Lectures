@@ -6,8 +6,8 @@
   <p>
     Status: <strong>{{ status() }}</strong>
   </p>
-  <button (click)="start()">Start</button>
-  <button (click)="stop()">Stop</button>
+  <button (click)="start()" [disabled]="status() === 'running'">Start</button>
+  <button (click)="stop()" [disabled]="status() === 'done'">Stop</button>
   <ul>
     @for (m of messages; track $index) {
     <li>{{ m }}</li>
