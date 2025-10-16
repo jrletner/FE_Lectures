@@ -1,0 +1,56 @@
+<section class="board">
+  <h2>DRAG & DROP USER ROLES DEMO</h2>
+  <div class="legend">
+    <h4>Legend:</h4>
+    <span class="badge unassigned">Unassigned</span>
+    <span class="badge admin">Admin</span>
+    <span class="badge basic">Basic User</span>
+  </div>
+  <div
+    class="column"
+    (dragover)="allowDrop($event)"
+    (drop)="onDrop($event, 'unassigned')"
+  >
+    <h3>Unassigned ({{ unassigned().length }})</h3>
+    <ul>
+      @for (u of unassigned(); track u.id) {
+      <li draggable="true" (dragstart)="onDragStart($event, u.id)">
+        <span class="badge unassigned">U</span>
+        {{ u.name }}
+      </li>
+      }
+    </ul>
+  </div>
+
+  <div
+    class="column"
+    (dragover)="allowDrop($event)"
+    (drop)="onDrop($event, 'admin')"
+  >
+    <h3>Admin ({{ admins().length }})</h3>
+    <ul>
+      @for (u of admins(); track u.id) {
+      <li draggable="true" (dragstart)="onDragStart($event, u.id)">
+        <span class="badge admin">A</span>
+        {{ u.name }}
+      </li>
+      }
+    </ul>
+  </div>
+
+  <div
+    class="column"
+    (dragover)="allowDrop($event)"
+    (drop)="onDrop($event, 'basic')"
+  >
+    <h3>Basic User ({{ basics().length }})</h3>
+    <ul>
+      @for (u of basics(); track u.id) {
+      <li draggable="true" (dragstart)="onDragStart($event, u.id)">
+        <span class="badge basic">B</span>
+        {{ u.name }}
+      </li>
+      }
+    </ul>
+  </div>
+</section>

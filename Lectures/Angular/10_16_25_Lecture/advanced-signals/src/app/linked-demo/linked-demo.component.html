@@ -1,0 +1,8 @@
+<section>
+  <h2>DERIVING STATE WITH LINKED SIGNALS DEMO</h2>
+  <p>Base (cents): {{ priceCents() }}</p>
+  <label
+    >Dollars: <input [ngModel]="price()" (ngModelChange)="setPrice($event)"
+  /></label>
+  <p>Preview: ${{ price() }}</p>
+</section>

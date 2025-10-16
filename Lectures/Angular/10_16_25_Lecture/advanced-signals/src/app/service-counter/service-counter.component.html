@@ -1,0 +1,9 @@
+<section>
+  <h2>USING SIGNALS WITH SERVICES DEMO</h2>
+  <p>
+    Shared count: <strong>{{ svc.count() }}</strong>
+  </p>
+  <button (click)="svc.dec()">-</button>
+  <button (click)="svc.inc()">+</button>
+  <button (click)="svc.reset()">Reset</button>
+</section>

@@ -1,0 +1,18 @@
+<section>
+  <h2>MANAGING ASYNC DATA WITH THE RESOURCES API DEMO</h2>
+  <label>Username: <input [(ngModel)]="username" /></label>
+  @if (user.isLoading()) {
+  <p class="muted">Loading…</p>
+  } @else if (user.error()) {
+  <p class="error">Error: {{ getErrorMessage(user.error()) }}</p>
+  } @else {
+  <p>
+    <strong>{{ user.value()?.login }}</strong> –
+    {{
+      user.value()?.name ||
+        "No
+    name"
+    }}
+  </p>
+  }
+</section>
