@@ -1,0 +1,18 @@
+<section>
+  <h3>Welcome to the a-http-basics route</h3>
+  <!-- Click the button to trigger the HTTP GET request -->
+  <button (click)="load()">Load posts</button>
+
+  <!-- Render a list of titles when posts() has data -->
+  <ul>
+    <!-- @for is Angular's control flow to loop over arrays; track by id for efficiency -->
+    @for (p of posts(); track p.id) {
+    <li>{{ p.title }}</li>
+    }
+  </ul>
+
+  <!-- Show a helpful message when no data is loaded yet -->
+  @if (!posts().length) {
+  <p class="muted">No posts loaded yet.</p>
+  }
+</section>

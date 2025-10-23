@@ -1,0 +1,21 @@
+<section>
+  <h3>Welcome to the d-http-post route</h3>
+  <!-- Two-way bind inputs to the title and body signals -->
+  <label
+    >Title: <input [ngModel]="title()" (ngModelChange)="title.set($event)"
+  /></label>
+  <label
+    >Body:
+    <textarea [ngModel]="body()" (ngModelChange)="body.set($event)"></textarea>
+  </label>
+
+  <!-- Disable the button while submitting -->
+  <button (click)="submit()" [disabled]="loading()">Create</button>
+
+  <!-- Show the server-assigned id after creation -->
+  @if (result()) {
+  <p>
+    Created post id: <strong>{{ result()!.id }}</strong>
+  </p>
+  }
+</section>

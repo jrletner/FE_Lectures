@@ -1,0 +1,24 @@
+<section>
+  <h3>Welcome to the c-http-params route</h3>
+  <!-- Choose which userId to filter on using Angular's ngModel binding -->
+  <label>
+    User:
+    <select [ngModel]="userId()" (ngModelChange)="userId.set(+$event)">
+      <option [value]="1">User 1</option>
+      <option [value]="2">User 2</option>
+      <option [value]="3">User 3</option>
+      <option [value]="4">User 4</option>
+      <option [value]="5">User 5</option>
+    </select>
+  </label>
+
+  <!-- Fetch results using the selected userId -->
+  <button (click)="load()">Load filtered</button>
+
+  <!-- Render the filtered results -->
+  <ul>
+    @for (p of posts(); track p.id) {
+    <li>#{{ p.id }} – {{ p.title }}</li>
+    }
+  </ul>
+</section>

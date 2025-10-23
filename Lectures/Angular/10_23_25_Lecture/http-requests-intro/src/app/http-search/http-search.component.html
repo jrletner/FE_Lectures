@@ -1,0 +1,13 @@
+<section>
+  <h3>Welcome to the i-http-search route</h3>
+  <!-- Debounced search: typing updates the query and triggers the debounced stream -->
+  <label
+    >Search: <input [ngModel]="query()" (ngModelChange)="onInput($event)"
+  /></label>
+  <!-- Render the first 10 results returned by the search API -->
+  <ul>
+    @for (p of results(); track p.id) {
+    <li>{{ p.title }}</li>
+    }
+  </ul>
+</section>

@@ -1,0 +1,17 @@
+<section>
+  <h3>Welcome to the g-http-headers route</h3>
+  <!-- Bind the input to the apiKey signal so we can send it as a header -->
+  <label
+    >API Key: <input [ngModel]="apiKey()" (ngModelChange)="apiKey.set($event)"
+  /></label>
+
+  <!-- Send the request with custom headers -->
+  <button (click)="send()">Send with header</button>
+
+  <!-- Show the header value that the server reports back -->
+  @if (seenHeader()) {
+  <p>
+    Server saw X-Api-Key: <strong>{{ seenHeader() }}</strong>
+  </p>
+  }
+</section>

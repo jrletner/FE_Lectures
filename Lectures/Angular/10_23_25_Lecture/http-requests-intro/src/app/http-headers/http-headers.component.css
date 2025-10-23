@@ -1,0 +1,29 @@
+section {
+  padding: 16px 0;
+}
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+}
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: linear-gradient(#eff6ff, #dbeafe);
+  color: #1e3a8a;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.15);
+}
+button:hover {
+  filter: brightness(0.98);
+}
+p strong {
+  color: #111;
+}

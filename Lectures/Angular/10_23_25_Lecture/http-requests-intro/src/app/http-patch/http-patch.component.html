@@ -1,0 +1,23 @@
+<section>
+  <h3>Welcome to the e-http-patch route</h3>
+  <!-- Choose which post id to update; keep the signal and input in sync -->
+  <label>
+    Post ID:
+    <input type="number" [ngModel]="id()" (ngModelChange)="id.set(+$event)" />
+  </label>
+
+  <!-- New title we want to send in the PATCH request -->
+  <label
+    >New Title: <input [ngModel]="title()" (ngModelChange)="title.set($event)"
+  /></label>
+
+  <!-- Send the PATCH request -->
+  <button (click)="patch()">PATCH</button>
+
+  <!-- Show the returned title after the server responds -->
+  @if (result()) {
+  <p>
+    Server responded with title: <strong>{{ result()!.title }}</strong>
+  </p>
+  }
+</section>

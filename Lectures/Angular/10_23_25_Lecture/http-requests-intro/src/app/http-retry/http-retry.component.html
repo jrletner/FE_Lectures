@@ -1,0 +1,8 @@
+<section>
+  <h3>Welcome to the j-http-retry route</h3>
+  <!-- Start the failing request and watch retries occur -->
+  <button (click)="tryRequest()">Try with retry/backoff</button>
+  <!-- Show the current status to understand the flow -->
+  <p>Status: {{ status() }}</p>
+  <p class="muted">Watch the Network tab to see retries.</p>
+</section>

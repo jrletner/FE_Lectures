@@ -1,0 +1,53 @@
+<nav class="nav">
+  <div class="nav-grid">
+    <a routerLink="/a-http-basics" routerLinkActive="active" class="chip">
+      <span class="badge">A</span>
+      <span>Simple GET</span>
+    </a>
+    <a routerLink="/b-http-states" routerLinkActive="active" class="chip">
+      <span class="badge">B</span>
+      <span>Loading & Error</span>
+    </a>
+    <a routerLink="/c-http-params" routerLinkActive="active" class="chip">
+      <span class="badge">C</span>
+      <span>Query Params</span>
+    </a>
+    <a routerLink="/d-http-post" routerLinkActive="active" class="chip">
+      <span class="badge">D</span>
+      <span>POST</span>
+    </a>
+    <a routerLink="/e-http-patch" routerLinkActive="active" class="chip">
+      <span class="badge">E</span>
+      <span>PATCH</span>
+    </a>
+    <a routerLink="/f-http-delete" routerLinkActive="active" class="chip">
+      <span class="badge">F</span>
+      <span>DELETE</span>
+    </a>
+    <a routerLink="/g-http-headers" routerLinkActive="active" class="chip">
+      <span class="badge">G</span>
+      <span>Headers</span>
+    </a>
+    <a routerLink="/h-http-interceptor" routerLinkActive="active" class="chip">
+      <span class="badge">H</span>
+      <span>Interceptor</span>
+    </a>
+    <a routerLink="/i-http-search" routerLinkActive="active" class="chip">
+      <span class="badge">I</span>
+      <span>Search</span>
+    </a>
+    <a routerLink="/j-http-retry" routerLinkActive="active" class="chip">
+      <span class="badge">J</span>
+      <span>Retry</span>
+    </a>
+  </div>
+  <hr />
+  <div class="legend">
+    <span class="legend-item">
+      <span class="dot-badge">{{ activeLetter() }}</span> Active route
+    </span>
+  </div>
+</nav>
+
+<!-- Where the routed component will render -->
+<router-outlet></router-outlet>

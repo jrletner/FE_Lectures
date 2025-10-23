@@ -1,0 +1,39 @@
+section {
+  padding: 16px 0;
+}
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+select,
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+}
+button {
+  background: linear-gradient(#eff6ff, #dbeafe);
+  color: #1e3a8a;
+  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.15);
+}
+button:hover {
+  filter: brightness(0.98);
+}
+ul {
+  list-style: none;
+  padding: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+li {
+  padding: 8px 10px;
+  border-top: 1px solid #f3f4f6;
+}
+li:first-child {
+  border-top: 0;
+}

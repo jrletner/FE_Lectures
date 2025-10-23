@@ -1,0 +1,30 @@
+section {
+  padding: 16px 0;
+}
+label {
+  display: block;
+  margin: 8px 0;
+}
+input,
+textarea {
+  width: 100%;
+  max-width: 520px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: #ffffff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+button {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: linear-gradient(#eff6ff, #dbeafe);
+  color: #1e3a8a;
+  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.15);
+}
+button[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}

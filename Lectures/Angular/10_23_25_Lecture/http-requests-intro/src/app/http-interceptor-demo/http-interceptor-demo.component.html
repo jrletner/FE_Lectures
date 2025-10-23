@@ -1,0 +1,11 @@
+<section>
+  <h3>Welcome to the h-http-interceptor route</h3>
+  <!-- Clicking the button triggers a GET; the interceptor attaches the header -->
+  <button (click)="load()">Call API</button>
+  <!-- Show the Authorization header that httpbin echoes back -->
+  @if (authHeader()) {
+  <p>
+    Authorization: <code>{{ authHeader() }}</code>
+  </p>
+  }
+</section>

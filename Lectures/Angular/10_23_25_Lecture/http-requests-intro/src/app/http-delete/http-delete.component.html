@@ -1,0 +1,14 @@
+<section>
+  <h3>Welcome to the f-http-delete route</h3>
+  <!-- Load a small list so it's easy to experiment with deletions -->
+  <button (click)="load()">Load 10 posts</button>
+  <ul>
+    @for (p of posts(); track p.id) {
+    <li>
+      <!-- Show the title and a Delete action for each item -->
+      {{ p.title }}
+      <button (click)="remove(p.id)">Delete</button>
+    </li>
+    }
+  </ul>
+</section>
