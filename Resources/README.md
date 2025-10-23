@@ -30,7 +30,7 @@ https://youtu.be/3dHNOWTI7H8?si=PeHXVKOgICgki0oK
 
 ## NodeJS Crash Course
 
-https://www.youtube.com/watch?v=bxsemcrY4gQ
+https://youtu.be/zb3Qk8SG5Ms?si=t-amli7hJBZk0uAc
 
 ## MongoDB Schemas and Data Models
 
