@@ -1,8 +1,0 @@
-@if (message) {
-<div class="banner">
-  <span>{{ message }}</span>
-  <div class="spacer"></div>
-  @if (retry) { <button (click)="retry.emit()">Retry</button> }
-  <button (click)="dismiss.emit()">Dismiss</button>
-</div>
-}
