@@ -2448,6 +2448,8 @@ ng g c k-protected --skip-tests
 <details><summary><code>src/app/auth.service.ts</code></summary>
 
 ```ts
+// A tiny demo auth service that keeps login state in a signal.
+// Real apps would verify tokens or sessions from a backend.
 import { Injectable, signal } from "@angular/core";
 
 @Injectable({ providedIn: "root" })
@@ -2456,14 +2458,17 @@ export class AuthService {
   private _isLoggedIn = signal(false);
 
   isLoggedIn() {
+    // Read the current auth state
     return this._isLoggedIn();
   }
 
   login() {
+    // Flip auth state on (pretend successful login)
     this._isLoggedIn.set(true);
   }
 
   logout() {
+    // Flip auth state off (pretend logout)
     this._isLoggedIn.set(false);
   }
 }
@@ -2476,14 +2481,19 @@ export class AuthService {
 <details><summary><code>src/app/auth.guard.ts</code></summary>
 
 ```ts
+// Functional route guard that only allows navigation when logged in.
+// If not logged in, we redirect to Part A.
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { AuthService } from "./auth.service";
 
 export const authGuard: CanActivateFn = () => {
+  // Access services without a class constructor
   const auth = inject(AuthService);
   const router = inject(Router);
+  // Allow if logged in
   if (auth.isLoggedIn()) return true;
+  // Otherwise, bounce to a safe public route
   router.navigateByUrl("/a-http-basics");
   return false;
 };
@@ -2496,11 +2506,12 @@ export const authGuard: CanActivateFn = () => {
 <details><summary><code>src/app/k-protected/k-protected.component.ts</code></summary>
 
 ```ts
+// A simple protected component shown only when the auth guard passes.
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
   selector: "app-k-protected",
-  standalone: true,
+  standalone: true, // Standalone so we can lazy-load without a module
   templateUrl: "./k-protected.component.html",
   styleUrls: ["./k-protected.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -2513,6 +2524,7 @@ export class KProtectedComponent {}
 <details><summary><code>src/app/k-protected/k-protected.component.html</code></summary>
 
 ```html
+<!-- Visible only when logged in (guard passed) -->
 <section>
   <h3>Welcome to the k-auth-guard (protected) route</h3>
   <p>
@@ -2546,7 +2558,9 @@ export const routes: Routes = [
   // ...existing routes...
   {
     path: "k-auth-guard",
+    // Protect this route with the functional guard
     canActivate: [authGuard],
+    // Lazy-load the standalone component on navigation
     loadComponent: () =>
       import("./k-protected/k-protected.component").then(
         (m) => m.KProtectedComponent
