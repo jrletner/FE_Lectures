@@ -3943,12 +3943,13 @@ section {
 
 ## All routes together (lazy-loaded)
 
-If you prefer to see a single consolidated routes file at the end, here’s an example that includes Parts A–J. Adjust paths if your folders differ.
+If you prefer to see a single consolidated routes file at the end, here’s an example that includes Parts A–K. Adjust paths if your folders differ.
 
 <details><summary><code>src/app/app.routes.ts</code> (complete list)</summary>
 
 ```ts
 import { Routes } from "@angular/router";
+import { authGuard } from "./auth.guard";
 
 export const routes: Routes = [
   {
@@ -4019,6 +4020,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import("./http-retry/http-retry.component").then(
         (m) => m.HttpRetryComponent
+      ),
+  },
+  {
+    path: "k-auth-guard",
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import("./k-protected/k-protected.component").then(
+        (m) => m.KProtectedComponent
       ),
   },
   { path: "", pathMatch: "full", redirectTo: "a-http-basics" },
