@@ -3,7 +3,6 @@
 ## Schedule and topics
 
 - 8/14 — Fundamentals kickoff (folder contains starter HTML/CSS/JS, Exercises, and Lecture_Notes)
-  - Folder: `8_14_25_Lecture/`
 - 8/18 — Fundamentals practice (folder contains starter HTML/CSS/JS, Exercises, and Lecture_Notes)
 - 8/21 — Fundamentals practice (folder contains starter HTML/CSS/JS, Exercises, and Lecture_Notes)
 - 8/25 — Fundamentals practice (folder contains starter HTML/CSS/JS, Exercises, and Lecture_Notes)
