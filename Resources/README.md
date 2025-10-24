@@ -30,7 +30,16 @@ https://youtu.be/3dHNOWTI7H8?si=PeHXVKOgICgki0oK
 
 ## NodeJS Crash Course
 
-https://youtu.be/zb3Qk8SG5Ms?si=t-amli7hJBZk0uAc
+- Traversy Media
+  - Node.JS Crash Course
+    - https://youtu.be/32M1al-Y6Ag?si=4Kf3lG09_bG4XO-z
+  - Express.JS Crash Course
+    - https://youtu.be/CnH3kAXSrmU?si=fHIwwM_ltowLOka4
+- Anson
+  - Express.JS Full Course
+    - https://youtu.be/nH9E25nkk3I?si=-hf-AyBFijChqFvl
+- Net Ninja
+  - https://youtu.be/zb3Qk8SG5Ms?si=t-amli7hJBZk0uAc
 
 ## MongoDB Schemas and Data Models
 
