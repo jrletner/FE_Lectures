@@ -47,16 +47,6 @@ nav.nav {
   color: #64748b;
   font-size: 12px;
 }
-.legend .dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #60a5fa;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-/* Circle badge with letter for active route */
 .legend .dot-badge {
   display: inline-flex;
   align-items: center;
@@ -64,16 +54,27 @@ nav.nav {
   width: 18px;
   height: 18px;
   border-radius: 999px;
-  background: #60a5fa;
-  color: white;
+  background: #3b82f6;
+  color: #fff;
   font-weight: 700;
   font-size: 11px;
-  line-height: 1;
-  margin-right: 8px;
-  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.35);
+  margin-right: 6px;
+  vertical-align: middle;
+  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.3);
 }
 hr {
   border: 0;
   border-top: 1px solid #e5e7eb;
   margin: 12px 0 12px;
+}
+.auth-btn {
+  margin-left: 12px;
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+.auth-btn:hover {
+  background: #f3f4f6;
 }

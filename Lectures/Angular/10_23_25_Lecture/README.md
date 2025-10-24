@@ -57,7 +57,7 @@ export class ExampleComponent {}
 
 </details>
 
-You will build 10 small demos:
+You will build 11 small demos:
 
 - Part A — Simple GET: load and show data
 - Part B — Loading and error states
@@ -69,6 +69,7 @@ You will build 10 small demos:
 - Part H — Interceptor for auth header
 - Part I — Debounced search with cancel
 - Part J — Retry with backoff on failure
+- Part K — Auth Guard (protect a route)
 
 Each has explicit goals & checkpoints. Read the HINTS only if you get stuck.
 
@@ -150,7 +151,7 @@ import { filter } from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  // Reactive state: the active exercise letter shown in the legend ("A"–"J")
+  // Reactive state: the active exercise letter shown in the legend ("A"–"K")
   activeLetter = signal<string>("A");
   // Get Router via functional DI (no constructor parameter needed)
   private router = inject(Router);
@@ -221,6 +222,10 @@ export class AppComponent {
     <a routerLink="/j-http-retry" routerLinkActive="active" class="chip">
       <span class="badge">J</span>
       <span>Retry</span>
+    </a>
+    <a routerLink="/k-auth-guard" routerLinkActive="active" class="chip">
+      <span class="badge">K</span>
+      <span>Auth Guard</span>
     </a>
   </div>
   <hr />
@@ -309,6 +314,19 @@ hr {
   border: 0;
   border-top: 1px solid #e5e7eb;
   margin: 12px 0 12px;
+}
+
+/* K: Auth Guard toggle button */
+.auth-btn {
+  margin-left: 12px;
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+.auth-btn:hover {
+  background: #f3f4f6;
 }
 ```
 
@@ -2407,6 +2425,154 @@ export const routes: Routes = [
 
 ---
 
+## Part K: Auth Guard (Protect a Route)
+
+Plain English: Create a simple “logged-in” switch in a tiny AuthService, add a functional route guard that only allows access when logged in, and wire a protected page. You’ll be able to toggle login from the header and try the guarded route.
+
+Goal: Add a functional `authGuard` to protect a new route and a tiny `AuthService` to simulate login/logout.
+
+<details><summary><code>Commands</code></summary>
+
+```bash
+# From your Angular workspace root
+ng g s auth --skip-tests
+ng g guard auth --functional --skip-tests --flat
+(when asked, choose "CanActivate")
+ng g c k-protected --skip-tests
+```
+
+</details>
+
+### K1. AuthService
+
+<details><summary><code>src/app/auth.service.ts</code></summary>
+
+```ts
+import { Injectable, signal } from "@angular/core";
+
+@Injectable({ providedIn: "root" })
+export class AuthService {
+  // Demo-only: signal for auth state
+  private _isLoggedIn = signal(false);
+
+  isLoggedIn() {
+    return this._isLoggedIn();
+  }
+
+  login() {
+    this._isLoggedIn.set(true);
+  }
+
+  logout() {
+    this._isLoggedIn.set(false);
+  }
+}
+```
+
+</details>
+
+### K2. Functional Auth Guard
+
+<details><summary><code>src/app/auth.guard.ts</code></summary>
+
+```ts
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { AuthService } from "./auth.service";
+
+export const authGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  if (auth.isLoggedIn()) return true;
+  router.navigateByUrl("/a-http-basics");
+  return false;
+};
+```
+
+</details>
+
+### K3. Protected Component
+
+<details><summary><code>src/app/k-protected/k-protected.component.ts</code></summary>
+
+```ts
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+
+@Component({
+  selector: "app-k-protected",
+  standalone: true,
+  templateUrl: "./k-protected.component.html",
+  styleUrls: ["./k-protected.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class KProtectedComponent {}
+```
+
+</details>
+
+<details><summary><code>src/app/k-protected/k-protected.component.html</code></summary>
+
+```html
+<section>
+  <h3>Welcome to the k-auth-guard (protected) route</h3>
+  <p>
+    This page is only visible when logged in. Use the Login/Logout button in the
+    header to toggle access.
+  </p>
+</section>
+```
+
+</details>
+
+<details><summary><code>src/app/k-protected/k-protected.component.css</code></summary>
+
+```css
+section {
+  padding: 12px 0;
+}
+```
+
+</details>
+
+### K4. Add the guarded route
+
+<details><summary><code>src/app/app.routes.ts</code> (add Part K)</summary>
+
+```ts
+import { Routes } from "@angular/router";
+import { authGuard } from "./auth.guard";
+
+export const routes: Routes = [
+  // ...existing routes...
+  {
+    path: "k-auth-guard",
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import("./k-protected/k-protected.component").then(
+        (m) => m.KProtectedComponent
+      ),
+  },
+];
+```
+
+</details>
+
+---
+
+### Run and Observe (Part K)
+
+- Start the dev server if it’s not running.
+- While logged OUT (default), click the “K: Auth Guard” chip in the header.
+  - Expected: you’ll be redirected to Part A (`/a-http-basics`) because the guard blocks access.
+- Click the Login button in the header, then click the “K: Auth Guard” chip again.
+  - Expected: the protected K route loads and displays its content.
+- Click Logout while you’re on K, then navigate away and back to K.
+  - Expected: on the next navigation, the guard runs and blocks access (redirects back to A).
+- Optional: manually enter `/k-auth-guard` in the address bar.
+  - Expected: if logged in you remain on K; if logged out, you’re redirected to A.
+
+Note: Guards run on navigation. If you log out while already on K, the view stays until you navigate again.
+
 ## Final Code (No Comments) – Reference
 
 <details><summary><code>src/app/app.config.ts</code></summary>
@@ -2433,6 +2599,7 @@ export const appConfig: ApplicationConfig = {
 
 ```ts
 import { Routes } from "@angular/router";
+import { authGuard } from "./auth.guard";
 
 export const routes: Routes = [
   {
@@ -2505,6 +2672,14 @@ export const routes: Routes = [
         (m) => m.HttpRetryComponent
       ),
   },
+  {
+    path: "k-auth-guard",
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import("./k-protected/k-protected.component").then(
+        (m) => m.KProtectedComponent
+      ),
+  },
   { path: "", pathMatch: "full", redirectTo: "a-http-basics" },
   { path: "**", redirectTo: "a-http-basics" },
 ];
@@ -2529,6 +2704,7 @@ import {
   NavigationEnd,
 } from "@angular/router";
 import { filter } from "rxjs";
+import { AuthService } from "./auth.service";
 
 @Component({
   selector: "app-root",
@@ -2541,6 +2717,7 @@ import { filter } from "rxjs";
 export class AppComponent {
   activeLetter = signal<string>("A");
   private router = inject(Router);
+  auth = inject(AuthService);
 
   constructor() {
     this.setLetterFromUrl(this.router.url);
@@ -2553,6 +2730,16 @@ export class AppComponent {
     const firstSeg = url.split("/").filter(Boolean)[0] || "a-http-basics";
     const letter = firstSeg.charAt(0).toUpperCase();
     this.activeLetter.set(letter);
+  }
+
+  login() {
+    this.auth.login();
+  }
+  logout() {
+    this.auth.logout();
+  }
+  isLoggedIn() {
+    return this.auth.isLoggedIn();
   }
 }
 ```
@@ -2594,12 +2781,18 @@ export class AppComponent {
     <a routerLink="/j-http-retry" routerLinkActive="active" class="chip"
       ><span class="badge">J</span><span>Retry</span></a
     >
+    <a routerLink="/k-auth-guard" routerLinkActive="active" class="chip"
+      ><span class="badge">K</span><span>Auth Guard</span></a
+    >
   </div>
   <hr />
   <div class="legend">
     <span class="legend-item"
       ><span class="dot-badge">{{ activeLetter() }}</span> Active route</span
     >
+    <button class="auth-btn" (click)="isLoggedIn() ? logout() : login()">
+      {{ isLoggedIn() ? 'Logout' : 'Login' }}
+    </button>
   </div>
 </nav>
 
@@ -2679,6 +2872,17 @@ hr {
   border: 0;
   border-top: 1px solid #e5e7eb;
   margin: 12px 0 12px;
+}
+.auth-btn {
+  margin-left: 12px;
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+.auth-btn:hover {
+  background: #f3f4f6;
 }
 ```
 
@@ -3631,6 +3835,91 @@ button:hover {
 }
 .muted {
   color: #6b7280;
+}
+```
+
+</details>
+
+---
+
+### Part K — auth-guard (Final Code)
+
+<details><summary><code>src/app/auth.service.ts</code></summary>
+
+```ts
+import { Injectable, signal } from "@angular/core";
+
+@Injectable({ providedIn: "root" })
+export class AuthService {
+  private _isLoggedIn = signal(false);
+  isLoggedIn() {
+    return this._isLoggedIn();
+  }
+  login() {
+    this._isLoggedIn.set(true);
+  }
+  logout() {
+    this._isLoggedIn.set(false);
+  }
+}
+```
+
+</details>
+
+<details><summary><code>src/app/auth.guard.ts</code></summary>
+
+```ts
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { AuthService } from "./auth.service";
+
+export const authGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  if (auth.isLoggedIn()) return true;
+  router.navigateByUrl("/a-http-basics");
+  return false;
+};
+```
+
+</details>
+
+<details><summary><code>src/app/k-protected/k-protected.component.ts</code></summary>
+
+```ts
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+
+@Component({
+  selector: "app-k-protected",
+  standalone: true,
+  templateUrl: "./k-protected.component.html",
+  styleUrls: ["./k-protected.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class KProtectedComponent {}
+```
+
+</details>
+
+<details><summary><code>src/app/k-protected/k-protected.component.html</code></summary>
+
+```html
+<section>
+  <h3>Welcome to the k-auth-guard (protected) route</h3>
+  <p>
+    This page is only visible when logged in. Use the Login/Logout button in the
+    header to toggle access.
+  </p>
+</section>
+```
+
+</details>
+
+<details><summary><code>src/app/k-protected/k-protected.component.css</code></summary>
+
+```css
+section {
+  padding: 12px 0;
 }
 ```
 

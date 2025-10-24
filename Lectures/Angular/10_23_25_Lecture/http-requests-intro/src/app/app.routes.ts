@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   // Route for Part A — place above redirects
@@ -80,6 +81,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./http-retry/http-retry.component').then(
         (m) => m.HttpRetryComponent
+      ),
+  },
+  {
+    path: 'k-auth-guard',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./k-protected/k-protected.component').then(
+        (m) => m.KProtectedComponent
       ),
   },
   // Default route: when URL is empty, redirect to Part A

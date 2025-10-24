@@ -11,34 +11,42 @@ import {
   Router,
   NavigationEnd,
 } from '@angular/router';
+import { filter } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // Import RouterOutlet, RouterLink
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  activeLetter = signal<string>('');
+  activeLetter = signal<string>('A');
   private router = inject(Router);
+  auth = inject(AuthService);
 
   constructor() {
-    // Initialize with current URL (may be empty before first navigation)
-    this.setLetterFromUrl(this.router.url ?? '');
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        this.setLetterFromUrl(e.urlAfterRedirects || e.url);
-      }
-    });
+    this.setLetterFromUrl(this.router.url);
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((e) => this.setLetterFromUrl(e.urlAfterRedirects));
   }
 
   private setLetterFromUrl(url: string) {
-    const clean = url.split('?')[0].split('#')[0];
-    const firstSeg = clean.split('/').filter(Boolean)[0] ?? '';
-    const letter = firstSeg.charAt(0);
-    this.activeLetter.set(letter ? letter.toUpperCase() : '');
+    const firstSeg = url.split('/').filter(Boolean)[0] || 'a-http-basics';
+    const letter = firstSeg.charAt(0).toUpperCase();
+    this.activeLetter.set(letter);
+  }
+
+  login() {
+    this.auth.login();
+  }
+  logout() {
+    this.auth.logout();
+  }
+  isLoggedIn() {
+    return this.auth.isLoggedIn();
   }
 }
