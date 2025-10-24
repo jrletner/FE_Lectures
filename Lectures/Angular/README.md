@@ -14,3 +14,4 @@ Version: Angular 19.2.3. Examples prefer standalone APIs, signals for component 
 - 10/16 — Angular Signals (Beginner Friendly)
 - 10/20 — No class — work on projects
 - 10/23 — HTTP Requests, Responses, and Routing (Beginner Friendly)
+- 10/27 — No class — work on projects
