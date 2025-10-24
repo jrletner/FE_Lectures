@@ -8,10 +8,10 @@ Version: Angular 19.2.3. Examples prefer standalone APIs, signals for component 
 - 9/25 — Angular Signals — Live‑Coding Mini Exercises
 - 9/29 — Angular Essentials, Part 2 (Short Walkthrough)
 - 10/02 — Angular Essentials, Part 3 (Short Walkthrough)
-- 10/06 — Student Auth Walkthrough (Beginner Friendly)
+- 10/06 — Student Auth Walkthrough
 - 10/09 — Angular 19 Forms (Reactive & Template‑Driven)
-- 10/13 — RxJS Observables in Angular (Beginner Friendly)
-- 10/16 — Angular Signals (Beginner Friendly)
+- 10/13 — RxJS Observables in Angular
+- 10/16 — More Angular Signals
 - 10/20 — No class — work on projects
-- 10/23 — HTTP Requests, Responses, and Routing (Beginner Friendly)
+- 10/23 — HTTP Requests, Responses, and Routing
 - 10/27 — No class — work on projects
