@@ -39,7 +39,8 @@ https://youtu.be/3dHNOWTI7H8?si=PeHXVKOgICgki0oK
   - Express.JS Full Course
     - https://youtu.be/nH9E25nkk3I?si=-hf-AyBFijChqFvl
 - Net Ninja
-  - https://youtu.be/zb3Qk8SG5Ms?si=t-amli7hJBZk0uAc
+  - NodeJs/Express/MongoDB Crash Course Tutorial
+    - https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU
 
 ## MongoDB Schemas and Data Models
 
