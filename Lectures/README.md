@@ -42,3 +42,14 @@
 - Support pagination and basic sorting in list endpoints
 
 Keep examples tiny, readable, and runnable. If something feels fuzzy, revisit the checklist and grab 1–2 workbook exercises until it clicks.
+
+### Reference PDFs
+
+The following books are available in this folder for deeper study and quick lookup:
+
+- [Book 1 – Up & Going](./Book%201%20-%20Up%20%26%20Going.pdf)
+- [Book 2 – Scope & Closures](./Book%202%20-%20Scope%20%26%20Closures.pdf)
+- [Book 3 – this & Object Prototypes](./Book%203%20-%20this%20%26%20Object%20Prototypes.pdf)
+- [Book 4 – Types & Grammar](./Book%204%20-%20Types%20%26%20Grammar.pdf)
+- [Book 5 – Async & Performance](./Book%205%20-%20Async%20%26%20Performance.pdf)
+- [Book 6 – ES6 and Beyond](./Book%206%20-%20ES6%20and%20Beyond.pdf)
