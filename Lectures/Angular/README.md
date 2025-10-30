@@ -11,7 +11,7 @@ Version: Angular 19.2.3. Examples prefer standalone APIs, signals for component 
 - 10/06 — Student Auth Walkthrough
 - 10/09 — Angular 19 Forms (Reactive & Template‑Driven)
 - 10/13 — RxJS Observables in Angular
-- 10/16 — More Angular Signals
+- 10/16 — Angular Signals - Advanced
 - 10/20 — No class — work on projects
 - 10/23 — HTTP Requests, Responses, and Routing
 - 10/27 — No class — work on projects

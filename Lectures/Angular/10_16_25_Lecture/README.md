@@ -1,4 +1,4 @@
-# Student Practice Walkthrough – Angular Signals (Beginner Friendly)
+# Student Practice Walkthrough – Angular Signals Advanced
 
 ## Before You Start: What Are Signals? (Plain English)
 
