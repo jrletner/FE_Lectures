@@ -8,7 +8,7 @@
 ### MongoDB
 
 - Create an account:
-  - https://www.mongodb.com/
+  - https://www.mongodb.com/cloud/atlas/register
 
 ### ER Diagrams
 
