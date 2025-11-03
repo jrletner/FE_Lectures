@@ -12,6 +12,10 @@
 - Create an account:
   - https://www.mongodb.com/cloud/atlas/register
 
+### Normalized vs. Denormalized
+
+- https://thedataschool.com/afnan-foyez/normalized-vs-denormalized-data/
+
 ### ER Diagrams
 
 - Draw.io:
