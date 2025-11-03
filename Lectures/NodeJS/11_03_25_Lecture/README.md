@@ -2,8 +2,10 @@
 
 ### SQL
 
-- https://www.w3schools.com/SQl/exercise.asp
-- https://sqlbolt.com/lesson/select_queries_introduction.
+- SQL Bolt:
+  - https://sqlbolt.com/lesson/select_queries_introduction
+- MDN Learning:
+  - https://www.w3schools.com/SQl/exercise.asp
 
 ### MongoDB
 
