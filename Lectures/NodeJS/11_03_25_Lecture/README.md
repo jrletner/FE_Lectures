@@ -4,7 +4,7 @@
 
 - SQL Bolt:
   - https://sqlbolt.com/lesson/select_queries_introduction
-- MDN Learning:
+- W3 Schools Learning:
   - https://www.w3schools.com/SQl/exercise.asp
 
 ### MongoDB
