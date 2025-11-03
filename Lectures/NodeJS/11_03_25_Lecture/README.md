@@ -4,8 +4,8 @@
 
 - SQL Bolt:
   - https://sqlbolt.com/lesson/select_queries_introduction
-- W3 Schools Learning:
-  - https://www.w3schools.com/SQl/sql_examples.asp
+- W3 Schools Tutorial:
+  - https://www.w3schools.com/SQl/default.asp
 
 ### MongoDB
 
