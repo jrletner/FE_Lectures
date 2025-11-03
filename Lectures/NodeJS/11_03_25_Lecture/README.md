@@ -11,8 +11,10 @@
 
 ### ER Diagrams
 
-- Draw.io: https://app.diagrams.net/
-- Crows Foot Notation: https://www.freecodecamp.org/news/crows-foot-notation-relationship-symbols-and-how-to-read-diagrams/
+- Draw.io:
+  - https://app.diagrams.net/
+- Crows Foot Notation:
+  - https://www.freecodecamp.org/news/crows-foot-notation-relationship-symbols-and-how-to-read-diagrams/
 
 ### Build a Quick REST API with Node.js, Express, & MongoDB
 
