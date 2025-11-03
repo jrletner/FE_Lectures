@@ -7,7 +7,8 @@
 
 ### MongoDB
 
-- https://www.mongodb.com/
+- Create an account:
+  - https://www.mongodb.com/
 
 ### ER Diagrams
 
