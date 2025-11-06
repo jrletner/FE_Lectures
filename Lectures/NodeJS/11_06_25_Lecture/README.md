@@ -101,7 +101,10 @@ server.listen(8000, () => console.log("A: http://localhost:8000"));
 
 ### Run and Observe
 
-- Visit `/` and `/about`; unknown paths show the HTML 404.
+- In Postman:
+  - Request 1: GET http://localhost:8000/ → Status 200 OK, body: "Welcome to the home page".
+  - Request 2: GET http://localhost:8000/about → Status 200 OK, body: "Here is our short history".
+  - Request 3: GET http://localhost:8000/anything → Status 200 (no explicit 404 status set in Part A), HTML body shows the 404 message and a link back home.
 
 ---
 
@@ -149,7 +152,10 @@ server.listen(8000, () => console.log("B: http://localhost:8000"));
 
 ### Run and Observe
 
-- Check DevTools → Network to see status 200 vs 404 and content types.
+- In Postman:
+  - GET http://localhost:8000/ → Status 200 OK, Headers include Content-Type: text/plain; charset=utf-8.
+  - GET http://localhost:8000/about → Status 200 OK, same Content-Type.
+  - GET http://localhost:8000/missing → Status 404 Not Found, Content-Type: text/html; charset=utf-8, with a small HTML body.
 
 ---
 
@@ -193,7 +199,9 @@ server.listen(8000, () => console.log("C: http://localhost:8000/?name=Ada"));
 
 ### Run and Observe
 
-- Visit `/?name=Ada` and see the greeting.
+- In Postman:
+  - GET http://localhost:8000/?name=Ada → Status 200 OK, body: "Hello, Ada!".
+  - GET http://localhost:8000/ (no query) → Status 200 OK, body: "Hello, friend!".
 
 ---
 
@@ -238,7 +246,9 @@ server.listen(8000, () => console.log("D: try /users/123"));
 
 ### Run and Observe
 
-- `GET /users/123` returns `{ "id": 123 }`.
+- In Postman:
+  - GET http://localhost:8000/users/123 → Status 200 OK, JSON body: { "id": 123 }.
+  - GET http://localhost:8000/users/abc → Status 404 Not Found (does not match the numeric route).
 
 ---
 
@@ -282,7 +292,10 @@ server.listen(8000, () => console.log("E: GET/POST /about"));
 
 ### Run and Observe
 
-- `curl -i -X POST localhost:8000/about` → 201; `GET` still works; others 405.
+- In Postman:
+  - Request 1: POST http://localhost:8000/about → Status 201 Created, body "About updated".
+  - Request 2: GET http://localhost:8000/about → Status 200 OK, body "About (read-only)".
+  - Any other method to /about → Status 405 Method Not Allowed.
 
 ---
 
@@ -322,7 +335,9 @@ server.listen(8000, () => console.log("F: GET /api/time"));
 
 ### Run and Observe
 
-- `GET /api/time` returns a JSON object with an ISO timestamp.
+- In Postman:
+  - GET http://localhost:8000/api/time → Status 200 OK, Headers include Content-Type: application/json.
+  - Body is JSON like: { "now": "2025-11-06T12:34:56.789Z" }.
 
 ---
 
@@ -385,7 +400,13 @@ server.listen(8000, () => console.log("G: POST /echo with JSON body"));
 
 ### Run and Observe
 
-- `curl -i -X POST localhost:8000/echo -d '{"x":1}' -H 'Content-Type: application/json'` → echoes JSON.
+- In Postman:
+  - Method: POST
+  - URL: http://localhost:8000/echo
+  - Headers: Content-Type: application/json
+  - Body (raw → JSON): {"x": 1}
+  - Send → Expect 200 OK with body: { "youSent": { "x": 1 } }
+  - Try malformed JSON to observe 400 Bad JSON.
 
 ---
 
@@ -426,7 +447,8 @@ server.listen(8000, () => console.log("H: GET /slow (~~150ms)"));
 
 ### Run and Observe
 
-- Notice the small delay before the response is sent.
+- In Postman:
+  - GET http://localhost:8000/slow → Status 200 OK, body: "Slow result: done" after ~150ms.
 
 ---
 
@@ -473,7 +495,8 @@ server.listen(8000, () => console.log("I: GET /stream"));
 
 ### Run and Observe
 
-- The body arrives in chunks; view it in curl or DevTools.
+- In Postman: GET http://localhost:8000/stream → you should see a multi-line response.
+  - Note: Some clients buffer chunked responses; if you don’t see parts stream in real time, confirm the final multi-line body or use your browser’s Network panel.
 
 ---
 
@@ -512,7 +535,9 @@ server.listen(8000, () => console.log("J: GET /old redirects to /"));
 
 ### Run and Observe
 
-- Browser should land on `/` when you visit `/old`.
+- In Postman:
+  - GET http://localhost:8000/old → Status 302 Found, Headers include Location: /.
+  - Optionally enable “Follow redirects” in Postman to see the final GET / response "Home".
 
 ---
 
@@ -562,7 +587,9 @@ server.listen(8000, () => console.log("K: GET /error → 500"));
 
 ### Run and Observe
 
-- `/error` returns 500; other paths return OK.
+- In Postman:
+  - GET http://localhost:8000/error → Status 500 Internal Server Error, body: "Internal Server Error".
+  - GET http://localhost:8000/ → Status 200 OK, body: "OK".
 
 ---
 
@@ -605,7 +632,9 @@ process.on("SIGINT", () => {
 
 ### Run and Observe
 
-- Press Ctrl+C; the server logs shutdown and exits.
+- In Postman:
+  - GET http://localhost:8000/ → Status 200 OK, body: "Running. Press Ctrl+C to stop.".
+  - Then stop the server with Ctrl+C in your terminal; watch the terminal logs for graceful shutdown. (Postman doesn’t send signals.)
 
 ---
 
