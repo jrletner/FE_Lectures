@@ -448,7 +448,7 @@ server.listen(8000, () => console.log("H: GET /slow (~~10 secs)"));
 ### Run and Observe
 
 - In Postman:
-  - GET http://localhost:8000/slow → Status 200 OK, body: "Slow result: done" after ~150ms.
+  - GET http://localhost:8000/slow → Status 200 OK, body: "Slow result: done" after ~10 secs.
 
 ---
 
