@@ -808,13 +808,13 @@ const http = require("http");
 const delay = (ms, v) => new Promise((r) => setTimeout(() => r(v), ms));
 const server = http.createServer(async (req, res) => {
   if (req.url === "/slow") {
-    const v = await delay(150, "done");
+    const v = await delay(10000, "done"); // 10 seconds
     res.writeHead(200, { "Content-Type": "text/plain" });
     return res.end("Slow result: " + v);
   }
   res.writeHead(404).end("Not Found");
 });
-server.listen(8000, () => console.log("H: GET /slow (~~150ms)"));
+server.listen(8000, () => console.log("H: GET /slow (~~10 secs)"));
 ```
 
 </details>
