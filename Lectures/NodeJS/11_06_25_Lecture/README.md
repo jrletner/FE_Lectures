@@ -433,14 +433,14 @@ const delay = (ms, val) => new Promise((res) => setTimeout(() => res(val), ms));
 const server = http.createServer(async (req, res) => {
   if (req.url === "/slow") {
     // 2) Await the "async" work before sending a response
-    const value = await delay(150, "done");
+    const value = await delay(10000, "done"); // 10 seconds
     res.writeHead(200, { "Content-Type": "text/plain" });
     return res.end(`Slow result: ${value}`);
   }
   res.writeHead(404).end("Not Found");
 });
 
-server.listen(8000, () => console.log("H: GET /slow (~~150ms)"));
+server.listen(8000, () => console.log("H: GET /slow (~~10 secs)"));
 ```
 
 </details>
