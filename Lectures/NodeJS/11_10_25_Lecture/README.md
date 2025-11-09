@@ -566,19 +566,6 @@ app.post("/tickets", (req, res) => {
 }); // End POST /tickets handler
 
 // PATCH ticket (reject invalid new priority)
-app.patch("/tickets/:id", (req, res) => {
-  // Handle PATCH /tickets/:id requests
-  const id = Number(req.params.id); // Convert path param id from string to number
-  const existing = tickets.find((t) => t.id === id); // Look up the ticket by id
-  if (!existing) return res.status(404).json({ error: "Not Found" }); // 404 if ticket does not exist
-  const updated = { ...existing, ...req.body }; // Shallow merge existing ticket with any provided fields
-  if (updated.priority && !allowed.has(updated.priority)) {
-    // If priority field provided, validate it
-    return res.status(400).json({ error: "invalid priority" }); // Reject invalid priority values
-  } // End priority validation
-  tickets = tickets.map((t) => (t.id === id ? updated : t)); // Replace only the matching ticket in the array
-  res.json(updated); // Respond with the updated ticket JSON
-}); // End PATCH /tickets/:id handler
 
 // DELETE ticket
 
