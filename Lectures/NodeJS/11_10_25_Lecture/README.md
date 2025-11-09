@@ -33,12 +33,25 @@ You’ll repeatedly:
 
 ## One‑time: How to run each part
 
-Each part stands alone in its own folder. Create `app.js` for the part, paste the code, then:
+Each part stands alone in its own folder. Create `server.js` for the part, paste the code, then:
 
 ```
 npm init -y
 npm install express
-node app.js
+npm install -D nodemon
+```
+
+```
+- Update package.json with "dev"
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+```
+
+```
+run your api with:  npm run dev
 ```
 
 Port: all parts use `http://localhost:3000`.
@@ -55,7 +68,7 @@ Backend tie‑in (simple):
 
 - Your first end‑to‑end resource API shape.
 
-<details><summary><code>part-a/app.js</code></summary>
+<details><summary><code>part-a/server.js</code></summary>
 
 ```js
 // 1) Import express and create the app
@@ -158,7 +171,7 @@ app.listen(3000, () => console.log("A: Users API on http://localhost:3000")); //
 
 Assignment: Same CRUD shape for products with price.
 
-<details><summary><code>part-b/app.js</code></summary>
+<details><summary><code>part-b/server.js</code></summary>
 
 ```js
 // Part B – Products CRUD (adds price validation)
@@ -258,7 +271,7 @@ app.listen(3000, () => console.log("B: Products API on http://localhost:3000"));
 
 Assignment: CRUD for books with author and year.
 
-<details><summary><code>part-c/app.js</code></summary>
+<details><summary><code>part-c/server.js</code></summary>
 
 ```js
 // Part C – Books CRUD (adds author + year fields)
@@ -354,7 +367,7 @@ app.listen(3000, () => console.log("C: Books API on http://localhost:3000")); //
 
 Assignment: CRUD for tasks with done flag; demonstrate partial updates.
 
-<details><summary><code>part-d/app.js</code></summary>
+<details><summary><code>part-d/server.js</code></summary>
 
 ```js
 // Part D – Tasks CRUD (boolean done flag)
@@ -400,7 +413,7 @@ app.listen(3000, () => console.log("D: Tasks API on http://localhost:3000"));
 
 Assignment: CRUD for posts with title/body and simple validation.
 
-<details><summary><code>part-e/app.js</code></summary>
+<details><summary><code>part-e/server.js</code></summary>
 
 ```js
 // Part E – Posts CRUD (title required, body optional)
@@ -445,7 +458,7 @@ app.listen(3000, () => console.log("E: Posts API on http://localhost:3000"));
 
 Assignment: CRUD for comments with postId, text.
 
-<details><summary><code>part-f/app.js</code></summary>
+<details><summary><code>part-f/server.js</code></summary>
 
 ```js
 // Part F – Comments CRUD (relational field postId)
@@ -489,7 +502,7 @@ app.listen(3000, () => console.log("F: Comments API on http://localhost:3000"));
 
 Assignment: CRUD for orders with total and status.
 
-<details><summary><code>part-g/app.js</code></summary>
+<details><summary><code>part-g/server.js</code></summary>
 
 ```js
 // Part G – Orders CRUD (numeric total + status)
@@ -532,7 +545,7 @@ app.listen(3000, () => console.log("G: Orders API on http://localhost:3000"));
 
 Assignment: CRUD for tickets with title and priority.
 
-<details><summary><code>part-h/app.js</code></summary>
+<details><summary><code>part-h/server.js</code></summary>
 
 ```js
 // Part H – Tickets CRUD (priority validation against allowed set)
@@ -590,7 +603,7 @@ app.listen(3000, () => console.log("H: Tickets API on http://localhost:3000")); 
 
 Assignment: CRUD for courses with name and credits.
 
-<details><summary><code>part-i/app.js</code></summary>
+<details><summary><code>part-i/server.js</code></summary>
 
 ```js
 // Part I – Courses CRUD (numeric credits)
@@ -633,7 +646,7 @@ app.listen(3000, () => console.log("I: Courses API on http://localhost:3000"));
 
 Assignment: CRUD for movies with title and year.
 
-<details><summary><code>part-j/app.js</code></summary>
+<details><summary><code>part-j/server.js</code></summary>
 
 ```js
 // Part J – Movies CRUD (simple year validation ≥ 1888)
@@ -676,7 +689,7 @@ app.listen(3000, () => console.log("J: Movies API on http://localhost:3000"));
 
 Assignment: CRUD for devices with name and online flag.
 
-<details><summary><code>part-k/app.js</code></summary>
+<details><summary><code>part-k/server.js</code></summary>
 
 ```js
 // Part K – Devices CRUD (boolean online flag)
@@ -719,7 +732,7 @@ app.listen(3000, () => console.log("K: Devices API on http://localhost:3000"));
 
 Assignment: CRUD for notes with title and content.
 
-<details><summary><code>part-l/app.js</code></summary>
+<details><summary><code>part-l/server.js</code></summary>
 
 ```js
 // Part L – Notes CRUD (title + content, content optional)
@@ -760,11 +773,11 @@ app.listen(3000, () => console.log("L: Notes API on http://localhost:3000"));
 
 ## Final Code (No Comments) – Reference
 
-Minimal versions for quick copy/paste (no explanatory comments). Each goes in `part-*/app.js`.
+Minimal versions for quick copy/paste (no explanatory comments). Each goes in `part-*/server.js`.
 
-### Part A — Final `app.js`
+### Part A — Final `server.js`
 
-<details><summary><code>part-a/app.js</code> (final)</summary>
+<details><summary><code>part-a/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -812,9 +825,9 @@ app.listen(3000, () => console.log("A: Users API"));
 
 </details>
 
-### Part B — Final `app.js`
+### Part B — Final `server.js`
 
-<details><summary><code>part-b/app.js</code> (final)</summary>
+<details><summary><code>part-b/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -862,9 +875,9 @@ app.listen(3000, () => console.log("B: Products API"));
 
 </details>
 
-### Part C — Final `app.js`
+### Part C — Final `server.js`
 
-<details><summary><code>part-c/app.js</code> (final)</summary>
+<details><summary><code>part-c/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -913,9 +926,9 @@ app.listen(3000, () => console.log("C: Books API"));
 
 </details>
 
-### Part D — Final `app.js`
+### Part D — Final `server.js`
 
-<details><summary><code>part-d/app.js</code> (final)</summary>
+<details><summary><code>part-d/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -961,9 +974,9 @@ app.listen(3000, () => console.log("D: Tasks API"));
 
 </details>
 
-### Part E — Final `app.js`
+### Part E — Final `server.js`
 
-<details><summary><code>part-e/app.js</code> (final)</summary>
+<details><summary><code>part-e/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -1009,9 +1022,9 @@ app.listen(3000, () => console.log("E: Posts API"));
 
 </details>
 
-### Part F — Final `app.js`
+### Part F — Final `server.js`
 
-<details><summary><code>part-f/app.js</code> (final)</summary>
+<details><summary><code>part-f/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -1058,9 +1071,9 @@ app.listen(3000, () => console.log("F: Comments API"));
 
 </details>
 
-### Part G — Final `app.js`
+### Part G — Final `server.js`
 
-<details><summary><code>part-g/app.js</code> (final)</summary>
+<details><summary><code>part-g/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -1107,9 +1120,9 @@ app.listen(3000, () => console.log("G: Orders API"));
 
 </details>
 
-### Part H — Final `app.js`
+### Part H — Final `server.js`
 
-<details><summary><code>part-h/app.js</code> (final)</summary>
+<details><summary><code>part-h/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -1159,9 +1172,9 @@ app.listen(3000, () => console.log("H: Tickets API"));
 
 </details>
 
-### Part I — Final `app.js`
+### Part I — Final `server.js`
 
-<details><summary><code>part-i/app.js</code> (final)</summary>
+<details><summary><code>part-i/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -1210,9 +1223,9 @@ app.listen(3000, () => console.log("I: Courses API"));
 
 </details>
 
-### Part J — Final `app.js`
+### Part J — Final `server.js`
 
-<details><summary><code>part-j/app.js</code> (final)</summary>
+<details><summary><code>part-j/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -1266,9 +1279,9 @@ app.listen(3000, () => console.log("J: Movies API"));
 
 </details>
 
-### Part K — Final `app.js`
+### Part K — Final `server.js`
 
-<details><summary><code>part-k/app.js</code> (final)</summary>
+<details><summary><code>part-k/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
@@ -1314,9 +1327,9 @@ app.listen(3000, () => console.log("K: Devices API"));
 
 </details>
 
-### Part L — Final `app.js`
+### Part L — Final `server.js`
 
-<details><summary><code>part-l/app.js</code> (final)</summary>
+<details><summary><code>part-l/server.js</code> (final)</summary>
 
 ```js
 const express = require("express");
