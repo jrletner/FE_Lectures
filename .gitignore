@@ -3,6 +3,7 @@
 copilot instructions.md
 copilot readme instructions.md
 copilot exercises instructions.md
+.rest
 
 # JAVASCRIPT LECTURES
 # Lectures/Javascript/8_14_25_Lecture
@@ -38,6 +39,8 @@ copilot exercises instructions.md
 # Lectures/NodeJS/11_06_25_Lecture/
 # Lectures/NodeJS/11_10_25_Lecture/
 Lectures/NodeJS/11_10_25_Lecture/ANSWERS.md
+Lectures/NodeJS/11_10_25_Lecture/*.rest
+Lectures/NodeJS/11_10_25_Lecture/part-a/
 
 Lectures/NodeJS/11_13_25_Lecture/
 Lectures/NodeJS/11_17_25_Lecture/
