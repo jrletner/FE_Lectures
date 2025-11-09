@@ -42,16 +42,18 @@ npm install -D nodemon
 ```
 
 ```
-- Update package.json with "dev"
+- Update package.json with "start" and "dev"
 
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
     "dev": "nodemon server.js"
   },
 ```
 
 ```
-run your api with:  npm run dev
+run your api in prod with: npm start
+run your api in dev with:  npm run dev
 ```
 
 Port: all parts use `http://localhost:3000`.
