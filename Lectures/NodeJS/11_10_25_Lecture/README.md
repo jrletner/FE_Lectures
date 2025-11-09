@@ -2,6 +2,8 @@
 
 In this lecture you’ll build small Express APIs that use an in‑memory array as the “database.” So changes only live for the process lifetime (restart resets data).
 
+- Express documentation: https://expressjs.com/
+
 You will build 12 small demos (each implements full CRUD):
 
 - Part A — Users CRUD
