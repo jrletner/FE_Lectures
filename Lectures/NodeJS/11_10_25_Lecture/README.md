@@ -39,6 +39,7 @@ Each part stands alone in its own folder. Create `server.js` for the part, paste
 npm init -y
 npm install express
 npm install -D nodemon
+touch server.js
 ```
 
 ```
