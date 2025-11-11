@@ -1,0 +1,17 @@
+http://localhost:3000
+
+###
+http://localhost:3000/about
+
+###
+http://localhost:3000/secret?secret=abc123
+
+###
+POST http://localhost:3000/users
+
+{
+    "name": "Joe"
+}
+
+###
+DELETE http://localhost:3000/users/1
