@@ -1,0 +1,99 @@
+# REST Client – CRUD requests for 11_13_25 Lecture
+
+@baseUrl = http://localhost:3000
+@json = application/json
+
+# Update these IDs as needed when testing
+@userId = 1
+@taskId = 1
+@assignmentId = 1
+
+### Base URL
+GET {{baseUrl}}
+
+### 404 URL
+GET {{baseUrl}}/blahblah
+
+### -------------------------
+### Users – List all
+GET {{baseUrl}}/users
+
+### Users – Get one
+GET {{baseUrl}}/users/{{userId}}
+
+### Users – Create
+POST {{baseUrl}}/users
+Content-Type: {{json}}
+
+{
+  "name": "Charlie",
+  "role": "user"
+}
+
+### Users – Update (PATCH)
+PATCH {{baseUrl}}/users/{{userId}}
+Content-Type: {{json}}
+
+{
+  "role": "admin"
+}
+
+### Users – Delete
+DELETE {{baseUrl}}/users/{{userId}}
+
+
+### -------------------------
+### Tasks – List all
+GET {{baseUrl}}/tasks
+
+### Tasks – Get one
+GET {{baseUrl}}/tasks/{{taskId}}
+
+### Tasks – Create
+POST {{baseUrl}}/tasks
+Content-Type: {{json}}
+
+{
+  "title": "Review Notes"
+}
+
+### Tasks – Update (PATCH)
+PATCH {{baseUrl}}/tasks/{{taskId}}
+Content-Type: {{json}}
+
+{
+  "completed": true,
+  "title": "Review Notes Thoroughly"
+}
+
+### Tasks – Delete
+DELETE {{baseUrl}}/tasks/{{taskId}}
+
+
+### -------------------------
+### Assignments – List all
+GET {{baseUrl}}/assignments
+
+### Assignments – Get one
+GET {{baseUrl}}/assignments/{{assignmentId}}
+
+### Assignments – Create (userId + taskId must exist; duplicate pairs 409)
+POST {{baseUrl}}/assignments
+Content-Type: {{json}}
+
+{
+  "userId": {{userId}},
+  "taskId": {{taskId}}
+}
+
+### Assignments – Update (PATCH)
+PATCH {{baseUrl}}/assignments/{{assignmentId}}
+Content-Type: {{json}}
+
+{
+  "userId": {{userId}},
+  "taskId": {{taskId}}
+}
+
+### Assignments – Delete
+DELETE {{baseUrl}}/assignments/{{assignmentId}}
