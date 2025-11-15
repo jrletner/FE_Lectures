@@ -44,7 +44,12 @@ https://youtu.be/3dHNOWTI7H8?si=PeHXVKOgICgki0oK
 
 ## MongoDB Schemas and Data Models
 
-https://www.youtube.com/watch?v=jZ-dzj6ut54
+- Intro to MongoDB and Mongoose | Node.js Tutorials for Beginners
+
+  - https://youtu.be/-PdjUx9JZ2E?si=K7Ui6PG5d2Jl4HOg
+
+- How to create MongoDB Schemas and Data Models | Node.js Tutorials for Beginners
+  - https://www.youtube.com/watch?v=jZ-dzj6ut54
 
 ## Node/Express/MongoDB
 
