@@ -336,8 +336,11 @@ Optional: add `src/environments/` to `.gitignore`
 <details><summary><code>src/environments/environment.ts</code></summary>
 
 ```ts
+// Default environment (used for prod builds unless replaced)
 export const environment = {
+  // Not used during dev server; see environment.development.ts
   production: false,
+  // Base URL of the Express API
   apiBaseUrl: "http://localhost:3000",
 };
 ```
@@ -347,8 +350,10 @@ export const environment = {
 <details><summary><code>src/environments/environment.development.ts</code></summary>
 
 ```ts
+// Dev environment (file-replaced by Angular when running `ng serve`)
 export const environment = {
   production: false,
+  // Base URL of the Express API for local development
   apiBaseUrl: "http://localhost:3000",
 };
 ```
@@ -364,38 +369,48 @@ ng g s services/auth
 <details><summary><code>src/app/services/auth.service.ts</code></summary>
 
 ```ts
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable, tap } from "rxjs";
-import { environment } from "../../environments/environments";
+import { Injectable } from "@angular/core"; // allows DI and service registration
+import { HttpClient } from "@angular/common/http"; // Angular HTTP client
+import { Observable, tap } from "rxjs"; // types + side-effect operator
+import { environment } from "../../environments/environment"; // base URL config
 
+// Response shape from POST /auth/login
 interface LoginResponse {
   token: string;
 }
+
+// Response shape from GET /auth/me
 interface ProfileResponse {
   user: { id: number; email: string; name: string; role: string };
 }
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: "root" }) // make service globally available
 export class AuthService {
+  // API base URL from environment files
   private base = environment.apiBaseUrl;
+  // Where we store the JWT token in the browser
   private tokenKey = "jwt_token";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {} // inject HttpClient
 
+  // Login and persist JWT token to localStorage
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(`${this.base}/auth/login`, { email, password })
       .pipe(tap((res) => localStorage.setItem(this.tokenKey, res.token)));
   }
 
+  // Retrieve token for interceptor/header use
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
+
+  // Clear token to "log out"
   logout(): void {
     localStorage.removeItem(this.tokenKey);
   }
 
+  // Fetch protected profile using Authorization: Bearer <token>
   me(): Observable<ProfileResponse> {
     return this.http.get<ProfileResponse>(`${this.base}/auth/me`);
   }
@@ -413,7 +428,7 @@ ng g interceptor interceptors/auth
 <details><summary><code>src/app/interceptors/auth.interceptor.ts</code></summary>
 
 ```ts
-import { Injectable } from "@angular/core";
+import { Injectable } from "@angular/core"; // DI decorator
 import {
   HttpEvent,
   HttpHandler,
@@ -421,23 +436,26 @@ import {
   HttpRequest,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../services/auth.service"; // to read stored token
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) {}
 
+  // Runs before each outgoing HTTP request
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.auth.getToken();
+    const token = this.auth.getToken(); // get JWT from storage
     if (token) {
+      // Clone request and add Authorization header
       const cloned = req.clone({
         setHeaders: { Authorization: `Bearer ${token}` },
       });
       return next.handle(cloned);
     }
+    // No token → pass the original request through
     return next.handle(req);
   }
 }
@@ -452,26 +470,32 @@ We must provide HttpClient _with_ DI interceptors so the interceptor executes.
 ```ts
 import {
   ApplicationConfig,
-  provideZoneChangeDetection,
   importProvidersFrom,
-} from "@angular/core";
-import { provideRouter } from "@angular/router";
-import { routes } from "./app.routes";
+  provideZoneChangeDetection,
+} from "@angular/core"; // app-level providers
+import { provideRouter } from "@angular/router"; // routing provider
+import { routes } from "./app.routes"; // route definitions
 import { BrowserModule } from "@angular/platform-browser";
+import { ReactiveFormsModule } from "@angular/forms"; // for reactive forms
 import {
   provideHttpClient,
   withInterceptorsFromDi,
   HTTP_INTERCEPTORS,
-} from "@angular/common/http";
-import { AuthInterceptor } from "./interceptors/auth.interceptor";
+} from "@angular/common/http"; // HTTP + interceptors
+import { AuthInterceptor } from "./interceptors/auth.interceptor"; // our auth interceptor
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(BrowserModule), // import necessary Angular modules
-    provideHttpClient(withInterceptorsFromDi()), // register HttpClient + DI interceptors
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // attach auth interceptor
-    provideZoneChangeDetection({ eventCoalescing: true }), // performance tweak
-    provideRouter(routes), // application routes
+    // Make Angular modules available in standalone bootstrap
+    importProvidersFrom(BrowserModule, ReactiveFormsModule),
+    // Provide HttpClient and enable DI-registered interceptors
+    provideHttpClient(withInterceptorsFromDi()),
+    // Register our AuthInterceptor
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // Optional performance tweak
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    // Router setup
+    provideRouter(routes),
   ],
 };
 ```
@@ -488,29 +512,36 @@ ng g c login
 
 ```ts
 import { Component } from "@angular/core";
-import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
-import { AuthService } from "../services/auth.service";
-import { JsonPipe } from "@angular/common";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms"; // reactive forms APIs
+import { AuthService } from "../services/auth.service"; // service that calls API
+import { JsonPipe } from "@angular/common"; // to pretty-print JSON in template
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
-  imports: [ReactiveFormsModule, JsonPipe], // standalone component imports
+  // Standalone component: declare imports here instead of in NgModule
+  imports: [ReactiveFormsModule, JsonPipe],
 })
 export class LoginComponent {
+  // Status message for user feedback
   message = "";
+  // Store the profile payload returned by /auth/me
   profile: any = null;
+  // Reactive form group instance
   form: any;
+  // Track login state to toggle UI
   isLoggedIn = false;
 
   constructor(private fb: FormBuilder, private auth: AuthService) {
+    // Initialize form with default demo credentials
     this.form = this.fb.group({
       email: ["ada@example.com", [Validators.required, Validators.email]],
       password: ["password123", [Validators.required]],
     });
   }
 
+  // Clear token and UI state
   logout() {
     this.auth.logout();
     this.profile = null;
@@ -518,8 +549,9 @@ export class LoginComponent {
     this.isLoggedIn = false;
   }
 
+  // Submit login: call API then fetch protected profile
   submit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) return; // guard invalid input
     const { email, password } = this.form.value as {
       email: string;
       password: string;
@@ -531,7 +563,7 @@ export class LoginComponent {
         this.message = "Logged in! Fetching profile...";
         this.auth.me().subscribe({
           next: (res) => {
-            this.profile = res.user;
+            this.profile = res.user; // display public profile fields
             this.message = "Profile loaded.";
           },
           error: (err) => {
@@ -553,9 +585,11 @@ export class LoginComponent {
 <details><summary><code>src/app/login/login.component.html</code></summary>
 
 ```html
+<!-- Simple login demo using Angular 19's declarative control flow (@if) -->
 <h2>Login Demo</h2>
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <!-- Show inputs only when logged out -->
   @if (!isLoggedIn){
   <label>
     Email
@@ -568,13 +602,18 @@ export class LoginComponent {
   </label>
 
   <button type="submit" [disabled]="form.invalid">Login</button>
-  } @if (isLoggedIn) {
-  <button type="button" (click)="logout()">Logout</button>
-
   }
+
+  <!-- Show logout action when logged in -->
+  @if (isLoggedIn) {
+  <button type="button" (click)="logout()">Logout</button>
+  }
+
+  <!-- Status text -->
   <span style="margin-left: 8px">{{ message }}</span>
 </form>
 
+<!-- Render profile JSON when available -->
 @if (profile) {
 <h3>Profile</h3>
 <pre>{{ profile | json }}</pre>
