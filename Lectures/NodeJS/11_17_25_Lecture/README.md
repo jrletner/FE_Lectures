@@ -502,12 +502,20 @@ export class LoginComponent {
   message = "";
   profile: any = null;
   form: any;
+  isLoggedIn = false;
 
   constructor(private fb: FormBuilder, private auth: AuthService) {
     this.form = this.fb.group({
       email: ["ada@example.com", [Validators.required, Validators.email]],
       password: ["password123", [Validators.required]],
     });
+  }
+
+  logout() {
+    this.auth.logout();
+    this.profile = null;
+    this.message = "Logged Out!";
+    this.isLoggedIn = false;
   }
 
   submit() {
@@ -519,6 +527,7 @@ export class LoginComponent {
     this.message = "Logging in...";
     this.auth.login(email, password).subscribe({
       next: () => {
+        this.isLoggedIn = true;
         this.message = "Logged in! Fetching profile...";
         this.auth.me().subscribe({
           next: (res) => {
@@ -544,9 +553,10 @@ export class LoginComponent {
 <details><summary><code>src/app/login/login.component.html</code></summary>
 
 ```html
-<h2>Login</h2>
+<h2>Login Demo</h2>
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  @if (!isLoggedIn){
   <label>
     Email
     <input type="email" formControlName="email" />
@@ -558,7 +568,11 @@ export class LoginComponent {
   </label>
 
   <button type="submit" [disabled]="form.invalid">Login</button>
-  <span style="margin-left: 8px;">{{ message }}</span>
+  } @if (isLoggedIn) {
+  <button type="button" (click)="logout()">Logout</button>
+
+  }
+  <span style="margin-left: 8px">{{ message }}</span>
 </form>
 
 @if (profile) {
