@@ -1,0 +1,26 @@
+<h2>Login Demo</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  @if (!isLoggedIn){
+  <label>
+    Email
+    <input type="email" formControlName="email" />
+  </label>
+
+  <label>
+    Password
+    <input type="password" formControlName="password" />
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Login</button>
+  } @if (isLoggedIn) {
+  <button type="button" (click)="logout()">Logout</button>
+
+  }
+  <span style="margin-left: 8px">{{ message }}</span>
+</form>
+
+@if (profile) {
+<h3>Profile</h3>
+<pre>{{ profile | json }}</pre>
+}

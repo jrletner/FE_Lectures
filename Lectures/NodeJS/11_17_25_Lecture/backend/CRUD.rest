@@ -1,0 +1,13 @@
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "bao@example.com",
+    "password": "password123"
+}
+
+
+### -- ME
+GET http://localhost:3000/auth/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInJvbGUiOiJ1c2VyIiwibmFtZSI6IkJhbyIsImVtYWlsIjoiYmFvQGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzNDIzNjIyLCJleHAiOjE3NjM0MjcyMjJ9.Vw5ByyjCBDA9UwtevaKTmafDyM40RggMTJE2uTwPObo
