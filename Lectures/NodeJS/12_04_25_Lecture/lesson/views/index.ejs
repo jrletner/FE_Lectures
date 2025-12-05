@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+  </head>
+  <body>
+    <% if (locals.tasks && tasks.length > 0) { %>
+    <h1>Tasks (<%= tasks.length %>)</h1>
+    <ul>
+      <% tasks.forEach(task => { %>
+      <li>
+        <strong>ID:</strong> <%= task._id %> | <strong>Name:</strong><%=
+        task.name %> | <strong>Completed:</strong> <%= task.completed %>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <h1>No tasks</h1>
+    <% } %>
+  </body>
+</html>
