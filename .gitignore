@@ -4,6 +4,8 @@ copilot instructions.md
 copilot readme instructions.md
 copilot exercises instructions.md
 .rest
+.env
+node_modules/
 
 # JAVASCRIPT LECTURES
 # Lectures/Javascript/8_14_25_Lecture
