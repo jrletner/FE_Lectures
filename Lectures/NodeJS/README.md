@@ -12,9 +12,9 @@
 - 11/20 - Review Day
 - 11/24 — Thanksgiving Week
 - 11/27 — Thanksgiving Week
-- 12/1 - Review Day
-- 12/4 - MongoDB
-- 12/8 - Authentication
+- 12/1 - No class
+- 12/4 - MongoDB - Task API
+- 12/8 - Task API / Angular Frontend
 - 12/11 - Authentication
 - 12/15 - Review Day
-- 12/18 - Last class
+- 12/18 - Graduation
