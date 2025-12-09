@@ -1,0 +1,25 @@
+<div class="wrap">
+  <div class="card">
+    <h2>Tasks</h2>
+
+    <form [formGroup]="form" (ngSubmit)="create()" class="form">
+      <label>
+        Name
+        <input type="text" formControlName="name" />
+      </label>
+      <button type="submit" [disabled]="form.invalid">Add Task</button>
+    </form>
+
+    <ul>
+      @for (t of tasks; track t._id) {
+      <li>
+        <input type="checkbox" [checked]="t.completed" (change)="toggle(t)" />
+        {{ t.name }}
+        <button type="button" class="danger" (click)="remove(t)">Delete</button>
+      </li>
+      } @empty {
+      <li class="muted">No tasks</li>
+      }
+    </ul>
+  </div>
+</div>

@@ -24,7 +24,7 @@ Each snippet is line‑by‑line commented. Use the final composite for a clean 
 
 ```bash
 npm init -y
-npm install express mongoose ejs dotenv
+npm install express mongoose ejs dotenv cors
 npm install -D nodemon
 ```
 
@@ -240,6 +240,14 @@ const dbURI = process.env.MONGO_URI;
 
 // Middleware
 app.use(express.json()); // parse JSON bodies
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+  })
+);
 
 // Routes: REST API
 app.use("/api/v1/tasks", tasksRouter);

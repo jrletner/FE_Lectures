@@ -1,0 +1,17 @@
+{
+  "name": "walkthrough",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd backend && nodemon server.js\" \"cd tasks-client && ng s -o\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "nodemon": "^3.0.1"
+  }
+}
