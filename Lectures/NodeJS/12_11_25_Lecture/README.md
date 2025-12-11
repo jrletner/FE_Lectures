@@ -24,6 +24,7 @@ Each snippet is line‑by‑line commented. Use the final composite for a clean 
 npm init -y
 npm install express mongoose ejs dotenv cors
 npm install -D nodemon
+touch server.js
 ```
 
 `package.json` scripts:
