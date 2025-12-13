@@ -15,6 +15,6 @@
 - 12/1 - No class
 - 12/4 - MongoDB - Task API
 - 12/8 - Task API / Angular Frontend
-- 12/11 - Authentication
-- 12/15 - Review Day
+- 12/11 - Task API
+- 12/15 - Task Frontend
 - 12/18 - Graduation
