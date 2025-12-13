@@ -77,22 +77,6 @@ export class TasksService {
   }
 
   /**
-   * get
-   * GET /api/v1/tasks/:id
-   * Fetch a single task by id.
-   * @param id task id string
-   * @returns Observable of Task (single task)
-   */
-  async get(id: string): Promise<Task> {
-    const res = await this.http
-      .get<{ success: boolean; payload: Task }>(
-        `${this.base}/api/v1/tasks/${id}`
-      )
-      .toPromise();
-    return (res?.payload as Task) ?? ({ name: "" } as Task);
-  }
-
-  /**
    * create
    * POST /api/v1/tasks
    * Create a new task with provided fields.
@@ -587,15 +571,6 @@ export class TasksService {
     this.http
       .get<{ success: boolean; payload: Task[] }>(`${this.base}/api/v1/tasks`)
       .subscribe((res) => this.tasks.set(res.payload ?? []));
-  }
-
-  async get(id: string): Promise<Task> {
-    const res = await this.http
-      .get<{ success: boolean; payload: Task }>(
-        `${this.base}/api/v1/tasks/${id}`
-      )
-      .toPromise();
-    return (res?.payload as Task) ?? ({ name: "" } as Task);
   }
 
   create(task: Task) {
