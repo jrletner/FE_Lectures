@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:3000
+@json = application/json
+@taskId = 69378eef4626dbb45532479f
+
+### List
+GET {{baseUrl}}/api/v1/tasks
+
+### Create
+POST {{baseUrl}}/api/v1/tasks
+Content-Type: {{json}}
+
+{
+  "name": "Write documentation"
+}
+
+### Get task
+GET {{baseUrl}}/api/v1/tasks/{{taskId}}
+
+### Update
+PATCH {{baseUrl}}/api/v1/tasks/{{taskId}}
+Content-Type: {{json}}
+
+{
+  "completed": true
+}
+
+### Delete
+DELETE {{baseUrl}}/api/v1/tasks/{{taskId}}
